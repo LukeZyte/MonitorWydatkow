@@ -2,7 +2,7 @@ export const AppStyle = {
   fontSize: {
     small: 12,
     medium: 16,
-    large: 24,
+    large: 20,
     huge: 36,
   },
   fontWeight: {
@@ -10,6 +10,6 @@ export const AppStyle = {
     normal: "400",
   },
   border: {
-    radius: 32,
+    radius: 12,
   },
 };

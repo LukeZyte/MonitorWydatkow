@@ -6,7 +6,12 @@ const ExpensesDateDisplay = () => {
   const { colors } = useTheme();
   return (
     <View style={styles.container}>
-      <View style={[styles.display, { borderColor: colors.border }]}>
+      <View
+        style={[
+          styles.display,
+          { borderColor: colors.border, backgroundColor: colors.darkPrimary },
+        ]}
+      >
         <View></View>
         <Text style={[styles.text, { color: colors.accent }]}>Październik</Text>
         <View></View>
@@ -19,7 +24,7 @@ export default ExpensesDateDisplay;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 16,
+    marginTop: 8,
     marginBottom: 8,
     flexDirection: "row",
     justifyContent: "center",

@@ -6,7 +6,7 @@ const ExpensesDisplay = () => {
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.card }]}>
+    <View style={[styles.container]}>
       <Text style={[styles.text, { color: colors.text }]}>327.75 zł</Text>
     </View>
   );
@@ -16,7 +16,8 @@ export default ExpensesDisplay;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 8,
+    marginTop: 8,
+    marginBottom: 32,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
