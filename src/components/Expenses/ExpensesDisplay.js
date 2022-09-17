@@ -1,13 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AppStyle } from "../../constants/style";
+import TextUI from "../UI/TextUI";
+import { useContext } from "react";
+import { ExpensesContext } from "../../../store/expensesContext";
 
 const ExpensesDisplay = () => {
   const { colors } = useTheme();
+  const expensesCtx = useContext(ExpensesContext);
+
+  const summary = expensesCtx.expenses.reduce(
+    (sum, { value }) => sum + +value,
+    0
+  );
 
   return (
     <View style={[styles.container]}>
-      <Text style={[styles.text, { color: colors.text }]}>327.75 zł</Text>
+      <TextUI style={styles.text}>{`${summary.toFixed(2)} zł`}</TextUI>
     </View>
   );
 };

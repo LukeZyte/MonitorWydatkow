@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Button } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AppStyle } from "../../constants/style";
+import TextUI from "../UI/TextUI";
 
 const ExpensesDateDisplay = () => {
   const { colors } = useTheme();
@@ -9,11 +10,13 @@ const ExpensesDateDisplay = () => {
       <View
         style={[
           styles.display,
-          { borderColor: colors.border, backgroundColor: colors.darkPrimary },
+          { borderColor: colors.border, backgroundColor: colors.bgPrimary },
         ]}
       >
         <View></View>
-        <Text style={[styles.text, { color: colors.accent }]}>Październik</Text>
+        <TextUI style={[styles.text, { color: colors.accent }]}>
+          Październik
+        </TextUI>
         <View></View>
       </View>
     </View>
@@ -40,7 +43,6 @@ const styles = StyleSheet.create({
     borderRadius: AppStyle.border.radius,
   },
   text: {
-    fontSize: AppStyle.fontSize.medium,
     fontWeight: AppStyle.fontWeight.normal,
   },
 });

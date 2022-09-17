@@ -34,8 +34,4 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: AppStyle.border.radius,
   },
-  text: {
-    fontSize: AppStyle.fontSize.small,
-    fontWeight: AppStyle.fontWeight.normal,
-  },
 });

@@ -1,6 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import { AppStyle } from "../../constants/style";
+import TextUI from "../UI/TextUI";
 
 const ExpenseItem = ({ id, title, value, date }) => {
   const { colors } = useTheme();
@@ -9,13 +10,13 @@ const ExpenseItem = ({ id, title, value, date }) => {
       style={[
         styles.container,
         //borderColor: colors.border,
-        { backgroundColor: colors.darkPrimary },
+        { backgroundColor: colors.bgPrimary },
       ]}
     >
-      <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
-      <Text style={[styles.value, { color: colors.accent }]}>
+      <TextUI>{title}</TextUI>
+      <TextUI style={[styles.value, { color: colors.accent }]}>
         {`${value} zł`}
-      </Text>
+      </TextUI>
     </View>
   );
 };
@@ -33,11 +34,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // borderRadius: AppStyle.border.radius,
   },
-  title: {
-    fontSize: AppStyle.fontSize.medium,
-  },
   value: {
     fontWeight: AppStyle.fontWeight.bold,
-    fontSize: AppStyle.fontSize.medium,
   },
 });

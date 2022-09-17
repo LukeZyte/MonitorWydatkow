@@ -1,25 +1,20 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import ManageExpenseScreen from "./src/screens/ManageExpenseScreen";
+import { useContext, useState } from "react";
+import { Alert } from "react-native";
+import { ThemeContext } from "./store/themeContext";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MyApp = () => {
-  const MyTheme = {
-    colors: {
-      primary: "#2d6fff",
-      darkPrimary: "#0c0e22",
-      accent: "#03A9F4",
-      background: "#000000",
-      card: "#1d1d1d",
-      text: "#FFFFFF",
-      border: "#243ac9",
-    },
-  };
+  const { currentTheme, isDarkTheme } = useContext(ThemeContext);
 
   const ExpensesScreen = () => {
     return (
@@ -28,8 +23,14 @@ const MyApp = () => {
           headerStyle: {
             // backgroundColor: "black",
           },
-          // headerTintColor: MyTheme.colors.accent,
           headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontSize: 26,
+            fontWeight: "bold",
+          },
+          tabBarActiveTintColor: isDarkTheme
+            ? currentTheme.colors.primary
+            : currentTheme.colors.background,
         }}
       >
         <Tab.Screen
@@ -59,13 +60,17 @@ const MyApp = () => {
   };
 
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer theme={currentTheme}>
+      <StatusBar
+        style={currentTheme.colors.text === "#FFFFFF" ? "light" : "dark"}
+      />
+
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
             // backgroundColor: "black",
           },
-          headerTintColor: MyTheme.colors.accent,
+          // headerTintColor: MyTheme.colors.accent,
           headerTitleAlign: "center",
         }}
       >
@@ -73,6 +78,10 @@ const MyApp = () => {
           name="ExpensesScreen"
           component={ExpensesScreen}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ManageExpenseScreen"
+          component={ManageExpenseScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
