@@ -2,10 +2,12 @@ import { useTheme } from "@react-navigation/native";
 import { Pressable, StyleSheet, View } from "react-native";
 import { AppStyle } from "../../constants/style";
 
-const IconButton = ({ children, onPress, style }) => {
+const SmallIconButton = ({ children, onPress, style }) => {
   const { colors } = useTheme();
   return (
-    <View style={[styles.outer, { backgroundColor: colors.primary }, style]}>
+    <View
+      style={[styles.outer, { backgroundColor: colors.secondBgPrimary }, style]}
+    >
       <Pressable onPress={onPress} android_ripple={{ color: colors.bgPrimary }}>
         <View style={styles.inner}>{children}</View>
       </Pressable>
@@ -13,16 +15,16 @@ const IconButton = ({ children, onPress, style }) => {
   );
 };
 
-export default IconButton;
+export default SmallIconButton;
 
 const styles = StyleSheet.create({
   outer: {
-    borderRadius: 100,
+    borderRadius: AppStyle.border.round,
     alignSelf: "center",
     overflow: "hidden",
-    marginBottom: 8,
+    margin: 4,
   },
   inner: {
-    padding: 24,
+    padding: 8,
   },
 });

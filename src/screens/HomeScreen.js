@@ -19,13 +19,9 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <>
-      <ExpensesDateDisplay />
       <ExpensesDisplay />
-      <MenuLabel style={styles.label}>Ostatnie wydatki</MenuLabel>
-      <View style={styles.listContainer}>
-        <View style={{ flex: 1 }}>
-          <ExpensesList />
-        </View>
+      <View style={styles.actionButtons}>
+        <ExpensesDateDisplay />
         <IconButton
           onPress={() => {
             // navigation.navigate("ManageExpenseScreen");
@@ -34,6 +30,13 @@ const HomeScreen = ({ navigation }) => {
         >
           <FontAwesome5 name="cart-plus" size={24} color={colors.background} />
         </IconButton>
+      </View>
+      <MenuLabel style={styles.label}>Ostatnie wydatki</MenuLabel>
+      <View style={styles.listContainer}>
+        <View style={{ flex: 1 }}>
+          <ExpensesList />
+        </View>
+
         {showAddExpenseModal && (
           <AddExpenseModal
             showAddExpenseModal={showAddExpenseModal}
@@ -48,8 +51,15 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+  actionButtons: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 16,
+  },
   label: {
-    textAlign: "center",
+    // textAlign: "center",
+    left: 16,
     marginBottom: 4,
   },
   listContainer: {

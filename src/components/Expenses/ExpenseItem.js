@@ -14,7 +14,7 @@ const ExpenseItem = ({ id, title, value, date }) => {
     >
       <TextUI>{title}</TextUI>
       <TextUI style={[styles.value, { color: colors.accent }]}>
-        {`${value} zł`}
+        {`${parseFloat(value).toFixed(2)} zł`}
       </TextUI>
     </View>
   );

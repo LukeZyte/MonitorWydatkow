@@ -36,8 +36,13 @@ export const ExpensesContext = createContext({
 const ExpensesContextProvider = ({ children }) => {
   const [expenses, setExpenses] = useState(initial_values);
 
+  const addExpense = (expense) => {
+    setExpenses((prevState) => [expense, ...prevState]);
+  };
+
   const value = {
     expenses: expenses,
+    addExpense: addExpense,
   };
 
   return (

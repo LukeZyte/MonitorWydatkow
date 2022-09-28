@@ -9,7 +9,7 @@ const DarkTheme = {
     secondBgPrimary: "#191c3f",
     accent: "#03A9F4",
     background: "#000000",
-    card: "#1d1d1d",
+    card: "#191c3f",
     text: "#FFFFFF",
     border: "#4690ff",
     header: "#FFFFFF",
