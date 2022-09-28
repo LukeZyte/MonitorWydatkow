@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import IconButton from "../UI/IconButton";

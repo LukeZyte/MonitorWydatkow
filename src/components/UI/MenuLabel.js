@@ -1,6 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import { StyleSheet, Text } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { StyleSheet } from "react-native";
 import { AppStyle } from "../../constants/style";
 import TextUI from "./TextUI";
 

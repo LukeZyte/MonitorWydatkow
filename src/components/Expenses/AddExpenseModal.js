@@ -3,9 +3,9 @@ import { AppStyle } from "../../constants/style";
 import ModalWindow from "../UI/ModalWindow";
 import TextUI from "../UI/TextUI";
 import AddExpenseForm from "./AddExpenseForm";
+import SmallIconButton from "../UI/SmallIconButton";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import SmallIconButton from "../UI/SmallIconButton";
 
 const AddExpenseModal = ({ showAddExpenseModal, setShowAddExpenseModal }) => {
   const { colors } = useTheme();

@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import ExpensesDisplay from "../components/Expenses/ExpensesDisplay";
 import ExpensesDateDisplay from "../components/Expenses/ExpensesDateDisplay";
@@ -6,10 +6,7 @@ import ExpensesList from "../components/Expenses/ExpensesList";
 import MenuLabel from "../components/UI/MenuLabel";
 import IconButton from "../components/UI/IconButton";
 import { FontAwesome5 } from "@expo/vector-icons";
-import TextUI from "../components/UI/TextUI";
 import { useState } from "react";
-import Card from "../components/UI/Card";
-import ModalWindow from "../components/UI/ModalWindow";
 import AddExpenseModal from "../components/Expenses/AddExpenseModal";
 
 const HomeScreen = ({ navigation }) => {

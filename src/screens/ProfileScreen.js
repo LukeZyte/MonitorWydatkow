@@ -1,11 +1,8 @@
-import { useRef } from "react";
-import { StyleSheet, Animated } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { useContext, useLayoutEffect } from "react";
-import HeaderButton from "../components/UI/HeaderButton";
 import { ThemeContext } from "../../store/themeContext";
 import TextUI from "../components/UI/TextUI";
-import ToggleThemeIcon from "../components/UI/ToggleThemeIcon";
 import ThemeToggleButton from "../components/UI/ThemeToggleButton";
 
 const ProfileScreen = () => {

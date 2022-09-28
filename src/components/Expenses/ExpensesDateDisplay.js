@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AppStyle } from "../../constants/style";
 import TextUI from "../UI/TextUI";

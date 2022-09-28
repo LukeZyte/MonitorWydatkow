@@ -1,6 +1,5 @@
 import { useTheme } from "@react-navigation/native";
 import { Pressable, StyleSheet, View } from "react-native";
-import { AppStyle } from "../../constants/style";
 
 const IconButton = ({ children, onPress, style }) => {
   const { colors } = useTheme();

@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { AppStyle } from "../../constants/style";
 
 function HeaderButton({ children, style, onPress }) {

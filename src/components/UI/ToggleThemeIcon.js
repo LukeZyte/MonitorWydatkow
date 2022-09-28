@@ -1,7 +1,6 @@
 import { StyleSheet, Pressable, Animated } from "react-native";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext } from "react/cjs/react.production.min";
 import { ThemeContext } from "../../../store/themeContext";
 
 const ToggleThemeIcon = () => {

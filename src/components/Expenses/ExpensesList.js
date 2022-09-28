@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AppStyle } from "../../constants/style";
 import { useContext } from "react";
