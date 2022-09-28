@@ -5,7 +5,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import ManageExpenseScreen from "./src/screens/ManageExpenseScreen";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Alert } from "react-native";
 import { ThemeContext } from "./store/themeContext";
 import { StatusBar } from "expo-status-bar";
@@ -24,6 +24,7 @@ const MyApp = () => {
             // backgroundColor: "black",
           },
           headerTitleAlign: "center",
+          headerTintColor: currentTheme.colors.header,
           headerTitleStyle: {
             fontSize: 26,
             fontWeight: "bold",
@@ -79,10 +80,10 @@ const MyApp = () => {
           component={ExpensesScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="ManageExpenseScreen"
           component={ManageExpenseScreen}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

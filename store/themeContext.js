@@ -6,11 +6,14 @@ const DarkTheme = {
   colors: {
     primary: "#03A9F4",
     bgPrimary: "#0c0e22",
+    secondBgPrimary: "#191c3f",
     accent: "#03A9F4",
     background: "#000000",
     card: "#1d1d1d",
     text: "#FFFFFF",
     border: "#4690ff",
+    header: "#FFFFFF",
+    wrong: "#FF0000",
   },
 };
 
@@ -18,11 +21,14 @@ const LightTheme = {
   colors: {
     primary: "#03A9F4",
     bgPrimary: "#e1eeff",
+    secondBgPrimary: "#a8c1e0",
     accent: "#004faa",
     background: "#fafafa",
     card: "#03A9F4",
     text: "#000000",
     border: "#fafafa",
+    header: "#FFFFFF",
+    wrong: "#FF0000",
   },
 };
 

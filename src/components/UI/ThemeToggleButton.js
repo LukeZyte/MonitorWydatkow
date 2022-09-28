@@ -15,7 +15,7 @@ const ThemeToggleButton = () => {
         <Ionicons
           name="moon"
           size={24}
-          color={colors.text}
+          color={colors.header}
           style={styles.iconInner}
         />
       )}
@@ -23,7 +23,7 @@ const ThemeToggleButton = () => {
         <Ionicons
           name="sunny"
           size={28}
-          color={colors.text}
+          color={colors.header}
           style={styles.iconInner}
         />
       )}

@@ -6,10 +6,7 @@ const IconButton = ({ children, onPress, style }) => {
   const { colors } = useTheme();
   return (
     <View style={[styles.outer, { backgroundColor: colors.primary }]}>
-      <Pressable
-        onPress={onPress}
-        android_ripple={{ color: colors.darkPrimary }}
-      >
+      <Pressable onPress={onPress} android_ripple={{ color: colors.bgPrimary }}>
         <View style={styles.inner}>{children}</View>
       </Pressable>
     </View>

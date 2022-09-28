@@ -9,8 +9,7 @@ const ExpenseItem = ({ id, title, value, date }) => {
     <View
       style={[
         styles.container,
-        //borderColor: colors.border,
-        { backgroundColor: colors.bgPrimary },
+        { borderColor: colors.accent, backgroundColor: colors.bgPrimary },
       ]}
     >
       <TextUI>{title}</TextUI>
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginVertical: 2,
     // borderWidth: 1,
-    // borderRadius: AppStyle.border.radius,
+    borderRadius: AppStyle.border.radius,
   },
   value: {
     fontWeight: AppStyle.fontWeight.bold,

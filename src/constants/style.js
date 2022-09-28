@@ -11,5 +11,6 @@ export const AppStyle = {
   },
   border: {
     radius: 12,
+    round: 100,
   },
 };
