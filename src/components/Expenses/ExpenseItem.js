@@ -9,10 +9,13 @@ const ExpenseItem = ({ id, title, value, date }) => {
     <View
       style={[
         styles.container,
-        { borderColor: colors.accent, backgroundColor: colors.bgPrimary },
+        {
+          borderBottomColor: colors.accent,
+          backgroundColor: colors.bgPrimary,
+        },
       ]}
     >
-      <TextUI>{title}</TextUI>
+      <TextUI style={{ flex: 3 }}>{title}</TextUI>
       <TextUI style={[styles.value, { color: colors.accent }]}>
         {`${parseFloat(value).toFixed(2)} zł`}
       </TextUI>
@@ -35,5 +38,7 @@ const styles = StyleSheet.create({
   },
   value: {
     fontWeight: AppStyle.fontWeight.bold,
+    flex: 1,
+    textAlign: "right",
   },
 });
