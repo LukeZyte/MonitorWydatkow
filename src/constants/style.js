@@ -13,4 +13,13 @@ export const AppStyle = {
     radius: 12,
     round: 200,
   },
+
+  categoriesColor: {
+    food: "#00b600",
+    drugs: "#ff0000",
+    personal: "#0373f4",
+    transport: "#ff7b00",
+    clothes: "#cc00ff",
+    other: "#5c5c5c",
+  },
 };

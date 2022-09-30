@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { Alert } from "react-native";
 import { ThemeContext } from "./store/themeContext";
 import { StatusBar } from "expo-status-bar";
+import { AppStyle } from "./src/constants/style";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,12 +27,17 @@ const MyApp = () => {
           headerTitleAlign: "center",
           headerTintColor: currentTheme.colors.header,
           headerTitleStyle: {
-            fontSize: 26,
+            fontSize: 24,
             fontWeight: "bold",
           },
           tabBarActiveTintColor: isDarkTheme
             ? currentTheme.colors.primary
             : currentTheme.colors.background,
+          tabBarStyle: {
+            height: 60,
+            paddingVertical: 10,
+            borderTopWidth: 0,
+          },
         }}
       >
         <Tab.Screen
@@ -39,6 +45,9 @@ const MyApp = () => {
           component={HomeScreen}
           options={{
             tabBarLabel: "Wydatki",
+            tabBarLabelStyle: {
+              fontSize: AppStyle.fontSize.medium,
+            },
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="wallet" size={24} color={color} />
             ),
@@ -50,6 +59,9 @@ const MyApp = () => {
           component={ProfileScreen}
           options={{
             tabBarLabel: "Profil",
+            tabBarLabelStyle: {
+              fontSize: AppStyle.fontSize.medium,
+            },
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="user-alt" size={24} color={color} />
             ),

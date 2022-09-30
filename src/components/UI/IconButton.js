@@ -1,5 +1,6 @@
 import { useTheme } from "@react-navigation/native";
 import { Pressable, StyleSheet, View } from "react-native";
+import { AppStyle } from "../../constants/style";
 
 const IconButton = ({ children, onPress, style }) => {
   const { colors } = useTheme();
@@ -16,7 +17,7 @@ export default IconButton;
 
 const styles = StyleSheet.create({
   outer: {
-    borderRadius: 100,
+    borderRadius: AppStyle.border.round,
     alignSelf: "center",
     overflow: "hidden",
     marginBottom: 8,

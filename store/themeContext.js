@@ -32,7 +32,7 @@ const LightTheme = {
     card: "#03A9F4",
     text: "#000000",
     // border: "#fafafa",
-    border: "#e1eeff",
+    border: "#004faa",
     header: "#FFFFFF",
     wrong: "#FF0000",
   },

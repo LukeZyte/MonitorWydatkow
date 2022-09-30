@@ -15,7 +15,16 @@ const ExpensesDisplay = () => {
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.bgPrimary }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.bgPrimary,
+          borderColor: colors.bgPrimary,
+          borderBottomColor: colors.border,
+        },
+      ]}
+    >
       <TextUI style={styles.text}>{`${summary.toFixed(2)} zł`}</TextUI>
     </View>
   );
@@ -28,8 +37,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     borderRadius: AppStyle.border.round,
-    marginTop: 32,
-    marginBottom: 32,
+    borderLeftWidth: 0.1,
+    borderRightWidth: 0.1,
+    borderTopWidth: 0,
+    borderBottomWidth: 4,
+    marginBottom: 16,
     padding: 24,
     minWidth: 240,
     minHeight: 240,

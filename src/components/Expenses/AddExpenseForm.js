@@ -1,16 +1,131 @@
-import { StyleSheet, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
 import IconButton from "../UI/IconButton";
 import Input from "../UI/Input";
 import { AppStyle } from "../../constants/style";
 import { useTheme } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
+import TextUI from "../UI/TextUI";
+import { CategoriesContext } from "../../../store/categoriesContext";
+
+const CategoryItem = ({
+  name,
+  color,
+  selectCategoryHandler,
+  selectedCategory,
+}) => {
+  const { categories } = useContext(CategoriesContext);
+  const { colors } = useTheme();
+  const iconSize = 24;
+  let icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
+
+  switch (name) {
+    case "Spożywcze":
+      icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
+      break;
+    case "Używki":
+      icon = <Ionicons name="beer" size={iconSize} color="white" />;
+      break;
+    case "Osobiste":
+      icon = <Ionicons name="game-controller" size={iconSize} color="white" />;
+      break;
+    case "Transport":
+      icon = <Ionicons name="car" size={iconSize} color="white" />;
+      break;
+    case "Odzież":
+      icon = <Ionicons name="shirt" size={iconSize} color="white" />;
+      break;
+    case "Inne":
+      icon = <Ionicons name="shapes" size={iconSize} color="white" />;
+      break;
+  }
+
+  const index = categories.findIndex((item) => item.name === name);
+
+  const choosenCategory = selectedCategory.name === name;
+
+  return (
+    <Pressable
+      onPress={() => {
+        selectCategoryHandler(index);
+      }}
+    >
+      <View
+        style={[
+          {
+            flexDirection: "row",
+            paddingVertical: 12,
+            paddingHorizontal: 12,
+            marginHorizontal: 2,
+            borderRadius: AppStyle.border.round,
+            backgroundColor: color,
+            borderWidth: 2,
+            borderColor: colors.bgPrimary,
+          },
+          choosenCategory && {
+            borderColor: colors.primary,
+            borderRadius: AppStyle.border.radius,
+          },
+        ]}
+      >
+        {icon}
+      </View>
+    </Pressable>
+  );
+};
+
+const CategoryPicker = ({ selectCategoryHandler, selectedCategory }) => {
+  const { categories } = useContext(CategoriesContext);
+  const { colors } = useTheme();
+
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-around",
+        margin: 8,
+        marginBottom: 32,
+      }}
+    >
+      <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+        <TextUI>Kategoria:</TextUI>
+        <TextUI
+          style={{
+            fontWeight: AppStyle.fontWeight.bold,
+            color: colors.accent,
+          }}
+        >
+          {selectedCategory.name}
+        </TextUI>
+      </View>
+      <View>
+        <FlatList
+          columnWrapperStyle={{
+            justifyContent: "center",
+            margin: 2,
+          }}
+          data={categories}
+          numColumns={3}
+          renderItem={({ item }) => (
+            <CategoryItem
+              key={item.name}
+              name={item.name}
+              color={item.color}
+              selectCategoryHandler={selectCategoryHandler}
+              selectedCategory={selectedCategory}
+            />
+          )}
+        />
+      </View>
+    </View>
+  );
+};
 
 const AddExpenseForm = ({ onSetModalVisible }) => {
   const { colors } = useTheme();
   const expensesCtx = useContext(ExpensesContext);
+  const { categories } = useContext(CategoriesContext);
 
   const [enteredPrice, setEnteredPrice] = useState({
     value: null,
@@ -20,6 +135,13 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
     value: "",
     isValid: true,
   });
+  const [selectedCategory, setSelectedCategory] = useState(
+    categories[categories.length - 1]
+  );
+
+  const selectCategoryHandler = (index) => {
+    setSelectedCategory(categories[index]);
+  };
 
   const submitHandler = () => {
     let titleOK = true;
@@ -46,6 +168,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         title: enteredTitle.value,
         value: enteredPrice.value,
         date: new Date(),
+        category: selectedCategory.name,
       });
 
       onSetModalVisible(false);
@@ -54,7 +177,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
 
   return (
     <>
-      <View style={{ marginHorizontal: 12, marginBottom: 32 }}>
+      <View style={{ marginHorizontal: 12 }}>
         <Input
           label="Koszt wydatku"
           keyboardType="number-pad"
@@ -66,7 +189,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
               color: colors.wrong,
             },
           ]}
-          placeholder="0.00..."
+          placeholder="Cena"
           placeholderTextColor={!enteredPrice.isValid && colors.wrong}
           // onChangeText={(enteredText) =>
           //   setEnteredPrice({
@@ -115,6 +238,12 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
           value={enteredTitle.value}
         />
       </View>
+
+      <CategoryPicker
+        selectCategoryHandler={selectCategoryHandler}
+        selectedCategory={selectedCategory}
+      />
+
       <IconButton onPress={submitHandler}>
         <Ionicons name="checkmark-sharp" size={32} color={colors.background} />
       </IconButton>
@@ -126,11 +255,13 @@ export default AddExpenseForm;
 
 const styles = StyleSheet.create({
   priceInput: {
+    marginBottom: 16,
     textAlign: "center",
     fontWeight: AppStyle.fontWeight.bold,
     fontSize: AppStyle.fontSize.huge,
   },
   titleInput: {
+    marginBottom: 16,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
