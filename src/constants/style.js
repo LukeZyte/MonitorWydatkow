@@ -1,5 +1,6 @@
 export const AppStyle = {
   fontSize: {
+    tiny: 9,
     small: 12,
     medium: 16,
     large: 20,

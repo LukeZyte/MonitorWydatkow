@@ -26,8 +26,8 @@ const ExpensesList = () => {
 
       {expensesCtx.expenses
         .filter((item, index) => index < 8)
-        .map((item) => (
-          <ExpenseItem key={item.id} {...item} />
+        .map((item, index) => (
+          <ExpenseItem key={item.id} {...item} itemIndex={index} />
         ))}
     </View>
   );

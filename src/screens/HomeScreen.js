@@ -52,6 +52,7 @@ const HomeScreen = ({ navigation }) => {
               <ExpensesList />
             </View>
             <IoniconTextButton
+              onPress={() => navigation.navigate("AllExpensesScreen")}
               icon="list"
               size={iconSize}
               color={colors.accent}

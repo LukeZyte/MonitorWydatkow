@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
-import ManageExpenseScreen from "./src/screens/ManageExpenseScreen";
+import AllExpensesScreen from "./src/screens/AllExpensesScreen";
 import { useContext } from "react";
 import { Alert } from "react-native";
 import { ThemeContext } from "./store/themeContext";
@@ -23,6 +23,9 @@ const MyApp = () => {
         screenOptions={{
           headerStyle: {
             // backgroundColor: "black",
+            // borderBottomColor: "red",
+            // borderBottomWidth: 0,
+            elevation: 0,
           },
           headerTitleAlign: "center",
           headerTintColor: currentTheme.colors.header,
@@ -32,11 +35,12 @@ const MyApp = () => {
           },
           tabBarActiveTintColor: isDarkTheme
             ? currentTheme.colors.primary
-            : currentTheme.colors.background,
+            : currentTheme.colors.primary,
           tabBarStyle: {
             height: 60,
             paddingVertical: 10,
             borderTopWidth: 0,
+            elevation: 0,
           },
         }}
       >
@@ -85,6 +89,19 @@ const MyApp = () => {
           },
           // headerTintColor: MyTheme.colors.accent,
           headerTitleAlign: "center",
+          headerTintColor: currentTheme.colors.header,
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: "bold",
+          },
+          tabBarActiveTintColor: isDarkTheme
+            ? currentTheme.colors.primary
+            : currentTheme.colors.background,
+          tabBarStyle: {
+            height: 60,
+            paddingVertical: 10,
+            borderTopWidth: 0,
+          },
         }}
       >
         <Stack.Screen
@@ -92,10 +109,13 @@ const MyApp = () => {
           component={ExpensesScreen}
           options={{ headerShown: false }}
         />
-        {/* <Stack.Screen
-          name="ManageExpenseScreen"
-          component={ManageExpenseScreen}
-        /> */}
+        <Stack.Screen
+          name="AllExpensesScreen"
+          component={AllExpensesScreen}
+          options={{
+            headerTitle: "Wszystkie wydatki",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

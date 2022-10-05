@@ -73,6 +73,7 @@ const ExpensesContextProvider = ({ children }) => {
   const deleteExpense = (id) => {
     const changedExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(changedExpenses);
+    setExpensesStore(changedExpenses);
   };
 
   const value = {

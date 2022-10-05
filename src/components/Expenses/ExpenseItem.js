@@ -6,8 +6,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { Alert } from "react-native";
 import { useContext } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
+import { getSimpleDate } from "../../constants/date";
 
-const ExpenseItem = ({ id, title, value, date, category }) => {
+const ExpenseItem = ({
+  id,
+  title,
+  value,
+  date,
+  category,
+  itemIndex,
+  withDatesSeparators,
+}) => {
   const { colors } = useTheme();
 
   const iconSize = 16;
@@ -59,37 +68,87 @@ const ExpenseItem = ({ id, title, value, date, category }) => {
   const expensesCtx = useContext(ExpensesContext);
 
   const longPressHandler = (id) => {
-    expensesCtx.deleteExpense(id);
+    Alert.alert(
+      `Usunąć ${title} za ${value}`,
+      "Potwierdzenie usunie wybrany rekord z bazy",
+      [
+        {
+          text: "Anuluj",
+        },
+        {
+          text: "Potwierdź",
+          onPress: () => expensesCtx.deleteExpense(id),
+        },
+      ]
+    );
   };
 
+  let sameDate = true;
+
+  if (itemIndex > 0) {
+    if (
+      new Date(date).toLocaleDateString() ===
+      new Date(
+        expensesCtx.expenses[parseInt(itemIndex) - 1].date
+      ).toLocaleDateString()
+    ) {
+      sameDate = true;
+    } else {
+      sameDate = false;
+    }
+  } else {
+    sameDate = false;
+  }
+
+  // Alert.alert(sameDate.toString());
+
   return (
-    <Pressable onLongPress={() => longPressHandler(id)}>
-      <View
-        style={[
-          styles.container,
-          {
-            borderBottomColor: colors.accent,
-            backgroundColor: colors.bgPrimary,
-          },
-        ]}
-      >
-        <View
-          style={{
-            backgroundColor: categoryColor,
-            padding: 6,
-            marginVertical: 6,
-            marginHorizontal: 6,
-            borderRadius: AppStyle.border.round,
-          }}
-        >
-          {icon}
+    <>
+      {withDatesSeparators && !sameDate && (
+        <View style={styles.dateSeparators}>
+          <Ionicons name="caret-down" size={20} color={colors.primary} />
+          <TextUI style={[styles.dateSeparatorsText, { color: colors.border }]}>
+            {getSimpleDate(date)}
+          </TextUI>
         </View>
-        <TextUI style={{ flex: 3 }}>{title}</TextUI>
-        <TextUI style={[styles.value, { color: colors.accent }]}>
-          {`${parseFloat(value).toFixed(2)} zł`}
-        </TextUI>
+      )}
+
+      <View
+        style={{
+          borderBottomColor: colors.accent,
+          backgroundColor: colors.bgPrimary,
+          borderRadius: AppStyle.border.radius,
+          overflow: "hidden",
+        }}
+      >
+        <Pressable
+          onLongPress={() => longPressHandler(id)}
+          android_ripple={{ color: colors.primary }}
+        >
+          <View style={[styles.container]}>
+            <View
+              style={[
+                styles.icon,
+                {
+                  backgroundColor: categoryColor,
+                },
+              ]}
+            >
+              {icon}
+            </View>
+            <View style={styles.titleDate}>
+              <TextUI>{title}</TextUI>
+              <TextUI style={[styles.date, { color: colors.accent }]}>
+                {getSimpleDate(date)}
+              </TextUI>
+            </View>
+            <TextUI style={[styles.value, { color: colors.accent }]}>
+              {`${parseFloat(value).toFixed(2)} zł`}
+            </TextUI>
+          </View>
+        </Pressable>
       </View>
-    </Pressable>
+    </>
   );
 };
 
@@ -104,11 +163,35 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     marginVertical: 2,
     // borderWidth: 1,
-    borderRadius: AppStyle.border.radius,
+  },
+  icon: {
+    padding: 6,
+    marginVertical: 6,
+    marginHorizontal: 6,
+    borderRadius: AppStyle.border.round,
   },
   value: {
     fontWeight: AppStyle.fontWeight.bold,
     flex: 1,
     textAlign: "right",
+  },
+  titleDate: {
+    justifyContent: "center",
+    flex: 3,
+  },
+  date: {
+    fontSize: AppStyle.fontSize.tiny,
+  },
+  dateSeparators: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 16,
+    marginVertical: 4,
+  },
+  dateSeparatorsText: {
+    fontSize: AppStyle.fontSize.normal,
+    fontWeight: AppStyle.fontWeight.bold,
+    marginHorizontal: 8,
   },
 });
