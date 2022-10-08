@@ -5,14 +5,27 @@ import TextUI from "../UI/TextUI";
 import { useContext } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
 
-const ExpensesDisplay = () => {
+const ExpensesDisplay = ({ selectedDate, setSelectedDate }) => {
   const { colors } = useTheme();
-  const expensesCtx = useContext(ExpensesContext);
+  const { expenses } = useContext(ExpensesContext);
 
-  const summary = expensesCtx.expenses.reduce(
-    (sum, { value }) => sum + parseFloat(value),
-    0
-  );
+  // const summary = expenses.reduce(
+  //   (sum, { value }) => sum + parseFloat(value),
+  //   0
+  // );
+
+  let summaryValue = 0;
+
+  for (let index = 0; index < expenses.length; index++) {
+    if (
+      new Date(expenses[index].date).getFullYear() ===
+        new Date(selectedDate).getFullYear() &&
+      new Date(expenses[index].date).getMonth() ===
+        new Date(selectedDate).getMonth()
+    ) {
+      summaryValue += parseFloat(expenses[index].value);
+    }
+  }
 
   return (
     <View
@@ -25,7 +38,7 @@ const ExpensesDisplay = () => {
         },
       ]}
     >
-      <TextUI style={styles.text}>{`${summary.toFixed(2)} zł`}</TextUI>
+      <TextUI style={styles.text}>{`${summaryValue.toFixed(2)} zł`}</TextUI>
     </View>
   );
 };
@@ -41,8 +54,8 @@ const styles = StyleSheet.create({
     borderRightWidth: 0.1,
     borderTopWidth: 0,
     borderBottomWidth: 4,
-    marginBottom: 16,
-    padding: 24,
+    marginBottom: 4,
+    // padding: 24,
     minWidth: 240,
     minHeight: 240,
     justifyContent: "center",

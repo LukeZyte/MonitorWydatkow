@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "MonitorWydatkow",
+    "name": "Monitor Wydatkow",
     "slug": "MonitorWydatkow",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,10 +22,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon2_mw.png",
         "backgroundColor": "#0c0e22"
-      }
+      },
+      "package": "com.lukezyte.MonitorWydatkow"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "616e3341-fbb8-47bd-bb96-923b677f78f6"
+      }
     }
   }
 }

@@ -3,6 +3,8 @@ import Card from "./Card";
 import OutsideView from "react-native-detect-press-outside";
 import { useRef } from "react";
 
+// REQUIRE: OnModalVisible state, onSetModalVisible state fun!
+
 const ModalWindow = ({
   children,
   onModalVisible,

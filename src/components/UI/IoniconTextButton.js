@@ -21,7 +21,12 @@ const IoniconTextButton = ({
         android_ripple={{ color: colors.secondBgPrimary }}
       >
         <View style={styles.inner}>
-          <Ionicons name={icon} size={size} color={color} />
+          <Ionicons
+            name={icon}
+            size={size}
+            color={color}
+            style={{ alignSelf: "center" }}
+          />
           <TextUI
             style={[
               styles.textStyle,

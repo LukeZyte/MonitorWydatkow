@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import ExpensesDisplay from "../components/Expenses/ExpensesDisplay";
 import ExpensesDateDisplay from "../components/Expenses/ExpensesDateDisplay";
@@ -6,12 +6,13 @@ import ExpensesList from "../components/Expenses/ExpensesList";
 import MenuLabel from "../components/UI/MenuLabel";
 import IconButton from "../components/UI/IconButton";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import AddExpenseModal from "../components/Expenses/AddExpenseModal";
 import IoniconTextButton from "../components/UI/IoniconTextButton";
 import { AppStyle } from "../constants/style";
 import { ExpensesContext } from "../../store/expensesContext";
 import TextUI from "../components/UI/TextUI";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -20,15 +21,52 @@ const HomeScreen = ({ navigation }) => {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const iconSize = AppStyle.fontSize.large;
 
+  const today = new Date();
+
+  const [selectedDate, setSelectedDate] = useState(today);
+
+  // AsyncStorage
+  const getSelectedDateFromStore = async () => {
+    try {
+      const result = await AsyncStorage.getItem("selectedDateKey");
+      if (result) {
+        setSelectedDate(new Date(JSON.parse(result)));
+      }
+    } catch (error) {
+      Alert.alert(error);
+    }
+  };
+
+  const setSelectedDateStore = async (data) => {
+    try {
+      await AsyncStorage.setItem("selectedDateKey", JSON.stringify(data));
+    } catch (error) {
+      Alert.alert(error);
+    }
+  };
+
+  useEffect(() => {
+    setSelectedDateStore(selectedDate);
+  }, [selectedDate]);
+
+  useLayoutEffect(() => {
+    getSelectedDateFromStore();
+  }, []);
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
-        <ExpensesDisplay />
+        <ExpensesDisplay
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
         <View style={styles.actionButtons}>
-          <ExpensesDateDisplay />
+          <ExpensesDateDisplay
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
           <IconButton
             onPress={() => {
-              // navigation.navigate("ManageExpenseScreen");
               setShowAddExpenseModal(true);
             }}
           >
@@ -36,6 +74,7 @@ const HomeScreen = ({ navigation }) => {
               name="cart-plus"
               size={iconSize}
               color={colors.background}
+              style={{ padding: 24 }}
             />
           </IconButton>
           {showAddExpenseModal && (
@@ -81,7 +120,9 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: { paddingVertical: 16 },
+  container: {
+    // paddingVertical: 16,
+  },
   actionButtons: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -91,7 +132,6 @@ const styles = StyleSheet.create({
   label: {
     // textAlign: "center",
     left: 16,
-    marginBottom: 4,
   },
   listContainer: {
     flex: 1,

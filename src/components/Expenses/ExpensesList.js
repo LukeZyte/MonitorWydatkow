@@ -13,7 +13,7 @@ const ExpensesList = () => {
     <View
       style={[
         styles.container,
-        { borderTopColor: colors.border, borderBottomColor: colors.border },
+        // { borderTopColor: colors.border, borderBottomColor: colors.border },
       ]}
     >
       {/* <FlatList
@@ -25,7 +25,7 @@ const ExpensesList = () => {
       /> */}
 
       {expensesCtx.expenses
-        .filter((item, index) => index < 8)
+        .filter((item, index) => index < 5)
         .map((item, index) => (
           <ExpenseItem key={item.id} {...item} itemIndex={index} />
         ))}
@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
     // marginHorizontal: 8,
     // padding: 8,
     justifyContent: "center",
-    borderWidth: 0.1,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
+    // borderWidth: 0.1,
+    // borderTopWidth: 2,
+    // borderBottomWidth: 2,
     borderRadius: AppStyle.border.radius,
   },
 });

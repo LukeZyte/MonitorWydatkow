@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import { useLayoutEffect, useContext, Alert } from "react";
+import { useLayoutEffect, useContext, Alert, useState } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { ExpensesContext } from "../../store/expensesContext";
 import ExpenseItem from "../components/Expenses/ExpenseItem";

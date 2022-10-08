@@ -165,7 +165,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
     if (formOK) {
       expensesCtx.addExpense({
         id: new Date().toLocaleString() + Math.random().toString(),
-        title: enteredTitle.value,
+        title: enteredTitle.value.trim(),
         value: enteredPrice.value,
         date: new Date(),
         category: selectedCategory.name,
@@ -245,7 +245,12 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
       />
 
       <IconButton onPress={submitHandler}>
-        <Ionicons name="checkmark-sharp" size={32} color={colors.background} />
+        <Ionicons
+          name="checkmark-sharp"
+          size={32}
+          color={colors.background}
+          style={{ padding: 16 }}
+        />
       </IconButton>
     </>
   );

@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const DarkTheme = {
   colors: {
     primary: "#03A9F4",
-    bgPrimary: "#0c0e22",
+    bgPrimary: "#0f122c",
     secondBgPrimary: "#191c3f",
     // bgPrimary: "#0c0e25",
     // secondBgPrimary: "#151a50",
@@ -22,7 +22,8 @@ const DarkTheme = {
 
 const LightTheme = {
   colors: {
-    primary: "#03A9F4",
+    // primary: "#03A9F4",
+    primary: "#004faa",
     // bgPrimary: "#e1eeff",
     bgPrimary: "#cae1ff",
     secondBgPrimary: "#a8c1e0",
