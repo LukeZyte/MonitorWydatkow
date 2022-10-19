@@ -1,7 +1,7 @@
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import ExpensesDisplay from "../components/Expenses/ExpensesDisplay";
-import ExpensesDateDisplay from "../components/Expenses/ExpensesDateDisplay";
+import DatePickerDisplay from "../components/Expenses/DatePickerDisplay";
 import ExpensesList from "../components/Expenses/ExpensesList";
 import MenuLabel from "../components/UI/MenuLabel";
 import IconButton from "../components/UI/IconButton";
@@ -61,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
           setSelectedDate={setSelectedDate}
         />
         <View style={styles.actionButtons}>
-          <ExpensesDateDisplay
+          <DatePickerDisplay
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />

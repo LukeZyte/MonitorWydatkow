@@ -7,50 +7,103 @@ import { useEffect, useState } from "react";
 import { getMonthName } from "../../constants/date";
 import IconButton from "../UI/IconButton";
 import { Ionicons } from "@expo/vector-icons";
+import Input from "../UI/Input";
 
-const MonthPickerModal = ({
+const DatePickerModal = ({
   selectedDate,
   setSelectedDate,
   datePickerVisible,
   setDatePickerVisible,
+  fullDate,
 }) => {
   const { colors } = useTheme();
 
   const thisYear = new Date().getFullYear();
-  const [year, setYear] = useState(new Date(selectedDate).getFullYear());
+  const [day, setDay] = useState(new Date(selectedDate).getDate().toString());
   const [month, setMonth] = useState(new Date(selectedDate).getMonth() + 1);
+  const [year, setYear] = useState(new Date(selectedDate).getFullYear());
+
+  const daysInMonth = (month, year) => {
+    return new Date(year, month, 0).getDate();
+  };
 
   const prevYearHandler = () => {
     if (year > 1) {
       setYear((prevState) => --prevState);
+      setDay(1);
     }
   };
   const nextYearHandler = () => {
     if (year < thisYear) {
       setYear((prevState) => ++prevState);
+      setDay(1);
     }
   };
   const prevMonthHandler = () => {
     if (month == 1) {
       setMonth(12);
+      setDay(1);
     }
     if (month > 1) {
       setMonth((prevState) => --prevState);
+      setDay(1);
     }
   };
   const nextMonthHandler = () => {
     if (month == 12) {
       setMonth(1);
+      setDay(1);
     }
     if (month < 12) {
       setMonth((prevState) => ++prevState);
+      setDay(1);
+    }
+  };
+  const prevDayHandler = () => {
+    if (day > 1) {
+      setDay((prevState) => --prevState);
+    }
+  };
+  const nextDayHandler = () => {
+    if (day < daysInMonth(month, year)) {
+      setDay((prevState) => ++prevState);
+    }
+  };
+
+  const changeDayHandler = (enteredText) => {
+    let newText = "";
+    let numbers = "0123456789";
+
+    // if (
+    //   parseInt(newText) <= daysInMonth(month, year) &&
+    //   parseInt(newText) > 0
+    // ) {
+    //   setDay(newText);
+    // } else if (newText === "") {
+    //   setDay("");
+    // } else {
+    //   setDay("1");
+    // }
+
+    for (var i = 0; i < enteredText.length; i++) {
+      if (numbers.indexOf(enteredText[i]) > -1) {
+        newText = newText + enteredText[i];
+        if (
+          parseInt(newText) <= daysInMonth(month, year) &&
+          parseInt(newText) > 0
+        ) {
+          setDay(parseInt(newText));
+        } else {
+          setDay(1);
+        }
+      }
     }
   };
 
   useEffect(() => {
-    const newDate = new Date(`${month}/1/${year}`);
+    const newDate = new Date(`${month}/${day}/${year}`);
     setSelectedDate(newDate);
-  }, [year, month]);
+  }, [year, month, day]);
 
   return (
     <ModalWindow
@@ -58,10 +111,20 @@ const MonthPickerModal = ({
       onSetModalVisible={setDatePickerVisible}
     >
       <View style={styles.container}>
-        <TextUI style={styles.title}>Wybierz miesiąc i rok</TextUI>
+        <TextUI style={styles.title}>Wybór daty</TextUI>
+        {fullDate && (
+          <TextUI
+            style={{
+              fontSize: AppStyle.fontSize.small,
+              texAlign: "center",
+              marginBottom: 8,
+            }}
+          >
+            Dzień wprowadź na końcu! Inaczej jego wartość wróci do 1
+          </TextUI>
+        )}
         <View style={styles.slidersContainer}>
           <View style={styles.sliderBox}>
-            {/* <Button title="<<" onPress={prevYearHandler} /> */}
             <IconButton>
               <Ionicons
                 name="arrow-back"
@@ -83,10 +146,8 @@ const MonthPickerModal = ({
                 onPress={nextYearHandler}
               />
             </IconButton>
-            {/* <Button title=">>" onPress={nextYearHandler} /> */}
           </View>
           <View style={styles.sliderBox}>
-            {/* <Button title="<<" onPress={prevMonthHandler} /> */}
             <IconButton>
               <Ionicons
                 name="arrow-back"
@@ -106,15 +167,37 @@ const MonthPickerModal = ({
                 onPress={nextMonthHandler}
               />
             </IconButton>
-            {/* <Button title=">>" onPress={nextMonthHandler} /> */}
           </View>
+
+          {fullDate && (
+            <View style={styles.sliderBox}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  width: "100%",
+                }}
+              >
+                <TextUI style={{ fontWeight: AppStyle.fontWeight.bold }}>
+                  Dzień
+                </TextUI>
+                <Input
+                  style={{ paddingHorizontal: 16, paddingVertical: 4 }}
+                  value={day}
+                  keyboardType="numeric"
+                  onChangeText={changeDayHandler}
+                />
+              </View>
+            </View>
+          )}
         </View>
       </View>
     </ModalWindow>
   );
 };
 
-export default MonthPickerModal;
+export default DatePickerModal;
 
 const styles = StyleSheet.create({
   container: {

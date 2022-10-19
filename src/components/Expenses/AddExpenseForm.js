@@ -7,7 +7,9 @@ import { useTheme } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
 import TextUI from "../UI/TextUI";
+import { getSimpleDate } from "../../constants/date";
 import { CategoriesContext } from "../../../store/categoriesContext";
+import DatePickerDisplay from "./DatePickerDisplay";
 
 const CategoryItem = ({
   name,
@@ -85,7 +87,7 @@ const CategoryPicker = ({ selectCategoryHandler, selectedCategory }) => {
         flexDirection: "row",
         justifyContent: "space-around",
         margin: 8,
-        marginBottom: 32,
+        // marginBottom: 32,
       }}
     >
       <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
@@ -167,13 +169,15 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         id: new Date().toLocaleString() + Math.random().toString(),
         title: enteredTitle.value.trim(),
         value: enteredPrice.value,
-        date: new Date(),
+        date: pickedDate,
         category: selectedCategory.name,
       });
 
       onSetModalVisible(false);
     }
   };
+
+  const [pickedDate, setPickedDate] = useState(new Date());
 
   return (
     <>
@@ -189,7 +193,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
               color: colors.wrong,
             },
           ]}
-          placeholder="Cena"
+          placeholder="Koszt"
           placeholderTextColor={!enteredPrice.isValid && colors.wrong}
           // onChangeText={(enteredText) =>
           //   setEnteredPrice({
@@ -244,14 +248,29 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         selectedCategory={selectedCategory}
       />
 
-      <IconButton onPress={submitHandler}>
-        <Ionicons
-          name="checkmark-sharp"
-          size={32}
-          color={colors.background}
-          style={{ padding: 16 }}
+      <View
+        style={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "row",
+          paddingHorizontal: 16,
+        }}
+      >
+        <DatePickerDisplay
+          selectedDate={pickedDate}
+          setSelectedDate={setPickedDate}
+          fullDate
         />
-      </IconButton>
+
+        <IconButton onPress={submitHandler}>
+          <Ionicons
+            name="checkmark-sharp"
+            size={32}
+            color={colors.background}
+            style={{ padding: 16 }}
+          />
+        </IconButton>
+      </View>
     </>
   );
 };

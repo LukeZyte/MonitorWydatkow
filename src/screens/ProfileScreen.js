@@ -1,4 +1,10 @@
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+  Platform,
+} from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { useContext, useLayoutEffect } from "react";
 import { ThemeContext } from "../../store/themeContext";
@@ -11,6 +17,7 @@ const ProfileScreen = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const { toggleTheme, isDarkTheme } = useContext(ThemeContext);
+  const isIOS = Platform.OS === "ios";
 
   // useLayoutEffect(() => {
   //   navigation.setOptions({
@@ -23,16 +30,20 @@ const ProfileScreen = () => {
       <View style={styles.container}>
         <Pressable
           onPress={toggleTheme}
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingVertical: 24,
-            paddingHorizontal: 12,
-            backgroundColor: colors.bgPrimary,
-            borderRadius: AppStyle.border.radius,
-            overflow: "hidden",
-          }}
+          style={({ pressed }) => [
+            {
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingVertical: 24,
+              paddingHorizontal: 12,
+              backgroundColor: colors.bgPrimary,
+              borderRadius: AppStyle.border.radius,
+              overflow: "hidden",
+            },
+            pressed &&
+              isIOS && { backgroundColor: colors.accent, opacity: 0.5 },
+          ]}
           android_ripple={{ color: colors.accent }}
         >
           <View

@@ -1,14 +1,23 @@
 import { useTheme } from "@react-navigation/native";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import { AppStyle } from "../../constants/style";
 
 const SmallIconButton = ({ children, onPress, style }) => {
   const { colors } = useTheme();
+  const isIOS = Platform.OS === "ios";
+
   return (
     <View
       style={[styles.outer, { backgroundColor: colors.secondBgPrimary }, style]}
     >
-      <Pressable onPress={onPress} android_ripple={{ color: colors.bgPrimary }}>
+      <Pressable
+        onPress={onPress}
+        android_ripple={{ color: colors.bgPrimary }}
+        style={({ pressed }) =>
+          pressed &&
+          isIOS && { opacity: 0.5, backgroundColor: colors.bgPrimary }
+        }
+      >
         <View style={styles.inner}>{children}</View>
       </Pressable>
     </View>

@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import TextUI from "./TextUI";
 import { AppStyle } from "../../constants/style";
@@ -14,11 +14,17 @@ const IoniconTextButton = ({
   textStyle,
 }) => {
   const { colors } = useTheme();
+  const isIOS = Platform.OS === "ios";
+
   return (
     <View style={[styles.outer, style]}>
       <Pressable
         onPress={onPress}
         android_ripple={{ color: colors.secondBgPrimary }}
+        style={({ pressed }) =>
+          pressed &&
+          isIOS && { backgroundColor: colors.bgPrimary, opacity: 0.5 }
+        }
       >
         <View style={styles.inner}>
           <Ionicons

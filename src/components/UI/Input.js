@@ -22,7 +22,7 @@ const Input = ({
 
   return (
     <View style={styles.container}>
-      <TextUI style={[styles.label, styleLabel]}>{label}</TextUI>
+      {label && <TextUI style={[styles.label, styleLabel]}>{label}</TextUI>}
       <TextInput
         keyboardType={keyboardType}
         style={[
@@ -31,7 +31,8 @@ const Input = ({
             backgroundColor: colors.secondBgPrimary,
             color: colors.text,
             borderColor: colors.secondBgPrimary,
-            borderRadius: AppStyle.border.round,
+            borderRadius: AppStyle.border.radius,
+            borderBottomColor: colors.accent,
           },
           focus && styles.focusInput,
           focus && {
@@ -59,10 +60,11 @@ export default Input;
 
 const styles = StyleSheet.create({
   input: {
-    borderWidth: 2,
+    // borderWidth: 2,
     paddingHorizontal: 4,
-    paddingVertical: 8,
+    // paddingVertical: 8,
     fontSize: 16,
+    borderBottomWidth: 2,
   },
   label: {
     fontSize: 16,

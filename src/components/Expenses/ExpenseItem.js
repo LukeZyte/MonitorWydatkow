@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import { Pressable, StyleSheet, View, Alert } from "react-native";
+import { Pressable, StyleSheet, View, Alert, Platform } from "react-native";
 import { AppStyle } from "../../constants/style";
 import TextUI from "../UI/TextUI";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,6 +17,7 @@ const ExpenseItem = ({
   withDatesSeparators,
 }) => {
   const { colors } = useTheme();
+  const isIOS = Platform.OS === "ios";
 
   const iconSize = 16;
   let icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
@@ -166,6 +167,10 @@ const ExpenseItem = ({
         <Pressable
           onLongPress={() => longPressHandler(id)}
           android_ripple={{ color: colors.primary }}
+          style={({ pressed }) =>
+            pressed &&
+            isIOS && { opacity: 0.5, backgroundColor: colors.primary }
+          }
         >
           <View style={[styles.container]}>
             <View

@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, View } from "react-native";
+import { Modal, ScrollView, StyleSheet, View } from "react-native";
 import Card from "./Card";
 import OutsideView from "react-native-detect-press-outside";
 import { useRef } from "react";
