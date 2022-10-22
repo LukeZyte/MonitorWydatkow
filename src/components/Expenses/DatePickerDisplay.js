@@ -6,6 +6,7 @@ import { useState } from "react";
 import DatePickerModal from "./DatePickerModal";
 import { Ionicons } from "@expo/vector-icons";
 import TextUI from "../UI/TextUI";
+import IoniconTextButton from "../UI/IoniconTextButton";
 
 const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
   const { colors } = useTheme();
@@ -26,7 +27,7 @@ const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
       )}
 
       <View style={[styles.display, { backgroundColor: colors.bgPrimary }]}>
-        <Pressable
+        {/* <Pressable
           onPress={() => setDatePickerVisible(true)}
           style={({ pressed }) => [
             styles.pressable,
@@ -59,7 +60,31 @@ const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
               </TextUI>
             )}
           </View>
-        </Pressable>
+        </Pressable> */}
+        <IoniconTextButton
+          // iconStyle={{ paddingRight: 10 }}
+          fitBorders={!fullDate}
+          icon="calendar"
+          size={24}
+          color={colors.accent}
+          onPress={() => setDatePickerVisible(true)}
+          style={({ pressed }) => [
+            // styles.pressable,
+            pressed && isIOS && { opacity: 0.5 },
+          ]}
+        >
+          {fullDate && getSimpleDate(selectedDate)}
+          {!fullDate && (
+            <View style={styles.dateContainer}>
+              <TextUI style={[styles.dateText, { color: colors.accent }]}>
+                {new Date(selectedDate).getFullYear()}
+              </TextUI>
+              <TextUI style={[styles.dateText]}>
+                {getMonthName(new Date(selectedDate).getMonth() + 1)}
+              </TextUI>
+            </View>
+          )}
+        </IoniconTextButton>
       </View>
     </>
   );
@@ -69,11 +94,11 @@ export default DatePickerDisplay;
 
 const styles = StyleSheet.create({
   display: {
-    width: 160,
+    // width: 160,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    overflow: "hidden",
+    // overflow: "hidden",
     borderRadius: AppStyle.border.radius,
   },
   dateText: {
@@ -84,10 +109,10 @@ const styles = StyleSheet.create({
     fontWeight: AppStyle.fontWeight.normal,
   },
   pressable: {
-    overflow: "hidden",
-    flexDirection: "row",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    // overflow: "hidden",
+    // flexDirection: "row",
+    // paddingHorizontal: 8,
+    // paddingVertical: 8,
   },
   icon: {
     justifyContent: "center",

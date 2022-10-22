@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../../UI/IconButton";
 import Input from "../../UI/Input";
@@ -27,6 +27,8 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
     categories[categories.length - 1]
   );
 
+  const [pickedDate, setPickedDate] = useState(new Date());
+
   const selectCategoryHandler = (index) => {
     setSelectedCategory(categories[index]);
   };
@@ -34,6 +36,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
   const submitHandler = () => {
     let titleOK = true;
     let priceOK = true;
+    let pickedOtherDate = true;
 
     if (
       !enteredPrice.value ||
@@ -50,7 +53,18 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
 
     let formOK = priceOK && titleOK;
 
-    if (formOK) {
+    if (
+      new Date().toLocaleDateString() ===
+      new Date(pickedDate).toLocaleDateString()
+    ) {
+      pickedOtherDate = false;
+    }
+
+    if (!formOK) {
+      return;
+    }
+
+    if (!pickedOtherDate) {
       expensesCtx.addExpense({
         id: new Date().toLocaleString() + Math.random().toString(),
         title: enteredTitle.value.trim(),
@@ -58,16 +72,24 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         date: pickedDate,
         category: selectedCategory.name,
       });
+      onSetModalVisible(false);
+    }
 
+    if (pickedOtherDate) {
+      expensesCtx.addExpenseAndSort({
+        id: new Date().toLocaleString() + Math.random().toString(),
+        title: enteredTitle.value.trim(),
+        value: enteredPrice.value,
+        date: pickedDate,
+        category: selectedCategory.name,
+      });
       onSetModalVisible(false);
     }
   };
 
-  const [pickedDate, setPickedDate] = useState(new Date());
-
   return (
     <>
-      <View style={{ marginHorizontal: 12 }}>
+      <View>
         <Input
           label="Koszt wydatku"
           keyboardType="number-pad"

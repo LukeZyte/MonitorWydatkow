@@ -15,16 +15,8 @@ const AddExpenseModal = ({ showAddExpenseModal, setShowAddExpenseModal }) => {
       onModalVisible={showAddExpenseModal}
       onSetModalVisible={setShowAddExpenseModal}
       style={styles.container}
+      title="Nowy wydatek"
     >
-      <View>
-        <TextUI style={styles.title}>Nowy wydatek</TextUI>
-        <SmallIconButton
-          style={styles.closeButton}
-          onPress={() => setShowAddExpenseModal(false)}
-        >
-          <Ionicons name="close-sharp" size={24} color={colors.text} />
-        </SmallIconButton>
-      </View>
       <AddExpenseForm onSetModalVisible={setShowAddExpenseModal} />
     </ModalWindow>
   );
@@ -33,13 +25,9 @@ const AddExpenseModal = ({ showAddExpenseModal, setShowAddExpenseModal }) => {
 export default AddExpenseModal;
 
 const styles = StyleSheet.create({
-  container: { padding: 8, width: 360 },
-  title: {
-    textAlign: "center",
-    fontSize: AppStyle.fontSize.large,
-    fontWeight: AppStyle.fontWeight.bold,
-    marginBottom: 32,
-    marginTop: 8,
+  container: {
+    padding: 8,
+    width: 360,
   },
   closeButton: {
     position: "absolute",

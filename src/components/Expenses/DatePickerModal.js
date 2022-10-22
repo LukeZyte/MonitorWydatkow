@@ -98,9 +98,9 @@ const DatePickerModal = ({
     <ModalWindow
       onModalVisible={datePickerVisible}
       onSetModalVisible={setDatePickerVisible}
+      title="Wybór daty"
     >
       <View style={styles.container}>
-        <TextUI style={styles.title}>Wybór daty</TextUI>
         {fullDate && (
           <TextUI style={styles.warning}>
             Dzień wprowadź na końcu! Inaczej jego wartość wróci do 1
@@ -177,12 +177,6 @@ const styles = StyleSheet.create({
     width: 360,
     justifyContent: "center",
     alignItems: "center",
-  },
-  title: {
-    fontSize: AppStyle.fontSize.large,
-    fontWeight: AppStyle.fontWeight.bold,
-    marginBottom: 16,
-    alignSelf: "center",
   },
   slidersContainer: {
     justifyContent: "center",

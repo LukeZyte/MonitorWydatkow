@@ -5,6 +5,7 @@ import { Alert } from "react-native";
 export const ExpensesContext = createContext({
   expenses: [],
   addExpense: (expense) => {},
+  addExpenseAndSort: (expense) => {},
   deleteExpense: (id) => {},
 });
 
@@ -35,8 +36,19 @@ const ExpensesContextProvider = ({ children }) => {
   }, []);
 
   const addExpense = (expense) => {
-    setExpenses((prevState) => [expense, ...prevState]);
-    setExpensesStore([expense, ...expenses]);
+    const newExpenses = [expense, ...expenses];
+
+    setExpenses(newExpenses);
+    setExpensesStore(newExpenses);
+  };
+
+  const addExpenseAndSort = (expense) => {
+    const newExpenses = [expense, ...expenses].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+
+    setExpenses(newExpenses);
+    setExpensesStore(newExpenses);
   };
 
   const deleteExpense = (id) => {
@@ -48,6 +60,7 @@ const ExpensesContextProvider = ({ children }) => {
   const value = {
     expenses: expenses,
     addExpense: addExpense,
+    addExpenseAndSort: addExpenseAndSort,
     deleteExpense: deleteExpense,
   };
 

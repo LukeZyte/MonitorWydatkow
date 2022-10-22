@@ -12,6 +12,8 @@ const IoniconTextButton = ({
   color,
   icon,
   textStyle,
+  iconStyle,
+  fitBorders,
 }) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
@@ -26,26 +28,23 @@ const IoniconTextButton = ({
           isIOS && { backgroundColor: colors.bgPrimary, opacity: 0.5 }
         }
       >
-        <View style={styles.inner}>
-          <Ionicons
-            name={icon}
-            size={size}
-            color={color}
-            style={{ alignSelf: "center" }}
-          />
-          <TextUI
-            style={[
-              styles.textStyle,
-              {
-                fontSize: AppStyle.fontSize.medium,
-                fontWeight: AppStyle.fontWeight.bold,
-              },
-
-              textStyle,
-            ]}
-          >
-            {children}
-          </TextUI>
+        <View
+          style={[
+            styles.inner,
+            fitBorders && { width: 160, justifyContent: "space-evenly" },
+          ]}
+        >
+          <View style={styles.innerSide}>
+            <Ionicons
+              name={icon}
+              size={size}
+              color={color}
+              style={[styles.icon, iconStyle]}
+            />
+          </View>
+          <View style={styles.innerSide}>
+            <TextUI style={[styles.textStyle, textStyle]}>{children}</TextUI>
+          </View>
         </View>
       </Pressable>
     </View>
@@ -62,10 +61,18 @@ const styles = StyleSheet.create({
   },
   inner: {
     flexDirection: "row",
-    paddingVertical: 8,
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  innerSide: {
+    marginHorizontal: 4,
+    justifyContent: "center",
   },
   textStyle: {
-    marginLeft: 8,
+    fontSize: AppStyle.fontSize.medium,
+    fontWeight: AppStyle.fontWeight.bold,
   },
+  icon: { alignSelf: "center" },
 });
