@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     borderRadius: AppStyle.border.radius,
     alignSelf: "center",
     overflow: "hidden",
-    // marginBottom: 8,
   },
   inner: {
     flexDirection: "row",

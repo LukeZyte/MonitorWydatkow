@@ -18,5 +18,6 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: AppStyle.border.radius,
     padding: 4,
+    overflow: "hidden",
   },
 });

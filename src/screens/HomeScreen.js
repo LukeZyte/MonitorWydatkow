@@ -7,7 +7,7 @@ import MenuLabel from "../components/UI/MenuLabel";
 import IconButton from "../components/UI/IconButton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
-import AddExpenseModal from "../components/Expenses/AddExpenseModal";
+import AddExpenseModal from "../components/Expenses/AddExpense/AddExpenseModal";
 import IoniconTextButton from "../components/UI/IoniconTextButton";
 import { AppStyle } from "../constants/style";
 import { ExpensesContext } from "../../store/expensesContext";
@@ -120,9 +120,7 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    // paddingVertical: 16,
-  },
+  container: {},
   actionButtons: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -130,7 +128,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    // textAlign: "center",
     left: 16,
   },
   listContainer: {

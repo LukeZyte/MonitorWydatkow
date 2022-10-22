@@ -1,128 +1,14 @@
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import IconButton from "../UI/IconButton";
-import Input from "../UI/Input";
-import { AppStyle } from "../../constants/style";
+import IconButton from "../../UI/IconButton";
+import Input from "../../UI/Input";
+import { AppStyle } from "../../../constants/style";
 import { useTheme } from "@react-navigation/native";
 import { useContext, useState } from "react";
-import { ExpensesContext } from "../../../store/expensesContext";
-import TextUI from "../UI/TextUI";
-import { getSimpleDate } from "../../constants/date";
-import { CategoriesContext } from "../../../store/categoriesContext";
-import DatePickerDisplay from "./DatePickerDisplay";
-
-const CategoryItem = ({
-  name,
-  color,
-  selectCategoryHandler,
-  selectedCategory,
-}) => {
-  const { categories } = useContext(CategoriesContext);
-  const { colors } = useTheme();
-  const iconSize = 24;
-  let icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
-
-  switch (name) {
-    case "Spożywcze":
-      icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
-      break;
-    case "Używki":
-      icon = <Ionicons name="beer" size={iconSize} color="white" />;
-      break;
-    case "Osobiste":
-      icon = <Ionicons name="game-controller" size={iconSize} color="white" />;
-      break;
-    case "Transport":
-      icon = <Ionicons name="car" size={iconSize} color="white" />;
-      break;
-    case "Odzież":
-      icon = <Ionicons name="shirt" size={iconSize} color="white" />;
-      break;
-    case "Inne":
-      icon = <Ionicons name="shapes" size={iconSize} color="white" />;
-      break;
-  }
-
-  const index = categories.findIndex((item) => item.name === name);
-
-  const choosenCategory = selectedCategory.name === name;
-
-  return (
-    <Pressable
-      onPress={() => {
-        selectCategoryHandler(index);
-      }}
-    >
-      <View
-        style={[
-          {
-            flexDirection: "row",
-            paddingVertical: 12,
-            paddingHorizontal: 12,
-            marginHorizontal: 2,
-            borderRadius: AppStyle.border.round,
-            backgroundColor: color,
-            borderWidth: 2,
-            borderColor: colors.bgPrimary,
-          },
-          choosenCategory && {
-            borderColor: colors.primary,
-            borderRadius: AppStyle.border.radius,
-          },
-        ]}
-      >
-        {icon}
-      </View>
-    </Pressable>
-  );
-};
-
-const CategoryPicker = ({ selectCategoryHandler, selectedCategory }) => {
-  const { categories } = useContext(CategoriesContext);
-  const { colors } = useTheme();
-
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-around",
-        margin: 8,
-        // marginBottom: 32,
-      }}
-    >
-      <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-        <TextUI>Kategoria:</TextUI>
-        <TextUI
-          style={{
-            fontWeight: AppStyle.fontWeight.bold,
-            color: colors.accent,
-          }}
-        >
-          {selectedCategory.name}
-        </TextUI>
-      </View>
-      <View>
-        <FlatList
-          columnWrapperStyle={{
-            justifyContent: "center",
-            margin: 2,
-          }}
-          data={categories}
-          numColumns={3}
-          renderItem={({ item }) => (
-            <CategoryItem
-              key={item.name}
-              name={item.name}
-              color={item.color}
-              selectCategoryHandler={selectCategoryHandler}
-              selectedCategory={selectedCategory}
-            />
-          )}
-        />
-      </View>
-    </View>
-  );
-};
+import { ExpensesContext } from "../../../../store/expensesContext";
+import { CategoriesContext } from "../../../../store/categoriesContext";
+import DatePickerDisplay from "../DatePickerDisplay";
+import CategoryPicker from "./CategoryPicker";
 
 const AddExpenseForm = ({ onSetModalVisible }) => {
   const { colors } = useTheme();
@@ -195,12 +81,6 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
           ]}
           placeholder="Koszt"
           placeholderTextColor={!enteredPrice.isValid && colors.wrong}
-          // onChangeText={(enteredText) =>
-          //   setEnteredPrice({
-          //     value: checkIsNumberCorrect(enteredText),
-          //     isValid: true,
-          //   })
-          // }
           onChangeText={(enteredText) => {
             let newText = "";
             let numbers = "0123456789.";
@@ -248,14 +128,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         selectedCategory={selectedCategory}
       />
 
-      <View
-        style={{
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexDirection: "row",
-          paddingHorizontal: 16,
-        }}
-      >
+      <View style={styles.bottomButtons}>
         <DatePickerDisplay
           selectedDate={pickedDate}
           setSelectedDate={setPickedDate}
@@ -267,7 +140,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
             name="checkmark-sharp"
             size={32}
             color={colors.background}
-            style={{ padding: 16 }}
+            style={styles.submitButton}
           />
         </IconButton>
       </View>
@@ -290,4 +163,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
   },
+  bottomButtons: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingHorizontal: 16,
+  },
+  submitButton: { padding: 16 },
 });

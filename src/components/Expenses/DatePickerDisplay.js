@@ -2,7 +2,6 @@ import { StyleSheet, View, Pressable, Platform } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { AppStyle } from "../../constants/style";
 import { getMonthName, getSimpleDate } from "../../constants/date";
-import IoniconTextButton from "../UI/IoniconTextButton";
 import { useState } from "react";
 import DatePickerModal from "./DatePickerModal";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,7 +10,6 @@ import TextUI from "../UI/TextUI";
 const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
-  const iconSize = AppStyle.fontSize.large;
 
   const [datePickerVisible, setDatePickerVisible] = useState(false);
 
@@ -27,44 +25,21 @@ const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
         />
       )}
 
-      <View
-        style={[
-          styles.display,
-          { borderColor: colors.border, backgroundColor: colors.bgPrimary },
-        ]}
-      >
+      <View style={[styles.display, { backgroundColor: colors.bgPrimary }]}>
         <Pressable
           onPress={() => setDatePickerVisible(true)}
           style={({ pressed }) => [
-            {
-              overflow: "hidden",
-              flexDirection: "row",
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-            },
-
+            styles.pressable,
             pressed && isIOS && { opacity: 0.5 },
           ]}
           android_ripple={{ color: colors.secondBgPrimary }}
         >
-          <View
-            style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
-          >
+          <View style={styles.icon}>
             <Ionicons name="calendar" size={24} color={colors.accent} />
           </View>
-          <View
-            style={{
-              flex: 2,
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.date}>
             {!fullDate && (
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <View style={styles.dateContainer}>
                 <TextUI style={[styles.dateText, { color: colors.accent }]}>
                   {new Date(selectedDate).getFullYear()}
                 </TextUI>
@@ -93,13 +68,6 @@ const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
 export default DatePickerDisplay;
 
 const styles = StyleSheet.create({
-  // container: {
-  //   // marginTop: 8,
-  //   // marginBottom: 8,
-  //   flexDirection: "row",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
   display: {
     width: 160,
     flexDirection: "row",
@@ -114,5 +82,24 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: AppStyle.fontWeight.normal,
+  },
+  pressable: {
+    overflow: "hidden",
+    flexDirection: "row",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  icon: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  date: {
+    flex: 2,
+    alignItems: "center",
+  },
+  dateContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

@@ -9,11 +9,6 @@ const ExpensesDisplay = ({ selectedDate, setSelectedDate }) => {
   const { colors } = useTheme();
   const { expenses } = useContext(ExpensesContext);
 
-  // const summary = expenses.reduce(
-  //   (sum, { value }) => sum + parseFloat(value),
-  //   0
-  // );
-
   let summaryValue = 0;
 
   for (let index = 0; index < expenses.length; index++) {
@@ -55,7 +50,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderBottomWidth: 4,
     marginBottom: 4,
-    // padding: 24,
     minWidth: 240,
     minHeight: 240,
     justifyContent: "center",

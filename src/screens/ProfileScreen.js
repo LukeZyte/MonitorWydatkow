@@ -1,74 +1,46 @@
 import {
   Pressable,
   ScrollView,
-  StyleSheet,
   View,
   Platform,
+  StyleSheet,
 } from "react-native";
-import { useNavigation, useTheme } from "@react-navigation/native";
-import { useContext, useLayoutEffect } from "react";
+import { useTheme } from "@react-navigation/native";
+import { useContext } from "react";
 import { ThemeContext } from "../../store/themeContext";
 import TextUI from "../components/UI/TextUI";
-import ThemeToggleButton from "../components/UI/ThemeToggleButton";
 import { Ionicons } from "@expo/vector-icons";
 import { AppStyle } from "../constants/style";
+import Card from "../components/UI/Card";
 
 const ProfileScreen = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation();
   const { toggleTheme, isDarkTheme } = useContext(ThemeContext);
   const isIOS = Platform.OS === "ios";
 
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => <ThemeToggleButton />,
-  //   });
-  // }, [navigation]);
-
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <Card>
         <Pressable
           onPress={toggleTheme}
           style={({ pressed }) => [
-            {
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingVertical: 24,
-              paddingHorizontal: 12,
-              backgroundColor: colors.bgPrimary,
-              borderRadius: AppStyle.border.radius,
-              overflow: "hidden",
-            },
+            styles.pressable,
+            { backgroundColor: colors.bgPrimary },
             pressed &&
               isIOS && { backgroundColor: colors.accent, opacity: 0.5 },
           ]}
           android_ripple={{ color: colors.accent }}
         >
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.title}>
             <TextUI>Motyw aplikacji</TextUI>
           </View>
-          <View
-            style={{
-              overflow: "hidden",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              // paddingHorizontal: 12,
-            }}
-          >
+          <View style={styles.icon}>
             {!isDarkTheme && (
               <Ionicons
                 name="sunny"
                 size={24}
                 color={colors.header}
-                style={{ marginRight: 12 }}
+                style={styles.ioniconStyle}
               />
             )}
             {isDarkTheme && (
@@ -76,7 +48,7 @@ const ProfileScreen = () => {
                 name="moon"
                 size={24}
                 color={colors.header}
-                style={{ marginRight: 12 }}
+                style={styles.ioniconStyle}
               />
             )}
             <TextUI
@@ -89,7 +61,7 @@ const ProfileScreen = () => {
             </TextUI>
           </View>
         </Pressable>
-      </View>
+      </Card>
     </ScrollView>
   );
 };
@@ -97,8 +69,24 @@ const ProfileScreen = () => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    overflow: "hidden",
+  pressable: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 24,
+    paddingHorizontal: 12,
     borderRadius: AppStyle.border.radius,
+    overflow: "hidden",
   },
+  title: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  icon: {
+    overflow: "hidden",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ioniconStyle: { marginRight: 12 },
 });

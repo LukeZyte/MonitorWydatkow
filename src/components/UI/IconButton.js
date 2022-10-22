@@ -1,11 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import {
-  Platform,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import { AppStyle } from "../../constants/style";
 
 const IconButton = ({ children, onPress, style, innerStyle }) => {

@@ -1,11 +1,9 @@
-import { useTheme } from "@react-navigation/native";
-import { useLayoutEffect, useContext, Alert, useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { useContext } from "react";
+import { View, FlatList } from "react-native";
 import { ExpensesContext } from "../../store/expensesContext";
 import ExpenseItem from "../components/Expenses/ExpenseItem";
 
-const AllExpensesScreen = ({ navigation }) => {
-  const { colors } = useTheme();
+const AllExpensesScreen = () => {
   const { expenses } = useContext(ExpensesContext);
 
   return (
@@ -22,5 +20,3 @@ const AllExpensesScreen = ({ navigation }) => {
 };
 
 export default AllExpensesScreen;
-
-const styles = StyleSheet.create({});

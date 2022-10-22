@@ -74,17 +74,6 @@ const DatePickerModal = ({
     let newText = "";
     let numbers = "0123456789";
 
-    // if (
-    //   parseInt(newText) <= daysInMonth(month, year) &&
-    //   parseInt(newText) > 0
-    // ) {
-    //   setDay(newText);
-    // } else if (newText === "") {
-    //   setDay("");
-    // } else {
-    //   setDay("1");
-    // }
-
     for (var i = 0; i < enteredText.length; i++) {
       if (numbers.indexOf(enteredText[i]) > -1) {
         newText = newText + enteredText[i];
@@ -113,13 +102,7 @@ const DatePickerModal = ({
       <View style={styles.container}>
         <TextUI style={styles.title}>Wybór daty</TextUI>
         {fullDate && (
-          <TextUI
-            style={{
-              fontSize: AppStyle.fontSize.small,
-              texAlign: "center",
-              marginBottom: 8,
-            }}
-          >
+          <TextUI style={styles.warning}>
             Dzień wprowadź na końcu! Inaczej jego wartość wróci do 1
           </TextUI>
         )}
@@ -130,7 +113,7 @@ const DatePickerModal = ({
                 name="arrow-back"
                 size={20}
                 color={colors.bgPrimary}
-                style={{ padding: 8 }}
+                style={styles.sliderIcon}
                 onPress={prevYearHandler}
               />
             </IconButton>
@@ -142,7 +125,7 @@ const DatePickerModal = ({
                 name="arrow-forward"
                 size={20}
                 color={colors.bgPrimary}
-                style={{ padding: 8 }}
+                style={styles.sliderIcon}
                 onPress={nextYearHandler}
               />
             </IconButton>
@@ -153,7 +136,7 @@ const DatePickerModal = ({
                 name="arrow-back"
                 size={20}
                 color={colors.bgPrimary}
-                style={{ padding: 8 }}
+                style={styles.sliderIcon}
                 onPress={prevMonthHandler}
               />
             </IconButton>
@@ -163,7 +146,7 @@ const DatePickerModal = ({
                 name="arrow-forward"
                 size={20}
                 color={colors.bgPrimary}
-                style={{ padding: 8 }}
+                style={styles.sliderIcon}
                 onPress={nextMonthHandler}
               />
             </IconButton>
@@ -171,24 +154,13 @@ const DatePickerModal = ({
 
           {fullDate && (
             <View style={styles.sliderBox}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-around",
-                  width: "100%",
-                }}
-              >
-                <TextUI style={{ fontWeight: AppStyle.fontWeight.bold }}>
-                  Dzień
-                </TextUI>
-                <Input
-                  style={{ paddingHorizontal: 16, paddingVertical: 4 }}
-                  value={day}
-                  keyboardType="numeric"
-                  onChangeText={changeDayHandler}
-                />
-              </View>
+              <TextUI style={styles.dayText}>Dzień</TextUI>
+              <Input
+                style={styles.dayInput}
+                value={day}
+                keyboardType="numeric"
+                onChangeText={changeDayHandler}
+              />
             </View>
           )}
         </View>
@@ -222,7 +194,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 8,
   },
+  sliderIcon: { padding: 8 },
   text: {
     fontWeight: AppStyle.fontWeight.bold,
+  },
+  warning: {
+    fontSize: AppStyle.fontSize.small,
+    texAlign: "center",
+    marginBottom: 8,
+  },
+  dayText: {
+    fontWeight: AppStyle.fontWeight.bold,
+  },
+  dayInput: {
+    paddingHorizontal: 16,
+    paddingVertical: 4,
   },
 });

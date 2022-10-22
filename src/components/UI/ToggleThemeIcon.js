@@ -3,11 +3,12 @@ import { useContext, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { ThemeContext } from "../../../store/themeContext";
 
+// NEVER USED
+
 const ToggleThemeIcon = () => {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
 
   const sunAnim = useRef(new Animated.Value(isDarkTheme ? 1 : 0)).current;
-
   const moonAnim = useRef(new Animated.Value(isDarkTheme ? 0 : 1)).current;
 
   const onAnimate = (firstAnim, secondAnim) => {

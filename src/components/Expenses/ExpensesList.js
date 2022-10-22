@@ -10,20 +10,7 @@ const ExpensesList = () => {
   const expensesCtx = useContext(ExpensesContext);
 
   return (
-    <View
-      style={[
-        styles.container,
-        // { borderTopColor: colors.border, borderBottomColor: colors.border },
-      ]}
-    >
-      {/* <FlatList
-        data={expensesCtx.expenses}
-        keyExtractor={(item) => item.id}
-        renderItem={(itemData) => {
-          return <ExpenseItem {...itemData.item} />;
-        }}
-      /> */}
-
+    <View style={[styles.container]}>
       {expensesCtx.expenses
         .filter((item, index) => index < 5)
         .map((item, index) => (
@@ -39,12 +26,7 @@ const styles = StyleSheet.create({
   container: {
     overflow: "hidden",
     marginVertical: 8,
-    // marginHorizontal: 8,
-    // padding: 8,
     justifyContent: "center",
-    // borderWidth: 0.1,
-    // borderTopWidth: 2,
-    // borderBottomWidth: 2,
     borderRadius: AppStyle.border.radius,
   },
 });

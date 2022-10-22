@@ -142,10 +142,6 @@ const ExpenseItem = ({
               backgroundColor: colors.bgPrimary,
               borderTopStartRadius: AppStyle.border.radius,
               borderTopEndRadius: AppStyle.border.radius,
-              // borderLeftWidth: 0.1,
-              // borderRightWidth: 0.1,
-              // borderTopWidth: 4,
-              // borderTopColor: colors.border,
             },
           ]}
         >
@@ -160,7 +156,6 @@ const ExpenseItem = ({
         style={{
           borderBottomColor: colors.accent,
           backgroundColor: colors.bgPrimary,
-          // borderRadius: AppStyle.border.radius,
           overflow: "hidden",
         }}
       >
@@ -198,49 +193,25 @@ const ExpenseItem = ({
 
       {withDatesSeparators && !sameDateBackwards && (
         <View
-          style={{
-            borderBottomStartRadius: AppStyle.border.radius,
-            borderBottomEndRadius: AppStyle.border.radius,
-            // borderLeftWidth: 0.1,
-            // borderRightWidth: 0.1,
-            // borderBottomWidth: 4,
-            // borderBottomColor: colors.border,
-            backgroundColor: colors.bgPrimary,
-            marginBottom: 4,
-          }}
+          style={[
+            styles.bottomOfPage,
+            {
+              backgroundColor: colors.bgPrimary,
+            },
+          ]}
         >
           <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              alignSelf: "center",
-              borderRadius: AppStyle.border.radius,
-              backgroundColor: colors.background,
-              marginBottom: 8,
-              paddingVertical: 4,
-              paddingHorizontal: 16,
-            }}
+            style={[styles.dateBox, { backgroundColor: colors.background }]}
           >
             <TextUI
-              style={{
-                fontSize: AppStyle.fontSize.normal,
-                fontWeight: AppStyle.fontWeight.bold,
-                color: colors.accent,
-                marginRight: 8,
-              }}
+              style={[
+                styles.addition,
+                { color: colors.accent, marginRight: 8 },
+              ]}
             >
               Suma:
             </TextUI>
-            <TextUI
-              style={{
-                fontSize: AppStyle.fontSize.normal,
-                fontWeight: AppStyle.fontWeight.bold,
-                color: colors.text,
-                // padding: 8,
-                // marginRight: 8,
-              }}
-            >
+            <TextUI style={[styles.addition, { color: colors.text }]}>
               {summaryValue.toFixed(2)}
             </TextUI>
           </View>
@@ -257,10 +228,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // paddingVertical: 8,
     paddingRight: 16,
     marginVertical: 2,
-    // borderWidth: 1,
   },
   icon: {
     padding: 6,
@@ -270,7 +239,6 @@ const styles = StyleSheet.create({
   },
   value: {
     fontWeight: AppStyle.fontWeight.bold,
-    // fontSize: AppStyle.fontSize.normal,
     flex: 1,
     textAlign: "right",
   },
@@ -284,9 +252,7 @@ const styles = StyleSheet.create({
   dateSeparators: {
     flexDirection: "row",
     justifyContent: "center",
-    // marginHorizontal: 16,
     alignItems: "center",
-    // paddingVertical: 4,
     paddingTop: 8,
     marginTop: 4,
     borderTopStartRadius: AppStyle.border.radius,
@@ -296,5 +262,24 @@ const styles = StyleSheet.create({
     fontSize: AppStyle.fontSize.normal,
     fontWeight: AppStyle.fontWeight.bold,
     paddingHorizontal: 8,
+  },
+  bottomOfPage: {
+    borderBottomStartRadius: AppStyle.border.radius,
+    borderBottomEndRadius: AppStyle.border.radius,
+    marginBottom: 4,
+  },
+  dateBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    borderRadius: AppStyle.border.radius,
+    marginBottom: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 16,
+  },
+  addition: {
+    fontSize: AppStyle.fontSize.normal,
+    fontWeight: AppStyle.fontWeight.bold,
   },
 });
