@@ -1,7 +1,5 @@
-import { Modal, StyleSheet, View } from "react-native";
+import { Modal, StyleSheet, View, TouchableOpacity } from "react-native";
 import Card from "./Card";
-import OutsideView from "react-native-detect-press-outside";
-import { useRef } from "react";
 import TextUI from "./TextUI";
 import { useTheme } from "@react-navigation/native";
 import SmallIconButton from "./SmallIconButton";
@@ -17,40 +15,28 @@ const ModalWindow = ({
   title,
   style,
 }) => {
-  const childRef = useRef();
   const { colors } = useTheme();
 
   return (
     <Modal transparent={true} visible={onModalVisible} animationType={"fade"}>
-      <View style={styles.rootContainer}>
-        <OutsideView
-          childRef={childRef}
-          onPressOutside={() => {
-            onSetModalVisible(false);
-          }}
-          style={styles.rootContainer}
-        >
-          <View style={styles.innerContainer}>
-            <View ref={childRef}>
-              <Card style={[styles.modalContent, style]}>
-                <View style={styles.top}>
-                  <TextUI style={styles.title}>{title}</TextUI>
-                  <SmallIconButton
-                    style={styles.closeButton}
-                    onPress={() => onSetModalVisible(false)}
-                  >
-                    <Ionicons
-                      name="close-sharp"
-                      size={20}
-                      color={colors.text}
-                    />
-                  </SmallIconButton>
-                  {children}
-                </View>
-              </Card>
-            </View>
+      <TouchableOpacity
+        style={styles.rootContainer}
+        activeOpacity={1}
+        onPressOut={() => onSetModalVisible(false)}
+      />
+      <View style={styles.innerContainer}>
+        <Card style={[styles.modalContent, style]}>
+          <View style={styles.top}>
+            <TextUI style={styles.title}>{title}</TextUI>
+            <SmallIconButton
+              style={styles.closeButton}
+              onPress={() => onSetModalVisible(false)}
+            >
+              <Ionicons name="close-sharp" size={20} color={colors.text} />
+            </SmallIconButton>
+            {children}
           </View>
-        </OutsideView>
+        </Card>
       </View>
     </Modal>
   );
@@ -60,7 +46,11 @@ export default ModalWindow;
 
 const styles = StyleSheet.create({
   rootContainer: {
-    flex: 1,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   innerContainer: {
