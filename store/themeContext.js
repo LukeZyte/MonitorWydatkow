@@ -43,6 +43,8 @@ const LightTheme = {
 export const ThemeContext = createContext({
   currentTheme: null,
   toggleTheme: () => {},
+  setDarkTheme: () => {},
+  setLightTheme: () => {},
   isDarkTheme: null,
 });
 
@@ -84,9 +86,21 @@ const ThemeContextProvider = ({ children }) => {
     }
   };
 
+  const setDarkTheme = () => {
+    setCurrentTheme(DarkTheme);
+    setThemeStore(DarkTheme);
+  };
+
+  const setLightTheme = () => {
+    setCurrentTheme(LightTheme);
+    setThemeStore(LightTheme);
+  };
+
   const value = {
     currentTheme: currentTheme,
     toggleTheme: toggleTheme,
+    setDarkTheme: setDarkTheme,
+    setLightTheme: setLightTheme,
     isDarkTheme: currentTheme.colors.text === "#FFFFFF",
   };
 

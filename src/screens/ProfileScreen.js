@@ -12,6 +12,7 @@ import TextUI from "../components/UI/TextUI";
 import { Ionicons } from "@expo/vector-icons";
 import { AppStyle } from "../constants/style";
 import Card from "../components/UI/Card";
+import OptionToggleTheme from "../components/Options/OptionToggleTheme";
 
 const ProfileScreen = () => {
   const { colors } = useTheme();
@@ -20,7 +21,8 @@ const ProfileScreen = () => {
 
   return (
     <ScrollView>
-      <Card>
+      <OptionToggleTheme />
+      {/* <Card>
         <Pressable
           onPress={toggleTheme}
           style={({ pressed }) => [
@@ -61,7 +63,7 @@ const ProfileScreen = () => {
             </TextUI>
           </View>
         </Pressable>
-      </Card>
+      </Card> */}
     </ScrollView>
   );
 };
