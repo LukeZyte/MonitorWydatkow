@@ -1,4 +1,10 @@
-import { Modal, StyleSheet, View, TouchableOpacity } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import Card from "./Card";
 import TextUI from "./TextUI";
 import { useTheme } from "@react-navigation/native";
@@ -25,14 +31,16 @@ const ModalWindow = ({
         onPressOut={() => onSetModalVisible(false)}
       />
       <View style={styles.innerContainer}>
-        <Card style={[styles.modalContent, style]}>
+        <Card
+          style={[styles.modalContent, style, { borderColor: colors.border }]}
+        >
           <View style={styles.top}>
             <TextUI style={styles.title}>{title}</TextUI>
             <SmallIconButton
               style={styles.closeButton}
               onPress={() => onSetModalVisible(false)}
             >
-              <Ionicons name="close-sharp" size={20} color={colors.text} />
+              <Ionicons name="close" size={20} color={colors.text} />
             </SmallIconButton>
             {children}
           </View>
@@ -51,15 +59,22 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(37, 37, 37, 0.7)",
   },
   innerContainer: {
     flex: 1,
+    // position: "absolute",
+    // backgroundColor: "red",
     alignItems: "center",
     justifyContent: "center",
+    // top: 0,
+    // bottom: 0,
+    // left: 0,
+    // right: 0,
   },
   modalContent: {
     paddingBottom: 12,
+    // borderWidth: 1,
   },
   top: {
     justifyContent: "center",

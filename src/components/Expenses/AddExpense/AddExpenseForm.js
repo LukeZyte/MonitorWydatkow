@@ -1,19 +1,23 @@
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, FlatList, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../../UI/IconButton";
 import Input from "../../UI/Input";
 import { AppStyle } from "../../../constants/style";
 import { useTheme } from "@react-navigation/native";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { ExpensesContext } from "../../../../store/expensesContext";
 import { CategoriesContext } from "../../../../store/categoriesContext";
 import DatePickerDisplay from "../DatePickerDisplay";
 import CategoryPicker from "./CategoryPicker";
+import TextUI from "../../UI/TextUI";
+import CategoryItem from "./CategoryItem";
 
 const AddExpenseForm = ({ onSetModalVisible }) => {
   const { colors } = useTheme();
   const expensesCtx = useContext(ExpensesContext);
   const { categories } = useContext(CategoriesContext);
+
+  const [navStage, setNavStage] = useState(1);
 
   const [enteredPrice, setEnteredPrice] = useState({
     value: null,
@@ -87,9 +91,77 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
     }
   };
 
-  return (
-    <>
-      <View>
+  const nextHandler = () => {
+    let priceNotValid = true;
+    let titleNotValid = true;
+    let formOK = false;
+    let pickedOtherDate = true;
+
+    if (navStage === 1) {
+      priceNotValid =
+        !enteredPrice.value ||
+        enteredPrice.value === "0" ||
+        enteredPrice.value === ".";
+      if (priceNotValid) {
+        setEnteredPrice({ value: null, isValid: false });
+        return;
+      }
+
+      setNavStage(2);
+    }
+
+    if (navStage === 2) {
+      titleNotValid = enteredTitle.value.trim().length === 0;
+      if (titleNotValid) {
+        setEnteredTitle({ value: "", isValid: false });
+        return;
+      }
+
+      setNavStage(3);
+    }
+
+    if (navStage === 3) {
+      if (!priceNotValid || !titleNotValid) {
+        // TODO Handle error + show user what was wrong
+        console.log(`FALSE ${priceNotValid}, ${titleNotValid}`);
+        return;
+      }
+
+      if (
+        new Date().toLocaleDateString() ===
+        new Date(pickedDate).toLocaleDateString()
+      ) {
+        pickedOtherDate = false;
+      }
+
+      if (!pickedOtherDate) {
+        expensesCtx.addExpense({
+          id: new Date().toLocaleString() + Math.random().toString(),
+          title: enteredTitle.value.trim(),
+          value: enteredPrice.value,
+          date: pickedDate,
+          category: selectedCategory.name,
+        });
+        onSetModalVisible(false);
+      }
+
+      if (pickedOtherDate) {
+        expensesCtx.addExpenseAndSort({
+          id: new Date().toLocaleString() + Math.random().toString(),
+          title: enteredTitle.value.trim(),
+          value: enteredPrice.value,
+          date: pickedDate,
+          category: selectedCategory.name,
+        });
+        onSetModalVisible(false);
+      }
+    }
+  };
+
+  const stagePrice = (
+    <View style={styles.cardContent}>
+      <View style={styles.priceContainer}>
+        <View style={styles.priceCurrencyText} />
         <Input
           label="Koszt wydatku"
           keyboardType="number-pad"
@@ -101,6 +173,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
               color: colors.wrong,
             },
           ]}
+          styleLabel={styles.centerLabel}
           placeholder="Koszt"
           placeholderTextColor={!enteredPrice.isValid && colors.wrong}
           onChangeText={(enteredText) => {
@@ -126,70 +199,155 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
           }}
           value={enteredPrice.value}
         />
-        <Input
-          label="Tytuł wydatku"
-          keyboardType="default"
-          style={[
-            styles.titleInput,
-            !enteredTitle.isValid && {
-              borderColor: colors.wrong,
-              color: colors.wrong,
-            },
-          ]}
-          placeholder="Nowy wydatek..."
-          placeholderTextColor={!enteredPrice.isValid && colors.wrong}
-          onChangeText={(enteredText) =>
-            setEnteredTitle({ value: enteredText, isValid: true })
-          }
-          value={enteredTitle.value}
-        />
+        <TextUI style={styles.priceCurrencyText}>zł</TextUI>
       </View>
+    </View>
+  );
 
-      <CategoryPicker
-        selectCategoryHandler={selectCategoryHandler}
-        selectedCategory={selectedCategory}
+  const stageTitle = (
+    <View style={styles.cardContent}>
+      <Input
+        label="Tytuł wydatku"
+        keyboardType="default"
+        style={[
+          styles.titleInput,
+          !enteredTitle.isValid && {
+            borderColor: colors.wrong,
+            color: colors.wrong,
+          },
+        ]}
+        styleLabel={styles.centerLabel}
+        placeholder="Nowy wydatek..."
+        placeholderTextColor={!enteredTitle.isValid && colors.wrong}
+        onChangeText={(enteredText) =>
+          setEnteredTitle({ value: enteredText, isValid: true })
+        }
+        value={enteredTitle.value}
       />
+    </View>
+  );
 
-      <View style={styles.bottomButtons}>
-        <DatePickerDisplay
-          selectedDate={pickedDate}
-          setSelectedDate={setPickedDate}
-          fullDate
-        />
-
-        <IconButton onPress={submitHandler}>
-          <Ionicons
-            name="checkmark-sharp"
-            size={32}
-            color={colors.background}
-            style={styles.submitButton}
+  const stageCategory = (
+    <View style={styles.cardContent}>
+      <TextUI style={styles.categoriesLabel}>Kategoria zakupów</TextUI>
+      <TextUI
+        style={[
+          {
+            fontWeight: AppStyle.fontWeight.bold,
+            color: colors.accent,
+          },
+          styles.categoryName,
+        ]}
+      >
+        {selectedCategory.name}
+      </TextUI>
+      <FlatList
+        columnWrapperStyle={{
+          justifyContent: "center",
+          margin: 2,
+        }}
+        data={categories}
+        numColumns={3}
+        renderItem={({ item }) => (
+          <CategoryItem
+            key={item.name}
+            name={item.name}
+            color={item.color}
+            selectCategoryHandler={selectCategoryHandler}
+            selectedCategory={selectedCategory}
           />
+        )}
+      />
+    </View>
+  );
+
+  return (
+    <View style={styles.rootContainer}>
+      {navStage === 1 && stagePrice}
+      {navStage === 2 && stageTitle}
+      {navStage === 3 && stageCategory}
+      <View style={styles.bottomButtons}>
+        <View style={{ marginHorizontal: 12 }}>
+          <DatePickerDisplay
+            selectedDate={pickedDate}
+            setSelectedDate={setPickedDate}
+            fullDate
+          />
+        </View>
+        <IconButton onPress={nextHandler} style={styles.submitButton}>
+          {(navStage === 1 || navStage === 2) && (
+            <Ionicons
+              name="md-arrow-forward"
+              size={32}
+              color={colors.background}
+              style={styles.submitIcon}
+            />
+          )}
+          {navStage === 3 && (
+            <Ionicons
+              name="ios-add-outline"
+              size={32}
+              color={colors.background}
+              style={styles.submitIcon}
+            />
+          )}
         </IconButton>
       </View>
-    </>
+    </View>
   );
 };
 
 export default AddExpenseForm;
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    marginHorizontal: 8,
+    height: 300,
+  },
+  cardContent: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  priceContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   priceInput: {
+    alignSelf: "center",
     marginBottom: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderRadius: AppStyle.border.round,
     textAlign: "center",
     fontWeight: AppStyle.fontWeight.bold,
     fontSize: AppStyle.fontSize.huge,
   },
+  priceCurrencyText: {
+    width: 24,
+    marginLeft: 8,
+    fontSize: AppStyle.fontSize.large,
+    fontWeight: AppStyle.fontWeight.bold,
+  },
+  centerLabel: { textAlign: "center" },
   titleInput: {
     marginBottom: 16,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
   },
+  categoriesLabel: { textAlign: "center" },
+  categoryName: {
+    textAlign: "center",
+    marginVertical: 8,
+  },
   bottomButtons: {
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    paddingHorizontal: 16,
   },
-  submitButton: { padding: 16 },
+  submitIcon: {
+    padding: 16,
+  },
+  submitButton: {},
 });

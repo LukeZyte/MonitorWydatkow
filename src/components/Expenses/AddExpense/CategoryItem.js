@@ -24,13 +24,16 @@ const CategoryItem = ({
       icon = <Ionicons name="beer" size={iconSize} color="white" />;
       break;
     case "Osobiste":
-      icon = <Ionicons name="game-controller" size={iconSize} color="white" />;
+      icon = <Ionicons name="folder-open" size={iconSize} color="white" />;
       break;
     case "Transport":
       icon = <Ionicons name="car" size={iconSize} color="white" />;
       break;
     case "Odzież":
       icon = <Ionicons name="shirt" size={iconSize} color="white" />;
+      break;
+    case "Rachunki":
+      icon = <Ionicons name="home" size={iconSize} color="white" />;
       break;
     case "Inne":
       icon = <Ionicons name="shapes" size={iconSize} color="white" />;

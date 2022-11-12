@@ -20,18 +20,39 @@ const DarkTheme = {
   },
 };
 
+// OLD LIGHT THEME
+// const LightTheme = {
+//   colors: {
+//     // primary: "#03A9F4",
+//     primary: "#004faa",
+//     // bgPrimary: "#e1eeff",
+//     bgPrimary: "#cae1ff",
+//     secondBgPrimary: "#a8c1e0",
+//     accent: "#004faa",
+//     // background: "#fafafa",
+//     background: "#e1eeff",
+//     // card: "#03A9F4",
+//     card: "#e1eeff",
+//     text: "#000000",
+//     // border: "#fafafa",
+//     border: "#004faa",
+//     header: "#000000",
+//     wrong: "#FF0000",
+//   },
+// };
+
 const LightTheme = {
   colors: {
-    // primary: "#03A9F4",
-    primary: "#004faa",
+    primary: "#0099ff",
+    // primary: "#004faa",
     // bgPrimary: "#e1eeff",
-    bgPrimary: "#cae1ff",
-    secondBgPrimary: "#a8c1e0",
+    bgPrimary: "#e2efff",
+    secondBgPrimary: "#e2efff",
     accent: "#004faa",
     // background: "#fafafa",
-    background: "#e1eeff",
+    background: "#ffffff",
     // card: "#03A9F4",
-    card: "#e1eeff",
+    card: "#ffffff",
     text: "#000000",
     // border: "#fafafa",
     border: "#004faa",

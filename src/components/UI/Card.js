@@ -6,7 +6,7 @@ const Card = ({ children, style }) => {
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.card, { backgroundColor: colors.bgPrimary }, style]}>
+    <View style={[styles.card, { backgroundColor: colors.background }, style]}>
       {children}
     </View>
   );

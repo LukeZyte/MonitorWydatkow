@@ -27,6 +27,10 @@ const INITIAL_CATEGORIES = [
     color: AppStyle.categoriesColor.clothes,
   },
   {
+    name: "Rachunki",
+    color: AppStyle.categoriesColor.bills,
+  },
+  {
     name: "Inne",
     color: AppStyle.categoriesColor.other,
   },

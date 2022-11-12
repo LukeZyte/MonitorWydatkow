@@ -1,13 +1,14 @@
 import ModalWindow from "../UI/ModalWindow";
-import { Alert, Button, StyleSheet, View } from "react-native";
+import { Alert, Button, Dimensions, StyleSheet, View } from "react-native";
 import TextUI from "../UI/TextUI";
 import { AppStyle } from "../../constants/style";
 import { useTheme } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getMonthName } from "../../constants/date";
 import IconButton from "../UI/IconButton";
 import { Ionicons } from "@expo/vector-icons";
 import Input from "../UI/Input";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const DatePickerModal = ({
   selectedDate,
@@ -19,9 +20,14 @@ const DatePickerModal = ({
   const { colors } = useTheme();
 
   const thisYear = new Date().getFullYear();
-  const [day, setDay] = useState(new Date(selectedDate).getDate().toString());
+  const [day, setDay] = useState(new Date(selectedDate).getDate());
   const [month, setMonth] = useState(new Date(selectedDate).getMonth() + 1);
   const [year, setYear] = useState(new Date(selectedDate).getFullYear());
+
+  const [dayInput, setDayInput] = useState({
+    value: new Date(selectedDate).getDate().toString(),
+    isValid: true,
+  });
 
   const daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
@@ -30,61 +36,68 @@ const DatePickerModal = ({
   const prevYearHandler = () => {
     if (year > 1) {
       setYear((prevState) => --prevState);
-      setDay(1);
     }
   };
   const nextYearHandler = () => {
     if (year < thisYear) {
       setYear((prevState) => ++prevState);
-      setDay(1);
     }
   };
   const prevMonthHandler = () => {
     if (month == 1) {
       setMonth(12);
-      setDay(1);
     }
     if (month > 1) {
       setMonth((prevState) => --prevState);
-      setDay(1);
     }
   };
   const nextMonthHandler = () => {
     if (month == 12) {
       setMonth(1);
-      setDay(1);
     }
     if (month < 12) {
       setMonth((prevState) => ++prevState);
-      setDay(1);
-    }
-  };
-  const prevDayHandler = () => {
-    if (day > 1) {
-      setDay((prevState) => --prevState);
-    }
-  };
-  const nextDayHandler = () => {
-    if (day < daysInMonth(month, year)) {
-      setDay((prevState) => ++prevState);
     }
   };
 
-  const changeDayHandler = (enteredText) => {
+  const dayInputHandler = (enteredText) => {
     let newText = "";
     let numbers = "0123456789";
 
     for (var i = 0; i < enteredText.length; i++) {
       if (numbers.indexOf(enteredText[i]) > -1) {
         newText = newText + enteredText[i];
-        if (
-          parseInt(newText) <= daysInMonth(month, year) &&
-          parseInt(newText) > 0
-        ) {
-          setDay(parseInt(newText));
-        } else {
-          setDay(1);
-        }
+      }
+    }
+    setDayInput({ value: newText, isValid: true });
+  };
+
+  const screenWidth = Dimensions.get("screen").width;
+
+  const [navStage, setNavStage] = useState(1);
+
+  const nextHandler = () => {
+    if (navStage === 1) {
+      setNavStage(2);
+    }
+    if (navStage === 2 && !fullDate) {
+      setDatePickerVisible(false);
+    }
+    if (navStage === 2 && fullDate) {
+      setNavStage(3);
+    }
+    if (navStage === 3) {
+      if (
+        parseInt(dayInput.value) <= daysInMonth(month, year) &&
+        parseInt(dayInput.value) > 0
+      ) {
+        const newDate = new Date(`${month}/${dayInput.value}/${year}`);
+        setSelectedDate(newDate);
+        setDatePickerVisible(false);
+      } else {
+        setDayInput((prevState) => {
+          return { value: prevState.value, isValid: false };
+        });
       }
     }
   };
@@ -92,78 +105,170 @@ const DatePickerModal = ({
   useEffect(() => {
     const newDate = new Date(`${month}/${day}/${year}`);
     setSelectedDate(newDate);
-  }, [year, month, day]);
+  }, [year, month]);
+
+  const [viewWidth, setViewWidth] = useState(0);
+
+  const onLayout = (event) => {
+    const { x, y, height, width } = event.nativeEvent.layout;
+    setViewWidth(width);
+  };
+
+  const yearStage = (
+    <>
+      <TextUI>Rok</TextUI>
+      <View style={styles.sliderBox}>
+        <IconButton>
+          <MaterialIcons
+            name="arrow-back-ios"
+            size={24}
+            color={colors.text}
+            style={[
+              styles.sliderIcon,
+              { backgroundColor: colors.background, borderRadius: 0 },
+            ]}
+            onPress={prevYearHandler}
+          />
+        </IconButton>
+        <TextUI
+          style={[styles.text, { color: colors.accent, width: viewWidth / 2 }]}
+        >
+          {year}
+        </TextUI>
+        <IconButton>
+          <MaterialIcons
+            name="arrow-forward-ios"
+            size={24}
+            color={colors.text}
+            style={[
+              styles.sliderIcon,
+              { backgroundColor: colors.background, borderRadius: 0 },
+            ]}
+            onPress={nextYearHandler}
+          />
+        </IconButton>
+      </View>
+    </>
+  );
+
+  const monthStage = (
+    <>
+      <TextUI>Miesiąc</TextUI>
+      <View style={styles.sliderBox}>
+        <IconButton>
+          <MaterialIcons
+            name="arrow-back-ios"
+            size={24}
+            color={colors.text}
+            style={[
+              styles.sliderIcon,
+              { backgroundColor: colors.background, borderRadius: 0 },
+            ]}
+            onPress={prevMonthHandler}
+          />
+        </IconButton>
+        <TextUI
+          style={[
+            styles.text,
+            {
+              color: colors.accent,
+              width: viewWidth / 2,
+              fontSize: AppStyle.fontSize.larger,
+            },
+          ]}
+        >
+          {getMonthName(month)}
+        </TextUI>
+        <IconButton>
+          <MaterialIcons
+            name="arrow-forward-ios"
+            size={24}
+            color={colors.text}
+            style={[
+              styles.sliderIcon,
+              { backgroundColor: colors.background, borderRadius: 0 },
+            ]}
+            onPress={nextMonthHandler}
+          />
+        </IconButton>
+      </View>
+    </>
+  );
+
+  const dayStage = (
+    <>
+      <TextUI>Dzień</TextUI>
+      <View style={styles.sliderBox}>
+        <Input
+          style={[
+            styles.dayText,
+            !dayInput.isValid && {
+              color: colors.wrong,
+              borderColor: colors.wrong,
+            },
+          ]}
+          value={dayInput.value}
+          keyboardType="numeric"
+          onChangeText={dayInputHandler}
+        />
+      </View>
+    </>
+  );
 
   return (
     <ModalWindow
       onModalVisible={datePickerVisible}
       onSetModalVisible={setDatePickerVisible}
       title="Wybór daty"
+      style={[styles.rootContainer, { width: screenWidth - 80 }]}
     >
-      <View style={styles.container}>
-        {fullDate && (
-          <TextUI style={styles.warning}>
-            Dzień wprowadź na końcu! Inaczej jego wartość wróci do 1
+      <View style={styles.container} onLayout={onLayout}>
+        {navStage === 1 && yearStage}
+        {navStage === 2 && monthStage}
+        {navStage === 3 && dayStage}
+      </View>
+      <View style={styles.bottomButtons}>
+        {navStage === 1 && <TextUI></TextUI>}
+        {navStage === 2 && <TextUI style={styles.dateHint}>{year}</TextUI>}
+        {navStage === 3 && (
+          <TextUI style={styles.dateHint}>
+            {year} - {month}
           </TextUI>
         )}
-        <View style={styles.slidersContainer}>
-          <View style={styles.sliderBox}>
-            <IconButton>
-              <Ionicons
-                name="arrow-back"
-                size={20}
-                color={colors.bgPrimary}
-                style={styles.sliderIcon}
-                onPress={prevYearHandler}
-              />
-            </IconButton>
-            <TextUI style={[styles.text, { color: colors.accent }]}>
-              {year}
-            </TextUI>
-            <IconButton>
-              <Ionicons
-                name="arrow-forward"
-                size={20}
-                color={colors.bgPrimary}
-                style={styles.sliderIcon}
-                onPress={nextYearHandler}
-              />
-            </IconButton>
-          </View>
-          <View style={styles.sliderBox}>
-            <IconButton>
-              <Ionicons
-                name="arrow-back"
-                size={20}
-                color={colors.bgPrimary}
-                style={styles.sliderIcon}
-                onPress={prevMonthHandler}
-              />
-            </IconButton>
-            <TextUI style={styles.text}>{getMonthName(month)}</TextUI>
-            <IconButton>
-              <Ionicons
-                name="arrow-forward"
-                size={20}
-                color={colors.bgPrimary}
-                style={styles.sliderIcon}
-                onPress={nextMonthHandler}
-              />
-            </IconButton>
-          </View>
-
-          {fullDate && (
-            <View style={styles.sliderBox}>
-              <TextUI style={styles.dayText}>Dzień</TextUI>
-              <Input
-                style={styles.dayInput}
-                value={day}
-                keyboardType="numeric"
-                onChangeText={changeDayHandler}
-              />
-            </View>
+        <IconButton onPress={nextHandler} style={styles.submitButton}>
+          {navStage === 1 && (
+            <Ionicons
+              name="md-arrow-forward"
+              size={32}
+              color={colors.background}
+              style={styles.submitIcon}
+            />
           )}
-        </View>
+          {navStage === 2 && !fullDate && (
+            <Ionicons
+              name="checkmark"
+              size={32}
+              color={colors.background}
+              style={styles.submitIcon}
+            />
+          )}
+          {navStage === 2 && fullDate && (
+            <Ionicons
+              name="md-arrow-forward"
+              size={32}
+              color={colors.background}
+              style={styles.submitIcon}
+            />
+          )}
+          {navStage === 3 && (
+            <Ionicons
+              name="checkmark"
+              size={32}
+              color={colors.background}
+              style={styles.submitIcon}
+            />
+          )}
+        </IconButton>
       </View>
     </ModalWindow>
   );
@@ -172,9 +277,12 @@ const DatePickerModal = ({
 export default DatePickerModal;
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     padding: 8,
-    width: 360,
+    justifyContent: "space-between",
+  },
+  container: {
+    height: 80,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -186,22 +294,48 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical: 8,
+    marginBottom: 16,
   },
   sliderIcon: { padding: 8 },
   text: {
     fontWeight: AppStyle.fontWeight.bold,
+    fontSize: AppStyle.fontSize.huge,
+    marginHorizontal: 24,
+    textAlign: "center",
+  },
+  dayText: {
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    texAlign: "center",
+    borderRadius: AppStyle.border.round,
+    fontSize: AppStyle.fontSize.larger,
+    fontWeight: AppStyle.fontWeight.bold,
+    borderWidth: 1,
   },
   warning: {
     fontSize: AppStyle.fontSize.small,
     texAlign: "center",
     marginBottom: 8,
   },
-  dayText: {
-    fontWeight: AppStyle.fontWeight.bold,
-  },
+
   dayInput: {
     paddingHorizontal: 16,
     paddingVertical: 4,
+    alignSelf: "center",
+  },
+  dateHint: {
+    marginHorizontal: 16,
+    fontWeight: AppStyle.fontWeight.bold,
+  },
+  submitIcon: {
+    padding: 16,
+  },
+  submitButton: {},
+  bottomButtons: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 8,
   },
 });

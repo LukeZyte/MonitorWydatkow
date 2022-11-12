@@ -4,6 +4,7 @@ export const AppStyle = {
     small: 12,
     medium: 16,
     large: 20,
+    larger: 26,
     huge: 36,
   },
   fontWeight: {
@@ -21,6 +22,7 @@ export const AppStyle = {
     personal: "#0373f4",
     transport: "#ff7b00",
     clothes: "#cc00ff",
+    bills: "#922900",
     other: "#5c5c5c",
   },
 };

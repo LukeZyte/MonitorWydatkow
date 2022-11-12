@@ -54,7 +54,11 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="always"
+      keyboardDismissMode="on-drag"
+    >
       <View style={styles.container}>
         <ExpensesDisplay
           selectedDate={selectedDate}
