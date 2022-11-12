@@ -11,7 +11,7 @@ const DarkTheme = {
     // secondBgPrimary: "#151a50",
     accent: "#03A9F4",
     background: "#000000",
-    modal: "#1d1d1d",
+    modal: "#212335",
     // card: "#191c3f",
     card: "#000000",
     text: "#FFFFFF",

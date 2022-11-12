@@ -118,15 +118,12 @@ const DatePickerModal = ({
     <>
       <TextUI>Rok</TextUI>
       <View style={styles.sliderBox}>
-        <IconButton>
+        <IconButton style={styles.sliderIconContainer}>
           <MaterialIcons
-            name="arrow-back-ios"
-            size={24}
+            name="keyboard-arrow-left"
+            size={32}
             color={colors.text}
-            style={[
-              styles.sliderIcon,
-              { backgroundColor: colors.modal, borderRadius: 0 },
-            ]}
+            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
             onPress={prevYearHandler}
           />
         </IconButton>
@@ -135,15 +132,12 @@ const DatePickerModal = ({
         >
           {year}
         </TextUI>
-        <IconButton>
+        <IconButton style={styles.sliderIconContainer}>
           <MaterialIcons
-            name="arrow-forward-ios"
-            size={24}
+            name="keyboard-arrow-right"
+            size={32}
             color={colors.text}
-            style={[
-              styles.sliderIcon,
-              { backgroundColor: colors.modal, borderRadius: 0 },
-            ]}
+            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
             onPress={nextYearHandler}
           />
         </IconButton>
@@ -155,15 +149,12 @@ const DatePickerModal = ({
     <>
       <TextUI>Miesiąc</TextUI>
       <View style={styles.sliderBox}>
-        <IconButton>
+        <IconButton style={styles.sliderIconContainer}>
           <MaterialIcons
-            name="arrow-back-ios"
-            size={24}
+            name="keyboard-arrow-left"
+            size={32}
             color={colors.text}
-            style={[
-              styles.sliderIcon,
-              { backgroundColor: colors.modal, borderRadius: 0 },
-            ]}
+            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
             onPress={prevMonthHandler}
           />
         </IconButton>
@@ -179,15 +170,12 @@ const DatePickerModal = ({
         >
           {getMonthName(month)}
         </TextUI>
-        <IconButton>
+        <IconButton style={styles.sliderIconContainer}>
           <MaterialIcons
-            name="arrow-forward-ios"
-            size={24}
+            name="keyboard-arrow-right"
+            size={32}
             color={colors.text}
-            style={[
-              styles.sliderIcon,
-              { backgroundColor: colors.modal, borderRadius: 0 },
-            ]}
+            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
             onPress={nextMonthHandler}
           />
         </IconButton>
@@ -300,7 +288,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 16,
   },
-  sliderIcon: { padding: 8 },
+  sliderIcon: {
+    padding: 8,
+  },
+  sliderIconContainer: {
+    borderRadius: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   text: {
     fontWeight: AppStyle.fontWeight.bold,
     fontSize: AppStyle.fontSize.huge,

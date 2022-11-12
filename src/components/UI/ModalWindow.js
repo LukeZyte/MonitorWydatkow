@@ -28,7 +28,7 @@ const ModalWindow = ({
       <TouchableOpacity
         style={styles.rootContainer}
         activeOpacity={1}
-        onPressOut={() => onSetModalVisible(false)}
+        // onPressOut={() => onSetModalVisible(false)}s
       />
       <View style={styles.innerContainer}>
         <Card

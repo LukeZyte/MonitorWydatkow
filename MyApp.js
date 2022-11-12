@@ -1,4 +1,8 @@
-import { DarkTheme, NavigationContainer } from "@react-navigation/native";
+import {
+  DarkTheme,
+  NavigationContainer,
+  useTheme,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -6,10 +10,11 @@ import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import AllExpensesScreen from "./src/screens/AllExpensesScreen";
 import { useContext } from "react";
-import { Alert } from "react-native";
 import { ThemeContext } from "./store/themeContext";
 import { StatusBar } from "expo-status-bar";
 import { AppStyle } from "./src/constants/style";
+import LogoBarImage from "./LogoBarImage";
+import WhatsNewButton from "./WhatsNewButton";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,7 +35,7 @@ const MyApp = () => {
           headerTitleAlign: "center",
           headerTintColor: currentTheme.colors.header,
           headerTitleStyle: {
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: "bold",
           },
           tabBarActiveTintColor: isDarkTheme
@@ -55,7 +60,10 @@ const MyApp = () => {
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="wallet" size={24} color={color} />
             ),
-            headerTitle: "Moje wydatki",
+            headerTitle: "",
+            headerBackground: () => <LogoBarImage />,
+            // headerTitle: "Monitor Wydatków",
+            headerRight: () => <WhatsNewButton />,
           }}
         />
         <Tab.Screen
@@ -91,7 +99,7 @@ const MyApp = () => {
           headerTitleAlign: "center",
           headerTintColor: currentTheme.colors.header,
           headerTitleStyle: {
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: "bold",
           },
           tabBarActiveTintColor: isDarkTheme

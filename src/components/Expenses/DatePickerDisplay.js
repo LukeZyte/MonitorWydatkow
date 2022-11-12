@@ -39,7 +39,7 @@ const DatePickerDisplay = ({
           size={24}
           color={colors.accent}
           onPress={() => setDatePickerVisible(true)}
-          style={({ pressed }) => [pressed && isIOS && { opacity: 0.5 }]}
+          // style={({ pressed }) => [pressed && isIOS && { opacity: 0.5 }]}
         >
           {fullDate && getSimpleDate(selectedDate)}
           {!fullDate && (

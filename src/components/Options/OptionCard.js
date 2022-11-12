@@ -10,10 +10,15 @@ import { ThemeContext } from "../../../store/themeContext";
 const OptionCard = ({ iconName, iconSize, title, optionText }) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
-  const { toggleTheme } = useContext(ThemeContext);
+  const { toggleTheme, isDarkTheme } = useContext(ThemeContext);
 
   return (
-    <Card style={styles.outer}>
+    <Card
+      style={[
+        styles.outer,
+        isDarkTheme && { backgroundColor: colors.background },
+      ]}
+    >
       <Pressable
         onPress={toggleTheme}
         android_ripple={{ color: colors.accent }}

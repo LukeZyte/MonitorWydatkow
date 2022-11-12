@@ -217,6 +217,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         keyboardType="default"
         style={[
           styles.titleInput,
+          isDarkTheme && { backgroundColor: colors.background },
           !enteredTitle.isValid && {
             borderColor: colors.wrong,
             color: colors.wrong,
