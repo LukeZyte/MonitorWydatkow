@@ -9,6 +9,7 @@ import IconButton from "../UI/IconButton";
 import { Ionicons } from "@expo/vector-icons";
 import Input from "../UI/Input";
 import { MaterialIcons } from "@expo/vector-icons";
+import { ThemeContext } from "../../../store/themeContext";
 
 const DatePickerModal = ({
   selectedDate,
@@ -18,6 +19,7 @@ const DatePickerModal = ({
   fullDate,
 }) => {
   const { colors } = useTheme();
+  const { isDarkTheme } = useContext(ThemeContext);
 
   const thisYear = new Date().getFullYear();
   const [day, setDay] = useState(new Date(selectedDate).getDate());
@@ -190,7 +192,7 @@ const DatePickerModal = ({
         <Input
           style={[
             styles.dayText,
-            {
+            isDarkTheme && {
               backgroundColor: colors.background,
               // borderColor: colors.background,
             },

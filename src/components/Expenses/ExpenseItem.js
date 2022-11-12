@@ -235,7 +235,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingRight: 16,
-    marginVertical: 2,
+    marginVertical: -1,
+    paddingVertical: 4,
   },
   icon: {
     padding: 6,
@@ -261,6 +262,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 8,
     marginTop: 4,
+    marginBottom: -1,
     borderTopStartRadius: AppStyle.border.radius,
     borderTopEndRadius: AppStyle.border.radius,
   },
@@ -273,6 +275,7 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: AppStyle.border.radius,
     borderBottomEndRadius: AppStyle.border.radius,
     marginBottom: 4,
+    marginTop: -1,
   },
   dateBox: {
     flexDirection: "row",
