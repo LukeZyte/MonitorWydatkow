@@ -11,11 +11,13 @@ import DatePickerDisplay from "../DatePickerDisplay";
 import CategoryPicker from "./CategoryPicker";
 import TextUI from "../../UI/TextUI";
 import CategoryItem from "./CategoryItem";
+import { ThemeContext } from "../../../../store/themeContext";
 
 const AddExpenseForm = ({ onSetModalVisible }) => {
   const { colors } = useTheme();
   const expensesCtx = useContext(ExpensesContext);
   const { categories } = useContext(CategoriesContext);
+  const { isDarkTheme } = useContext(ThemeContext);
 
   const [navStage, setNavStage] = useState(1);
 
@@ -168,6 +170,10 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
           maxLength={8}
           style={[
             styles.priceInput,
+            isDarkTheme && {
+              backgroundColor: colors.background,
+              // borderColor: colors.background,
+            },
             !enteredPrice.isValid && {
               borderColor: colors.wrong,
               color: colors.wrong,
@@ -272,6 +278,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
             selectedDate={pickedDate}
             setSelectedDate={setPickedDate}
             fullDate
+            style={{ backgroundColor: colors.modal }}
           />
         </View>
         <IconButton onPress={nextHandler} style={styles.submitButton}>

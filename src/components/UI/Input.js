@@ -37,7 +37,7 @@ const Input = React.forwardRef(
             {
               backgroundColor: colors.secondBgPrimary,
               color: colors.text,
-              borderColor: colors.secondBgPrimary,
+              borderColor: colors.background,
               borderRadius: AppStyle.border.radius,
               // borderColor: colors.accent,
             },

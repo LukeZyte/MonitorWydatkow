@@ -7,7 +7,12 @@ import DatePickerModal from "./DatePickerModal";
 import TextUI from "../UI/TextUI";
 import IoniconTextButton from "../UI/IoniconTextButton";
 
-const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
+const DatePickerDisplay = ({
+  selectedDate,
+  setSelectedDate,
+  fullDate,
+  style,
+}) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
 
@@ -25,7 +30,9 @@ const DatePickerDisplay = ({ selectedDate, setSelectedDate, fullDate }) => {
         />
       )}
 
-      <View style={[styles.display, { backgroundColor: colors.bgPrimary }]}>
+      <View
+        style={[styles.display, { backgroundColor: colors.bgPrimary }, style]}
+      >
         <IoniconTextButton
           fitBorders={!fullDate}
           icon="calendar"

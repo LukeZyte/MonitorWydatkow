@@ -25,7 +25,7 @@ const IoniconTextButton = ({
         android_ripple={{ color: colors.secondBgPrimary }}
         style={({ pressed }) =>
           pressed &&
-          isIOS && { backgroundColor: colors.bgPrimary, opacity: 0.5 }
+          isIOS && { backgroundColor: colors.secondbgPrimary, opacity: 0.5 }
         }
       >
         <View

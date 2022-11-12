@@ -125,7 +125,7 @@ const DatePickerModal = ({
             color={colors.text}
             style={[
               styles.sliderIcon,
-              { backgroundColor: colors.background, borderRadius: 0 },
+              { backgroundColor: colors.modal, borderRadius: 0 },
             ]}
             onPress={prevYearHandler}
           />
@@ -142,7 +142,7 @@ const DatePickerModal = ({
             color={colors.text}
             style={[
               styles.sliderIcon,
-              { backgroundColor: colors.background, borderRadius: 0 },
+              { backgroundColor: colors.modal, borderRadius: 0 },
             ]}
             onPress={nextYearHandler}
           />
@@ -162,7 +162,7 @@ const DatePickerModal = ({
             color={colors.text}
             style={[
               styles.sliderIcon,
-              { backgroundColor: colors.background, borderRadius: 0 },
+              { backgroundColor: colors.modal, borderRadius: 0 },
             ]}
             onPress={prevMonthHandler}
           />
@@ -186,7 +186,7 @@ const DatePickerModal = ({
             color={colors.text}
             style={[
               styles.sliderIcon,
-              { backgroundColor: colors.background, borderRadius: 0 },
+              { backgroundColor: colors.modal, borderRadius: 0 },
             ]}
             onPress={nextMonthHandler}
           />
@@ -202,6 +202,10 @@ const DatePickerModal = ({
         <Input
           style={[
             styles.dayText,
+            {
+              backgroundColor: colors.background,
+              // borderColor: colors.background,
+            },
             !dayInput.isValid && {
               color: colors.wrong,
               borderColor: colors.wrong,

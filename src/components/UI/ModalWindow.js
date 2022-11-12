@@ -37,7 +37,8 @@ const ModalWindow = ({
           <View style={styles.top}>
             <TextUI style={styles.title}>{title}</TextUI>
             <SmallIconButton
-              style={styles.closeButton}
+              pressColor={colors.accent}
+              style={[styles.closeButton, { backgroundColor: colors.modal }]}
               onPress={() => onSetModalVisible(false)}
             >
               <Ionicons name="close" size={20} color={colors.text} />
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(37, 37, 37, 0.7)",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   innerContainer: {
     flex: 1,
