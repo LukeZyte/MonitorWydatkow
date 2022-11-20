@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Input from "../UI/Input";
 import { MaterialIcons } from "@expo/vector-icons";
 import { ThemeContext } from "../../../store/themeContext";
+import ArrowButton from "../UI/ArrowButton";
 
 const DatePickerModal = ({
   selectedDate,
@@ -120,29 +121,13 @@ const DatePickerModal = ({
     <>
       <TextUI>Rok</TextUI>
       <View style={styles.sliderBox}>
-        <IconButton style={styles.sliderIconContainer}>
-          <MaterialIcons
-            name="keyboard-arrow-left"
-            size={32}
-            color={colors.text}
-            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
-            onPress={prevYearHandler}
-          />
-        </IconButton>
+        <ArrowButton direction="left" onPress={prevYearHandler} />
         <TextUI
           style={[styles.text, { color: colors.accent, width: viewWidth / 2 }]}
         >
           {year}
         </TextUI>
-        <IconButton style={styles.sliderIconContainer}>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            size={32}
-            color={colors.text}
-            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
-            onPress={nextYearHandler}
-          />
-        </IconButton>
+        <ArrowButton direction="right" onPress={nextYearHandler} />
       </View>
     </>
   );
@@ -151,15 +136,7 @@ const DatePickerModal = ({
     <>
       <TextUI>Miesiąc</TextUI>
       <View style={styles.sliderBox}>
-        <IconButton style={styles.sliderIconContainer}>
-          <MaterialIcons
-            name="keyboard-arrow-left"
-            size={32}
-            color={colors.text}
-            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
-            onPress={prevMonthHandler}
-          />
-        </IconButton>
+        <ArrowButton direction="left" onPress={prevMonthHandler} />
         <TextUI
           style={[
             styles.text,
@@ -172,15 +149,7 @@ const DatePickerModal = ({
         >
           {getMonthName(month)}
         </TextUI>
-        <IconButton style={styles.sliderIconContainer}>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            size={32}
-            color={colors.text}
-            style={[styles.sliderIcon, { backgroundColor: colors.modal }]}
-            onPress={nextMonthHandler}
-          />
-        </IconButton>
+        <ArrowButton direction="right" onPress={nextMonthHandler} />
       </View>
     </>
   );
@@ -295,8 +264,8 @@ const styles = StyleSheet.create({
   },
   sliderIconContainer: {
     borderRadius: 0,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   text: {
     fontWeight: AppStyle.fontWeight.bold,
