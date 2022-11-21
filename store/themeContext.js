@@ -18,6 +18,7 @@ const DarkTheme = {
     border: "#4690ff",
     header: "#FFFFFF",
     wrong: "#FF0000",
+    wrongDarker: "#8b0000",
   },
 };
 
@@ -60,6 +61,7 @@ const LightTheme = {
     border: "#004faa",
     header: "#000000",
     wrong: "#FF0000",
+    wrongDarker: "#8b0000",
   },
 };
 

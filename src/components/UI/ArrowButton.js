@@ -22,7 +22,7 @@ const ArrowButton = ({ direction, onPress }) => {
           name={`keyboard-arrow-${direction}`}
           size={32}
           color={colors.text}
-          //   style={[styles.sliderIcon]}
+          style={{ padding: 4 }}
         />
       </Pressable>
     </View>

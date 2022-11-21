@@ -17,10 +17,13 @@ const IconButton = ({
     <View style={[styles.outer, { backgroundColor: colors.primary }, style]}>
       <Pressable
         onPress={onPress}
-        android_ripple={{ color: colors.bgPrimary }}
+        android_ripple={
+          pressColor ? { color: pressColor } : { color: colors.bgPrimary }
+        }
         style={({ pressed }) => {
-          pressed &&
-            isIOS && { opacity: 0.5, backgroundColor: colors.bgPrimary };
+          pressed && isIOS && pressColor
+            ? { opacity: 0.5, backgroundColor: pressColor }
+            : { opacity: 0.5, backgroundColor: colors.bgPrimary };
           // pressColor && { backgroundColor: pressColor };
           // pressed && { backgroundColor: "orange" };
         }}

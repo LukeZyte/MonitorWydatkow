@@ -3,9 +3,10 @@ import { Pressable, StyleSheet, View, Alert, Platform } from "react-native";
 import { AppStyle } from "../../constants/style";
 import TextUI from "../UI/TextUI";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
 import { getSimpleDate } from "../../constants/date";
+import DeleteExpenseModal from "../UI/DeleteExpenseModal";
 
 const ExpenseItem = ({
   id,
@@ -73,20 +74,10 @@ const ExpenseItem = ({
 
   const expensesCtx = useContext(ExpensesContext);
 
+  const [showDeleteExpenseModal, setShowDeleteExpenseModal] = useState(false);
+
   const longPressHandler = (id) => {
-    Alert.alert(
-      `Usunąć "${title.trim()}" za ${parseFloat(value).toFixed(2)} zł`,
-      "Potwierdzenie usunie wybrany rekord z bazy",
-      [
-        {
-          text: "Anuluj",
-        },
-        {
-          text: "Potwierdź",
-          onPress: () => expensesCtx.deleteExpense(id),
-        },
-      ]
-    );
+    setShowDeleteExpenseModal(true);
   };
 
   let sameDate = true;
@@ -140,6 +131,16 @@ const ExpenseItem = ({
 
   return (
     <>
+      {showDeleteExpenseModal && (
+        <DeleteExpenseModal
+          onModalVisible={showDeleteExpenseModal}
+          onSetModalVisible={setShowDeleteExpenseModal}
+          title={title}
+          value={value}
+          category={category}
+          id={id}
+        />
+      )}
       {withDatesSeparators && !sameDate && (
         <View
           style={[

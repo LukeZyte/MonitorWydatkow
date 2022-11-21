@@ -13,6 +13,7 @@ import { AppStyle } from "../constants/style";
 import { ExpensesContext } from "../../store/expensesContext";
 import TextUI from "../components/UI/TextUI";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import DeleteExpenseModal from "../components/UI/DeleteExpenseModal";
 
 const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -54,70 +55,72 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      keyboardShouldPersistTaps="always"
-      keyboardDismissMode="on-drag"
-    >
-      <View style={styles.container}>
-        <ExpensesDisplay
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-        />
-        <View style={styles.actionButtons}>
-          <DatePickerDisplay
+    <>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="always"
+        keyboardDismissMode="on-drag"
+      >
+        <View style={styles.container}>
+          <ExpensesDisplay
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-          <IconButton
-            onPress={() => {
-              setShowAddExpenseModal(true);
-            }}
-          >
-            <FontAwesome5
-              name="cart-plus"
-              size={iconSize}
-              color={colors.background}
-              style={{ padding: 24 }}
+          <View style={styles.actionButtons}>
+            <DatePickerDisplay
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
             />
-          </IconButton>
-          {showAddExpenseModal && (
-            <AddExpenseModal
-              showAddExpenseModal={showAddExpenseModal}
-              setShowAddExpenseModal={setShowAddExpenseModal}
-            />
+            <IconButton
+              onPress={() => {
+                setShowAddExpenseModal(true);
+              }}
+            >
+              <FontAwesome5
+                name="cart-plus"
+                size={iconSize}
+                color={colors.background}
+                style={{ padding: 24 }}
+              />
+            </IconButton>
+            {showAddExpenseModal && (
+              <AddExpenseModal
+                showAddExpenseModal={showAddExpenseModal}
+                setShowAddExpenseModal={setShowAddExpenseModal}
+              />
+            )}
+          </View>
+          {expenses.length > 0 && (
+            <>
+              <MenuLabel style={styles.label}>Ostatnie wydatki</MenuLabel>
+              <View style={styles.listContainer}>
+                <ExpensesList />
+              </View>
+              <IoniconTextButton
+                onPress={() => navigation.navigate("AllExpensesScreen")}
+                icon="list"
+                size={iconSize}
+                color={colors.accent}
+                textStyle={{ color: colors.accent }}
+              >
+                Pokaż wszystkie
+              </IoniconTextButton>
+            </>
+          )}
+          {expenses.length === 0 && (
+            <TextUI
+              style={{
+                textAlign: "center",
+                marginVertical: 32,
+                color: "gray",
+              }}
+            >
+              {`Brak zarejestrowanych wydatków\nKliknij w koszyk, aby dodać pierwszy zakup`}
+            </TextUI>
           )}
         </View>
-        {expenses.length > 0 && (
-          <>
-            <MenuLabel style={styles.label}>Ostatnie wydatki</MenuLabel>
-            <View style={styles.listContainer}>
-              <ExpensesList />
-            </View>
-            <IoniconTextButton
-              onPress={() => navigation.navigate("AllExpensesScreen")}
-              icon="list"
-              size={iconSize}
-              color={colors.accent}
-              textStyle={{ color: colors.accent }}
-            >
-              Pokaż wszystkie
-            </IoniconTextButton>
-          </>
-        )}
-        {expenses.length === 0 && (
-          <TextUI
-            style={{
-              textAlign: "center",
-              marginVertical: 32,
-              color: "gray",
-            }}
-          >
-            {`Brak zarejestrowanych wydatków\nKliknij w koszyk, aby dodać pierwszy zakup`}
-          </TextUI>
-        )}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 };
 
