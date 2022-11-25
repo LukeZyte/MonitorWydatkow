@@ -1,9 +1,9 @@
 import { Dimensions, StyleSheet, View } from "react-native";
-import ModalWindow from "./ModalWindow";
-import TextUI from "./TextUI";
+import ModalWindow from "../UI/ModalWindow";
+import TextUI from "../UI/TextUI";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import IconButton from "./IconButton";
+import IconButton from "../UI/IconButton";
 import { AppStyle } from "../../constants/style";
 import { useContext } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";

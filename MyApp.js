@@ -14,7 +14,6 @@ import { ThemeContext } from "./store/themeContext";
 import { StatusBar } from "expo-status-bar";
 import { AppStyle } from "./src/constants/style";
 import LogoBarImage from "./LogoBarImage";
-import WhatsNewButton from "./WhatsNewButton";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -63,7 +62,6 @@ const MyApp = () => {
             headerTitle: "",
             headerBackground: () => <LogoBarImage />,
             // headerTitle: "Monitor Wydatków",
-            headerRight: () => <WhatsNewButton />,
           }}
         />
         <Tab.Screen

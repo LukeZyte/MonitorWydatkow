@@ -13,7 +13,6 @@ import { AppStyle } from "../constants/style";
 import { ExpensesContext } from "../../store/expensesContext";
 import TextUI from "../components/UI/TextUI";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import DeleteExpenseModal from "../components/UI/DeleteExpenseModal";
 
 const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();

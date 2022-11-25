@@ -7,7 +7,7 @@ import { AppStyle } from "../../constants/style";
 import { useContext } from "react";
 import { ThemeContext } from "../../../store/themeContext";
 
-const OptionCard = ({ iconName, iconSize, title, optionText }) => {
+const OptionCard = ({ iconName, iconSize, title, optionText, onPress }) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
   const { toggleTheme, isDarkTheme } = useContext(ThemeContext);
@@ -20,7 +20,7 @@ const OptionCard = ({ iconName, iconSize, title, optionText }) => {
       ]}
     >
       <Pressable
-        onPress={toggleTheme}
+        onPress={onPress}
         android_ripple={{ color: colors.accent }}
         style={({ pressed }) => [
           pressed && isIOS && { opacity: 0.5, backgroundColor: colors.accent },
@@ -63,5 +63,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: AppStyle.fontWeight.bold,
     marginHorizontal: 8,
+    maxWidth: 200,
+    textAlign: "center",
   },
 });

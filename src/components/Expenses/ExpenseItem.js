@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
 import { getSimpleDate } from "../../constants/date";
-import DeleteExpenseModal from "../UI/DeleteExpenseModal";
+import DeleteExpenseModal from "./DeleteExpenseModal";
 
 const ExpenseItem = ({
   id,

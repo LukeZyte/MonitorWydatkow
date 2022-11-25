@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { AppStyle } from "../constants/style";
 import Card from "../components/UI/Card";
 import OptionToggleTheme from "../components/Options/OptionToggleTheme";
+import OptionWhatsNew from "../components/Options/WhatsNew/OptionWhatsNew";
 
 const ProfileScreen = () => {
   const { colors } = useTheme();
@@ -22,6 +23,7 @@ const ProfileScreen = () => {
   return (
     <ScrollView>
       <OptionToggleTheme />
+      <OptionWhatsNew />
       {/* <Card>
         <Pressable
           onPress={toggleTheme}

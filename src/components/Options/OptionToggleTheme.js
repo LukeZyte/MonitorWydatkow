@@ -6,34 +6,40 @@ import OptionCard from "./OptionCard";
 
 const OptionToggleTheme = () => {
   const { colors } = useTheme();
-  const { isDarkTheme, setLightTheme, setDarkTheme } = useContext(ThemeContext);
+  const { isDarkTheme, setLightTheme, setDarkTheme, toggleTheme } =
+    useContext(ThemeContext);
   const iconSize = 24;
   const systemTheme = Appearance.getColorScheme();
 
-  const [pickedOption, setPickedOption] = useState("system"); // "system", "light", "dark"
+  const [pickedOption, setPickedOption] = useState("light"); // "system", "light", "dark"
 
   const pressHandler = () => {
-    if (pickedOption === "system") {
-      setPickedOption("light");
-      setLightTheme();
-    }
-    if (pickedOption === "light") {
-      setPickedOption("dark");
-      setDarkTheme();
-    }
-    if (pickedOption === "dark") {
-      setPickedOption("system");
-      if (systemTheme === "dark") {
-        setDarkTheme();
-      } else {
-        setLightTheme();
-      }
-    }
+    toggleTheme();
+    // if (pickedOption === "system") {
+    //   console.log(pickedOption, "BRUH");
+    //   setPickedOption("light");
+    //   setLightTheme();
+    // }
+    // if (pickedOption === "light") {
+    //   console.log(pickedOption);
+    //   setPickedOption("dark");
+    //   setDarkTheme();
+    // }
+    // if (pickedOption === "dark") {
+    //   setPickedOption("light");
+    //   console.log(pickedOption);
+    //   // setPickedOption("system");
+    //   // if (systemTheme === "dark") {
+    //   //   setDarkTheme();
+    //   // } else {
+    //   setLightTheme();
+    //   // }
+    // }
   };
 
   return (
     <OptionCard
-      iconName={isDarkTheme ? "sunny" : "moon"}
+      iconName={isDarkTheme ? "moon" : "sunny"}
       iconSize={iconSize}
       color={colors.accent}
       title="Motyw aplikacji"
