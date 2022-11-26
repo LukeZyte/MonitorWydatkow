@@ -76,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <FontAwesome5
-                name="cart-plus"
+                name="shopping-cart"
                 size={iconSize}
                 color={colors.background}
                 style={{ padding: 24 }}

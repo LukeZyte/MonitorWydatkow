@@ -19,6 +19,10 @@ const INITIAL_CATEGORIES = [
     color: AppStyle.categoriesColor.personal,
   },
   {
+    name: "Usługi",
+    color: AppStyle.categoriesColor.services,
+  },
+  {
     name: "Transport",
     color: AppStyle.categoriesColor.transport,
   },

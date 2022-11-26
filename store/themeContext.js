@@ -1,69 +1,7 @@
 import { createContext, useLayoutEffect, useState } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const DarkTheme = {
-  colors: {
-    primary: "#03A9F4",
-    bgPrimary: "#0f122c",
-    secondBgPrimary: "#191c3f",
-    // bgPrimary: "#0c0e25",
-    // secondBgPrimary: "#151a50",
-    accent: "#03A9F4",
-    background: "#000000",
-    modal: "#17192b",
-    // card: "#191c3f",
-    card: "#000000",
-    text: "#FFFFFF",
-    border: "#4690ff",
-    header: "#FFFFFF",
-    wrong: "#FF0000",
-    wrongDarker: "#8b0000",
-  },
-};
-
-// OLD LIGHT THEME
-// const LightTheme = {
-//   colors: {
-//     // primary: "#03A9F4",
-//     primary: "#004faa",
-//     // bgPrimary: "#e1eeff",
-//     bgPrimary: "#cae1ff",
-//     secondBgPrimary: "#a8c1e0",
-//     accent: "#004faa",
-//     // background: "#fafafa",
-//     background: "#e1eeff",
-//     // card: "#03A9F4",
-//     card: "#e1eeff",
-//     text: "#000000",
-//     // border: "#fafafa",
-//     border: "#004faa",
-//     header: "#000000",
-//     wrong: "#FF0000",
-//   },
-// };
-
-const LightTheme = {
-  colors: {
-    primary: "#0099ff",
-    // primary: "#004faa",
-    // bgPrimary: "#e1eeff",
-    bgPrimary: "#e2efff",
-    secondBgPrimary: "#e2efff",
-    accent: "#004faa",
-    // background: "#fafafa",
-    background: "#ffffff",
-    modal: "#ffffff",
-    // card: "#03A9F4",
-    card: "#ffffff",
-    text: "#000000",
-    // border: "#fafafa",
-    border: "#004faa",
-    header: "#000000",
-    wrong: "#FF0000",
-    wrongDarker: "#8b0000",
-  },
-};
+import { DarkTheme, LightTheme } from "../src/constants/style";
 
 export const ThemeContext = createContext({
   currentTheme: null,
@@ -102,12 +40,15 @@ const ThemeContextProvider = ({ children }) => {
   }, []);
 
   const toggleTheme = () => {
-    if (currentTheme == DarkTheme) {
+    console.log("ZMIENIAM TRYB");
+    if (currentTheme.colors.text === DarkTheme.colors.text) {
       setCurrentTheme(LightTheme);
       setThemeStore(LightTheme);
+      console.log("Ustawiam LIGHT");
     } else {
       setCurrentTheme(DarkTheme);
       setThemeStore(DarkTheme);
+      console.log("Ustawiam DARK");
     }
   };
 

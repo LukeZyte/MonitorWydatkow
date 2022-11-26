@@ -38,6 +38,9 @@ const DeleteExpenseModal = ({
     case "Odzież":
       icon = <Ionicons name="shirt" size={iconSize} color="white" />;
       break;
+    case "Usługi":
+      icon = <Ionicons name="cut" size={iconSize} color="white" />;
+      break;
     case "Rachunki":
       icon = <Ionicons name="home" size={iconSize} color="white" />;
       break;
@@ -62,6 +65,9 @@ const DeleteExpenseModal = ({
       break;
     case "Odzież":
       categoryColor = AppStyle.categoriesColor.clothes;
+      break;
+    case "Usługi":
+      categoryColor = AppStyle.categoriesColor.services;
       break;
     case "Rachunki":
       categoryColor = AppStyle.categoriesColor.bills;
@@ -113,7 +119,7 @@ const DeleteExpenseModal = ({
             <Ionicons
               name="trash"
               size={28}
-              color={colors.text}
+              color={colors.background}
               style={styles.submitIcon}
             />
           </IconButton>

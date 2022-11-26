@@ -4,41 +4,12 @@ import { AppStyle } from "../../../constants/style";
 import ModalWindow from "../../UI/ModalWindow";
 import TextUI from "../../UI/TextUI";
 import WhatsNewRecord from "./WhatsNewRecord";
+import updatesLog from "../../../util/updatesLog";
 
 const WhatsNewModal = ({ onModalVisible, onSetModalVisible }) => {
   const screenWidth = Dimensions.get("screen").width;
   const screenHeight = Dimensions.get("screen").height;
   const { colors } = useTheme();
-
-  const DATA = [
-    {
-      title: "Aktualizacja 25.11.2022",
-      added: [
-        "Nowy przycisk w profilu do wyświetlania informacji o aktualizacjach",
-        'Linki do profilu na telegram i facebook w "Co nowego"',
-      ],
-      changed: ['Nowy design okienka "Co nowego"'],
-      fixed: ["Przycisk do zmiany motywu teraz pokazuje poprawną ikonę"],
-      removed: ["Przycisk informacji z prawego górnego rogu ekranu"],
-      knownIssues: [
-        "Nie zawsze reagujące przyciski w opcjach",
-        "Biały pasek nawigacyjny u dołu ekranu (jeżeli widoczny)",
-      ],
-    },
-    {
-      title: "Aktualizacja 12.11.2022",
-      added: [
-        'Dodano logo w zakładce "Wydatki"',
-        "Nowe okno komunikatu podczas usuwania wydatku",
-      ],
-      changed: ["Nowy wygląd okienek", "Nowa paleta kolorów"],
-      knownIssues: [
-        "Nie zawsze reagujące przyciski w opcjach",
-        'Natywne, białe okno w "Co nowego"',
-        "Biały pasek nawigacyjny u dołu ekranu (jeżeli widoczny)",
-      ],
-    },
-  ];
 
   return (
     <ModalWindow
@@ -74,7 +45,7 @@ const WhatsNewModal = ({ onModalVisible, onSetModalVisible }) => {
 
       <FlatList
         style={styles.list}
-        data={DATA}
+        data={updatesLog}
         renderItem={(itemData) => {
           return (
             <WhatsNewRecord {...itemData.item} itemIndex={itemData.index} />

@@ -2,9 +2,9 @@ import { useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 
 import { View, Image, StyleSheet } from "react-native";
-import TextUI from "./src/components/UI/TextUI";
-import { AppStyle } from "./src/constants/style";
-import { ThemeContext } from "./store/themeContext";
+import TextUI from "../components/UI/TextUI";
+import { AppStyle } from "../constants/style";
+import { ThemeContext } from "../../store/themeContext";
 
 const LogoBarImage = () => {
   const { colors } = useTheme();
@@ -15,12 +15,12 @@ const LogoBarImage = () => {
       <View style={styles.container}>
         {isDarkTheme ? (
           <Image
-            source={require("./assets/LogoMW_trans.png")}
+            source={require("../../assets/LogoMW_trans.png")}
             style={styles.image}
           />
         ) : (
           <Image
-            source={require("./assets/LogoMWLight_trans.png")}
+            source={require("../../assets/LogoMWLight_trans.png")}
             style={styles.image}
           />
         )}

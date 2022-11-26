@@ -32,6 +32,9 @@ const CategoryItem = ({
     case "Odzież":
       icon = <Ionicons name="shirt" size={iconSize} color="white" />;
       break;
+    case "Usługi":
+      icon = <Ionicons name="cut" size={iconSize} color="white" />;
+      break;
     case "Rachunki":
       icon = <Ionicons name="home" size={iconSize} color="white" />;
       break;

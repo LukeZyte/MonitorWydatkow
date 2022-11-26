@@ -10,7 +10,7 @@ import { ThemeContext } from "../../../store/themeContext";
 const OptionCard = ({ iconName, iconSize, title, optionText, onPress }) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
-  const { toggleTheme, isDarkTheme } = useContext(ThemeContext);
+  const { isDarkTheme } = useContext(ThemeContext);
 
   return (
     <Card

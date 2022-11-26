@@ -13,7 +13,10 @@ import { useContext } from "react";
 import { ThemeContext } from "./store/themeContext";
 import { StatusBar } from "expo-status-bar";
 import { AppStyle } from "./src/constants/style";
-import LogoBarImage from "./LogoBarImage";
+import LogoBarImage from "./src/util/LogoBarImage";
+import { View } from "react-native";
+import TextUI from "./src/components/UI/TextUI";
+import BottomTabElement from "./src/components/UI/BottomTabElement";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,11 +28,11 @@ const MyApp = () => {
     return (
       <Tab.Navigator
         screenOptions={{
+          // tabBarShowLabel: false,
+          headerShadowVisible: false,
           headerStyle: {
             // backgroundColor: "black",
-            // borderBottomColor: "red",
             // borderBottomWidth: 0,
-            elevation: 0,
           },
           headerTitleAlign: "center",
           headerTintColor: currentTheme.colors.header,
@@ -37,27 +40,39 @@ const MyApp = () => {
             fontSize: 20,
             fontWeight: "bold",
           },
+          // tabBarActiveBackgroundColor: "orange",
           tabBarActiveTintColor: isDarkTheme
             ? currentTheme.colors.primary
             : currentTheme.colors.primary,
           tabBarStyle: {
             height: 60,
-            paddingVertical: 10,
+            // backgroundColor: "gray",
+            // paddingVertical: 10,
+            // paddingVertical: 4,
             borderTopWidth: 0,
             elevation: 0,
           },
+          tabBarShowLabel: false,
+          tabBarLabelStyle: {
+            fontSize: AppStyle.fontSize.normal,
+            fontWeight: AppStyle.fontWeight.bold,
+            marginBottom: 4,
+          },
         }}
+        labeled={false}
       >
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{
             tabBarLabel: "Wydatki",
-            tabBarLabelStyle: {
-              fontSize: AppStyle.fontSize.medium,
-            },
             tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="wallet" size={24} color={color} />
+              <BottomTabElement
+                color={color}
+                iconName="wallet"
+                bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
+                title="Wydatki"
+              />
             ),
             headerTitle: "",
             headerBackground: () => <LogoBarImage />,
@@ -69,12 +84,15 @@ const MyApp = () => {
           component={ProfileScreen}
           options={{
             tabBarLabel: "Profil",
-            tabBarLabelStyle: {
-              fontSize: AppStyle.fontSize.medium,
-            },
             tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="user-alt" size={24} color={color} />
+              <BottomTabElement
+                color={color}
+                iconName="user-alt"
+                bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
+                title="Profil"
+              />
             ),
+
             headerTitle: "Profil",
           }}
         />
@@ -90,8 +108,9 @@ const MyApp = () => {
 
       <Stack.Navigator
         screenOptions={{
+          headerShadowVisible: false,
           headerStyle: {
-            // backgroundColor: "black",
+            borderBottomWidth: 0,
           },
           // headerTintColor: MyTheme.colors.accent,
           headerTitleAlign: "center",
@@ -106,7 +125,6 @@ const MyApp = () => {
           tabBarStyle: {
             height: 60,
             paddingVertical: 10,
-            borderTopWidth: 0,
           },
         }}
       >

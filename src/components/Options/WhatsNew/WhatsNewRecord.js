@@ -4,6 +4,7 @@ import { StyleSheet, View, Linking, Alert, Pressable } from "react-native";
 import { AppStyle } from "../../../constants/style";
 import TextUI from "../../UI/TextUI";
 import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const WhatsNewRecord = ({
   title,
@@ -50,9 +51,17 @@ const WhatsNewRecord = ({
   return (
     <>
       <View style={styles.container}>
-        <TextUI style={[styles.title, { color: colors.accent }]}>
-          {title}
-        </TextUI>
+        <View style={styles.titleContainer}>
+          <Ionicons
+            name="star"
+            size={16}
+            color={colors.accent}
+            style={{ marginHorizontal: 8 }}
+          />
+          <TextUI style={[styles.title, { color: colors.accent }]}>
+            {title}
+          </TextUI>
+        </View>
         {added && <TextUI style={styles.subtitle}>Dodano</TextUI>}
         {added &&
           added.map((item) => <TextUI style={styles.content}>• {item}</TextUI>)}
@@ -84,7 +93,7 @@ const WhatsNewRecord = ({
       {itemIndex === 0 && (
         <View style={styles.footerContainer}>
           <TextUI style={styles.footer}>
-            Jeżli napotkasz jakiś błąd, który nie został powyżej wymieniony -
+            Jeżeli napotkasz jakiś błąd, który nie został powyżej wymieniony -
             daj znać, z góry dziękuję ❤
           </TextUI>
 
@@ -140,11 +149,16 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 16,
   },
+  titleContainer: {
+    flexDirection: "row",
+    marginVertical: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   title: {
     fontSize: AppStyle.fontSize.large,
-    textAlign: "center",
+    // textAlign: "center",
     fontWeight: AppStyle.fontWeight.bold,
-    marginVertical: 4,
   },
   subtitle: {
     fontWeight: AppStyle.fontWeight.bold,
