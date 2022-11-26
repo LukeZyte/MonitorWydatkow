@@ -19,8 +19,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.lukezyte.MonitorWydatkow"
     },
-
     "android": {
+      "backgroundColor": "black",
+
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon2_mw_trans.png",
@@ -37,7 +38,11 @@
       }
     },
     "androidStatusBar": {
-      "barStyle": "light-content"
+      "barStyle": "light-content",
+      "backgroundColor": "#0c0e22"
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "black"
     }
   }
 }

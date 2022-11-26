@@ -4,9 +4,11 @@ import { ThemeContext } from "../../../store/themeContext";
 import TextUI from "./TextUI";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AppStyle } from "../../constants/style";
+import { useTheme } from "@react-navigation/native";
 
-const BottomTabElement = ({ title, bgColor, color, iconName }) => {
+const BottomTabElement = ({ title, bgColor, active, color, iconName }) => {
   const { currentTheme, isDarkTheme } = useContext(ThemeContext);
+  const { colors } = useTheme();
   return (
     <View
       style={{
@@ -23,8 +25,8 @@ const BottomTabElement = ({ title, bgColor, color, iconName }) => {
             padding: 12,
             borderRadius: AppStyle.border.round,
           },
-          color === currentTheme.colors.primary && {
-            backgroundColor: bgColor,
+          active && {
+            backgroundColor: colors.secondBgPrimary,
           },
         ]}
       />

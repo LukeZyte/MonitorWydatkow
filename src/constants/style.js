@@ -1,8 +1,10 @@
 export const DarkTheme = {
   colors: {
     primary: "#03A9F4",
-    bgPrimary: "#0f122c",
-    secondBgPrimary: "#191c3f",
+    // bgPrimary: "#0f122c",
+    // secondBgPrimary: "#191c3f",
+    bgPrimary: "#0c0e25",
+    secondBgPrimary: "#0e2149",
     // bgPrimary: "#0c0e25",
     // secondBgPrimary: "#151a50",
     accent: "#03A9F4",
@@ -45,7 +47,9 @@ export const LightTheme = {
     // primary: "#004faa",
     // bgPrimary: "#e1eeff",
     bgPrimary: "#e2efff",
-    secondBgPrimary: "#e2efff",
+    // secondBgPrimary: "#e2efff",
+    // bgPrimary: "#d0eeff",
+    secondBgPrimary: "#d0eeff",
     accent: "#004faa",
     // background: "#fafafa",
     background: "#ffffff",

@@ -5,7 +5,6 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesome5 } from "@expo/vector-icons";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import AllExpensesScreen from "./src/screens/AllExpensesScreen";
@@ -14,8 +13,6 @@ import { ThemeContext } from "./store/themeContext";
 import { StatusBar } from "expo-status-bar";
 import { AppStyle } from "./src/constants/style";
 import LogoBarImage from "./src/util/LogoBarImage";
-import { View } from "react-native";
-import TextUI from "./src/components/UI/TextUI";
 import BottomTabElement from "./src/components/UI/BottomTabElement";
 
 const Stack = createNativeStackNavigator();
@@ -68,9 +65,10 @@ const MyApp = () => {
             tabBarLabel: "Wydatki",
             tabBarIcon: ({ color }) => (
               <BottomTabElement
+                active={color === currentTheme.colors.primary}
                 color={color}
                 iconName="wallet"
-                bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
+                // bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
                 title="Wydatki"
               />
             ),
@@ -86,9 +84,10 @@ const MyApp = () => {
             tabBarLabel: "Profil",
             tabBarIcon: ({ color }) => (
               <BottomTabElement
+                active={color === currentTheme.colors.primary}
                 color={color}
                 iconName="user-alt"
-                bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
+                // bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
                 title="Profil"
               />
             ),

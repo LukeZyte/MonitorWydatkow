@@ -1,14 +1,13 @@
-import { Alert, FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../../UI/IconButton";
 import Input from "../../UI/Input";
 import { AppStyle } from "../../../constants/style";
 import { useTheme } from "@react-navigation/native";
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ExpensesContext } from "../../../../store/expensesContext";
 import { CategoriesContext } from "../../../../store/categoriesContext";
 import DatePickerDisplay from "../DatePickerDisplay";
-import CategoryPicker from "./CategoryPicker";
 import TextUI from "../../UI/TextUI";
 import CategoryItem from "./CategoryItem";
 import { ThemeContext } from "../../../../store/themeContext";
@@ -293,7 +292,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
           )}
           {navStage === 3 && (
             <Ionicons
-              name="ios-add-outline"
+              name="checkmark"
               size={32}
               color={colors.background}
               style={styles.submitIcon}
@@ -347,7 +346,7 @@ const styles = StyleSheet.create({
   categoriesLabel: { textAlign: "center" },
   categoryName: {
     textAlign: "center",
-    marginVertical: 8,
+    marginVertical: 4,
   },
   bottomButtons: {
     justifyContent: "space-between",

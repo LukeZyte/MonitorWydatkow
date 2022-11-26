@@ -5,13 +5,14 @@ const updatesLog = [
     fixed: [
       'Header w "wszystkie wydatki" nie rzuca już cienia w trybie jasnym',
       "Zmiana motywu aplikacji działa za każdym razem",
+      "Pasek nawigacyjny teraz jest zawsze w kolorze czarnym",
     ],
     changed: [
       "Nowa ikona przycisku dodawania wydatku",
       'Tytuł aktualizacji w "Co nowego" teraz posiada ikonę gwiazdki',
       "Ładniejszy pasek nawigacyjny",
+      '"Fajeczka" zamiast plusa przy dodawaniu wydatku',
     ],
-    knownIssues: ["Biały pasek nawigacyjny u dołu ekranu (jeżeli widoczny)"],
   },
   {
     title: "Aktualizacja 25.11.2022",
