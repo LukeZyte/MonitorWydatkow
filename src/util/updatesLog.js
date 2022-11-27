@@ -14,6 +14,9 @@ const updatesLog = [
       '"Fajeczka" zamiast plusa przy dodawaniu wydatku',
       "Kolory niektórych kategorii uległy zmianie",
     ],
+    knownIssues: [
+      "Godzina i pasek nawigacyjny jest niewidoczny (powodem jest dziwne zachowaniu kolorów podczas otwierania okien)",
+    ],
   },
   {
     title: "Aktualizacja 25.11.2022",
