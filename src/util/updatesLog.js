@@ -5,7 +5,7 @@ const updatesLog = [
     fixed: [
       'Header w "wszystkie wydatki" nie rzuca już cienia w trybie jasnym',
       "Zmiana motywu aplikacji działa za każdym razem",
-      "Pasek nawigacyjny teraz jest zawsze w kolorze czarnym",
+      "Pasek nawigacyjny teraz dostosowywuje się do motywu aplikacji",
     ],
     changed: [
       "Nowa ikona przycisku dodawania wydatku",

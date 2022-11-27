@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import AllExpensesScreen from "./src/screens/AllExpensesScreen";
-import { useContext } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { ThemeContext } from "./store/themeContext";
 import { StatusBar } from "expo-status-bar";
 import { AppStyle } from "./src/constants/style";

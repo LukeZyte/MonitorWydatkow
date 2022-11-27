@@ -2,6 +2,7 @@ import { createContext, useLayoutEffect, useState } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DarkTheme, LightTheme } from "../src/constants/style";
+import * as NavigationBar from "expo-navigation-bar";
 
 export const ThemeContext = createContext({
   currentTheme: null,
@@ -44,10 +45,15 @@ const ThemeContextProvider = ({ children }) => {
     if (currentTheme.colors.text === DarkTheme.colors.text) {
       setCurrentTheme(LightTheme);
       setThemeStore(LightTheme);
+
+      NavigationBar.setBackgroundColorAsync(LightTheme.colors.background);
+
       console.log("Ustawiam LIGHT");
     } else {
       setCurrentTheme(DarkTheme);
       setThemeStore(DarkTheme);
+
+      NavigationBar.setBackgroundColorAsync(DarkTheme.colors.background);
       console.log("Ustawiam DARK");
     }
   };
