@@ -13,6 +13,7 @@ import { AppStyle } from "../constants/style";
 import { ExpensesContext } from "../../store/expensesContext";
 import TextUI from "../components/UI/TextUI";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as NavigationBar from "expo-navigation-bar";
 
 const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -47,6 +48,8 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     setSelectedDateStore(selectedDate);
+
+    NavigationBar.setBackgroundColorAsync(colors.background);
   }, [selectedDate]);
 
   useLayoutEffect(() => {

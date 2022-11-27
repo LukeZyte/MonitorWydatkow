@@ -11,6 +11,8 @@ import { useTheme } from "@react-navigation/native";
 import SmallIconButton from "./SmallIconButton";
 import { Ionicons } from "@expo/vector-icons";
 import { AppStyle } from "../../constants/style";
+import { useLayoutEffect } from "react";
+import * as NavigationBar from "expo-navigation-bar";
 
 // REQUIRE: OnModalVisible state, onSetModalVisible state fun!
 
@@ -22,6 +24,10 @@ const ModalWindow = ({
   style,
 }) => {
   const { colors } = useTheme();
+
+  useLayoutEffect(() => {
+    NavigationBar.setBackgroundColorAsync(colors.background);
+  }, []);
 
   return (
     <Modal transparent={true} visible={onModalVisible} animationType={"fade"}>
