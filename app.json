@@ -20,7 +20,7 @@
       "bundleIdentifier": "com.lukezyte.MonitorWydatkow"
     },
     "android": {
-      "backgroundColor": "black",
+      "backgroundColor": "#000000",
 
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
