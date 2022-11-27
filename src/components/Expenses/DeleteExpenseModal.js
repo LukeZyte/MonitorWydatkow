@@ -44,6 +44,11 @@ const DeleteExpenseModal = ({
     case "Rachunki":
       icon = <Ionicons name="home" size={iconSize} color="white" />;
       break;
+    case "Suplementy":
+      //leaf
+      //flash
+      icon = <Ionicons name="barbell" size={iconSize} color="white" />;
+      break;
     case "Inne":
       icon = <Ionicons name="shapes" size={iconSize} color="white" />;
       break;

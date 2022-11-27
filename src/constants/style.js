@@ -88,9 +88,10 @@ export const AppStyle = {
     drugs: "#ff0000",
     personal: "#0373f4",
     transport: "#ff7b00",
-    clothes: "#cc00ff",
+    clothes: "#9900ff",
     services: "#ff00c8",
-    bills: "#922900",
+    bills: "#a83000",
+    supplements: "#0a009b",
     other: "#5c5c5c",
   },
 };

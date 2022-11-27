@@ -1,7 +1,7 @@
 const updatesLog = [
   {
     title: "Aktualizacja 26.11.2022",
-    added: ['Nowa kategoria wydatku "Usługi"'],
+    added: ['Nowe kategorie wydatku "Usługi", "Suplementy"'],
     fixed: [
       'Header w "wszystkie wydatki" nie rzuca już cienia w trybie jasnym',
       "Zmiana motywu aplikacji działa za każdym razem",
@@ -12,6 +12,7 @@ const updatesLog = [
       'Tytuł aktualizacji w "Co nowego" teraz posiada ikonę gwiazdki',
       "Ładniejszy pasek nawigacyjny",
       '"Fajeczka" zamiast plusa przy dodawaniu wydatku',
+      "Kolory niektórych kategorii uległy zmianie",
     ],
   },
   {
