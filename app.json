@@ -37,8 +37,7 @@
       }
     },
     "androidNavigationBar": {
-      "barStyle": "light-content",
-      "visible": "sticky-immersive"
+      "barStyle": "light-content"
     },
     "androidStatusBar": {
       "hidden": false,

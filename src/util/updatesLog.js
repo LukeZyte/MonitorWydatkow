@@ -1,5 +1,20 @@
 const updatesLog = [
   {
+    title: "Aktualizacja 29.11.2022",
+    added: [
+      "Opcja planowania budżetu miesięcznego w profilu",
+      "ProgressBar jeżeli wybrany został plan budżetowy ( póki co działa tylko dla aktualnego miesiąca )",
+      "Miesięczny budżet o ile zdefiniowany jest napisany pod sumą wydatków",
+    ],
+    fixed: [
+      "Teraz wpisanie przecinka do formularza wpisuje kropkę, zamiast usuwać wprowadzony znak",
+    ],
+    changed: ["Co nowego wyróżnia się od innych opcji"],
+    knownIssues: [
+      "Biały pasek nawigacyjny ( czasem czarny ) u dołu ekranu (jeżeli widoczny) podczas wyświetlania okna",
+    ],
+  },
+  {
     title: "Aktualizacja 26.11.2022",
     added: ['Nowe kategorie wydatku "Usługi", "Suplementy"'],
     fixed: [

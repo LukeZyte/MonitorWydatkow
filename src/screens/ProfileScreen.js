@@ -14,6 +14,7 @@ import { AppStyle } from "../constants/style";
 import Card from "../components/UI/Card";
 import OptionToggleTheme from "../components/Options/OptionToggleTheme";
 import OptionWhatsNew from "../components/Options/WhatsNew/OptionWhatsNew";
+import OptionPlannedExpenses from "../components/Options/PlannedAmount/OptionPlannedAmount";
 
 const ProfileScreen = () => {
   const { colors } = useTheme();
@@ -21,51 +22,10 @@ const ProfileScreen = () => {
   const isIOS = Platform.OS === "ios";
 
   return (
-    <ScrollView>
+    <ScrollView keyboardShouldPersistTaps="handled">
       <OptionToggleTheme />
+      <OptionPlannedExpenses />
       <OptionWhatsNew />
-      {/* <Card>
-        <Pressable
-          onPress={toggleTheme}
-          style={({ pressed }) => [
-            styles.pressable,
-            { backgroundColor: colors.bgPrimary },
-            pressed &&
-              isIOS && { backgroundColor: colors.accent, opacity: 0.5 },
-          ]}
-          android_ripple={{ color: colors.accent }}
-        >
-          <View style={styles.title}>
-            <TextUI>Motyw aplikacji</TextUI>
-          </View>
-          <View style={styles.icon}>
-            {!isDarkTheme && (
-              <Ionicons
-                name="sunny"
-                size={24}
-                color={colors.header}
-                style={styles.ioniconStyle}
-              />
-            )}
-            {isDarkTheme && (
-              <Ionicons
-                name="moon"
-                size={24}
-                color={colors.header}
-                style={styles.ioniconStyle}
-              />
-            )}
-            <TextUI
-              style={{
-                fontWeight: AppStyle.fontWeight.bold,
-                color: colors.accent,
-              }}
-            >
-              {isDarkTheme ? "Ciemny" : "Jasny"}
-            </TextUI>
-          </View>
-        </Pressable>
-      </Card> */}
     </ScrollView>
   );
 };

@@ -7,7 +7,14 @@ import { AppStyle } from "../../constants/style";
 import { useContext } from "react";
 import { ThemeContext } from "../../../store/themeContext";
 
-const OptionCard = ({ iconName, iconSize, title, optionText, onPress }) => {
+const OptionCard = ({
+  iconName,
+  iconSize,
+  title,
+  optionText,
+  onPress,
+  style,
+}) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
   const { isDarkTheme } = useContext(ThemeContext);
@@ -17,6 +24,7 @@ const OptionCard = ({ iconName, iconSize, title, optionText, onPress }) => {
       style={[
         styles.outer,
         isDarkTheme && { backgroundColor: colors.background },
+        style,
       ]}
     >
       <Pressable
@@ -56,9 +64,12 @@ const styles = StyleSheet.create({
   },
   optionTitle: {
     flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 8,
   },
   title: {
     marginLeft: 16,
+    maxWidth: 200,
   },
   text: {
     fontWeight: AppStyle.fontWeight.bold,

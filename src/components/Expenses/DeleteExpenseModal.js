@@ -7,6 +7,7 @@ import IconButton from "../UI/IconButton";
 import { AppStyle } from "../../constants/style";
 import { useContext } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
+import { ThemeContext } from "../../../store/themeContext";
 
 const DeleteExpenseModal = ({
   onModalVisible,
@@ -19,6 +20,7 @@ const DeleteExpenseModal = ({
   const screenWidth = Dimensions.get("screen").width;
   const { colors } = useTheme();
   const expensesCtx = useContext(ExpensesContext);
+  const { isDarkTheme } = useContext(ThemeContext);
 
   const iconSize = 32;
   let icon = <Ionicons name="shapes" size={iconSize} color="white" />;
@@ -118,13 +120,14 @@ const DeleteExpenseModal = ({
         <View style={styles.submitFooter}>
           <IconButton
             style={[styles.submitButton, { backgroundColor: colors.wrong }]}
+            myColors={[colors.wrong, colors.wrongDarker]}
             pressColor={colors.wrongDarker}
             onPress={submitHandler}
           >
             <Ionicons
               name="trash"
               size={28}
-              color={colors.background}
+              color="white"
               style={styles.submitIcon}
             />
           </IconButton>

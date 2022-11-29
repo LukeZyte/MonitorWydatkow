@@ -1,6 +1,7 @@
 import MyApp from "./MyApp";
 import CategoriesContextProvider from "./store/categoriesContext";
 import ExpensesContextProvider from "./store/expensesContext";
+import PlannedAmountContextProvider from "./store/plannedAmountContext";
 import ThemeContextProvider from "./store/themeContext";
 
 export default function App() {
@@ -8,7 +9,9 @@ export default function App() {
     <ThemeContextProvider>
       <ExpensesContextProvider>
         <CategoriesContextProvider>
-          <MyApp />
+          <PlannedAmountContextProvider>
+            <MyApp />
+          </PlannedAmountContextProvider>
         </CategoriesContextProvider>
       </ExpensesContextProvider>
     </ThemeContextProvider>

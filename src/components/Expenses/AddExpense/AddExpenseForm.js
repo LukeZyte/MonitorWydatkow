@@ -183,16 +183,23 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
           placeholderTextColor={!enteredPrice.isValid && colors.wrong}
           onChangeText={(enteredText) => {
             let newText = "";
-            let numbers = "0123456789.";
+            let numbers = "0123456789.,";
             let numberOfDots = 0;
 
             for (var i = 0; i < enteredText.length; i++) {
               if (numbers.indexOf(enteredText[i]) > -1) {
-                if (enteredText[i] === ".") {
+                if (numberOfDots < 1 && enteredText[i] === ",") {
+                  newText = newText + ".";
+                  break;
+                }
+                if (enteredText[i] === "." || enteredText[i] === ",") {
                   numberOfDots++;
                 }
                 if (numberOfDots > 1) {
                   break;
+                }
+                if (numberOfDots === 1 && enteredText.length - i > 3) {
+                  return;
                 }
                 newText = newText + enteredText[i];
               }

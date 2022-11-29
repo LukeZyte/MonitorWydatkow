@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import Card from "./Card";
 import TextUI from "./TextUI";
@@ -24,6 +25,9 @@ const ModalWindow = ({
   style,
 }) => {
   const { colors } = useTheme();
+
+  const screenWidth = Dimensions.get("screen").width;
+  const screenHeight = Dimensions.get("screen").height;
 
   useLayoutEffect(() => {
     NavigationBar.setBackgroundColorAsync(colors.background);
