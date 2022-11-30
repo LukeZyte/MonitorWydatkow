@@ -20,7 +20,7 @@ const OptionWhatsNew = () => {
         iconSize={iconSize}
         color={colors.accent}
         title="Co nowego"
-        optionText={"Ostatnia aktualizacja: 29.11.2022"}
+        optionText={"Ostatnia aktualizacja: 30.11.2022"}
         onPress={pressHandler}
         style={{
           borderWidth: 2,

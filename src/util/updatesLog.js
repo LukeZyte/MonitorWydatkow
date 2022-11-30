@@ -1,6 +1,6 @@
 const updatesLog = [
   {
-    title: "Aktualizacja ...",
+    title: "Aktualizacja 30.11.2022",
     added: [
       "Nowa animacja między etapami w okienkach",
       "Po przekroczeniu miesięcznego budżetu pojawia się odpowiedni tekst pod monitorem wydatków",
