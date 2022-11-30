@@ -30,7 +30,7 @@ const PlannedAmountModal = ({ onModalVisible, onSetModalVisible }) => {
       onSetModalVisible(false);
       return;
     }
-    setPlannedAmount(enteredPrice.value);
+    setPlannedAmount(parseFloat(enteredPrice.value));
     onSetModalVisible(false);
   };
 

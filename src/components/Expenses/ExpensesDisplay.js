@@ -34,7 +34,7 @@ const ExpensesDisplay = ({ selectedDate, setSelectedDate }) => {
 
   return (
     <>
-      {plannedAmount > 0 && plannedAmount > summaryValue && thisMonth && (
+      {plannedAmount > 0 && plannedAmount >= summaryValue && thisMonth && (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <CircularProgress
             radius={120}
@@ -58,17 +58,18 @@ const ExpensesDisplay = ({ selectedDate, setSelectedDate }) => {
               fontSize: AppStyle.fontSize.huge,
               color: colors.text,
             }}
-            progressFormatter={(value) => {
-              "worklet";
-              return value.toFixed(2); // 2 decimal places
-            }}
+            // progressFormatter={(value) => {
+            //   "worklet";
+            //   return value.toFixed(2); // 2 decimal places
+            // }}
           />
         </View>
       )}
-      {plannedAmount > 0 && plannedAmount <= summaryValue && thisMonth && (
+      {plannedAmount > 0 && plannedAmount < summaryValue && thisMonth && (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <CircularProgress
             radius={120}
+            stroke
             value={summaryValue}
             maxValue={summaryValue}
             duration={1000}
@@ -83,23 +84,28 @@ const ExpensesDisplay = ({ selectedDate, setSelectedDate }) => {
             // }}
             valueSuffix={" zł"}
             inActiveStrokeColor={colors.bgPrimary}
-            activeStrokeColor={colors.wrong}
-            activeStrokeSecondaryColor={colors.wrong}
+            activeStrokeColor={colors.gradientWrongOne}
+            activeStrokeSecondaryColor={colors.gradientWrongThree}
             progressValueStyle={{
               fontSize: AppStyle.fontSize.huge,
               color: colors.text,
             }}
-            progressFormatter={(value) => {
-              "worklet";
-              return value.toFixed(2); // 2 decimal places
-            }}
+            // progressFormatter={(value) => {
+            //   "worklet";
+            //   return value.toFixed(2); // 2 decimal places
+            // }}
           />
         </View>
       )}
-      {plannedAmount > 0 && thisMonth && (
+      {plannedAmount > 0 && thisMonth && plannedAmount >= summaryValue && (
         <TextUI
           style={styles.plannedAmount}
         >{`Miesięczny budżet ${plannedAmount} zł`}</TextUI>
+      )}
+      {plannedAmount > 0 && thisMonth && plannedAmount < summaryValue && (
+        <TextUI
+          style={[styles.plannedAmount, { color: colors.wrong }]}
+        >{`Miesięczny budżet ${plannedAmount} zł\nPrzekroczono`}</TextUI>
       )}
       {(plannedAmount === 0 || !thisMonth) && (
         <View

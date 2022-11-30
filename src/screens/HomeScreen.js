@@ -1,7 +1,6 @@
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import ExpensesDisplay from "../components/Expenses/ExpensesDisplay";
-import DatePickerDisplay from "../components/Expenses/DatePickerDisplay";
 import ExpensesList from "../components/Expenses/ExpensesList";
 import MenuLabel from "../components/UI/MenuLabel";
 import IconButton from "../components/UI/IconButton";
@@ -14,6 +13,7 @@ import { ExpensesContext } from "../../store/expensesContext";
 import TextUI from "../components/UI/TextUI";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as NavigationBar from "expo-navigation-bar";
+import DatePickerDisplay from "../components/UI/DatePickers/DatePickerDisplay";
 
 const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();

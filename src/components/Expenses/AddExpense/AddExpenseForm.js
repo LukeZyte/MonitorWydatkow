@@ -1,22 +1,33 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  View,
+  Dimensions,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../../UI/IconButton";
 import Input from "../../UI/Input";
 import { AppStyle } from "../../../constants/style";
 import { useTheme } from "@react-navigation/native";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { ExpensesContext } from "../../../../store/expensesContext";
 import { CategoriesContext } from "../../../../store/categoriesContext";
-import DatePickerDisplay from "../DatePickerDisplay";
 import TextUI from "../../UI/TextUI";
 import CategoryItem from "./CategoryItem";
 import { ThemeContext } from "../../../../store/themeContext";
+import FullDatePickerDisplay from "../../UI/DatePickers/FullDatePickerDisplay";
 
 const AddExpenseForm = ({ onSetModalVisible }) => {
   const { colors } = useTheme();
   const expensesCtx = useContext(ExpensesContext);
   const { categories } = useContext(CategoriesContext);
   const { isDarkTheme } = useContext(ThemeContext);
+
+  const screenWidth = Dimensions.get("screen").width;
+  const screenHeight = Dimensions.get("screen").height;
+
+  const navAddStageRef = useRef();
 
   const [navStage, setNavStage] = useState(1);
 
@@ -92,6 +103,8 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
     }
   };
 
+  const sizeOfNavStage = screenWidth - 52;
+
   const nextHandler = () => {
     let priceNotValid = true;
     let titleNotValid = true;
@@ -107,7 +120,10 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         setEnteredPrice({ value: null, isValid: false });
         return;
       }
-
+      navAddStageRef.current?.scrollTo({
+        x: sizeOfNavStage,
+        animated: true,
+      });
       setNavStage(2);
     }
 
@@ -117,7 +133,10 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         setEnteredTitle({ value: "", isValid: false });
         return;
       }
-
+      navAddStageRef.current?.scrollTo({
+        x: sizeOfNavStage * 2,
+        animated: true,
+      });
       setNavStage(3);
     }
 
@@ -160,8 +179,8 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
   };
 
   const stagePrice = (
-    <View style={styles.cardContent}>
-      <View style={styles.priceContainer}>
+    <View style={[styles.cardContent, { width: sizeOfNavStage }]}>
+      <View style={[styles.priceContainer]}>
         <View style={styles.priceCurrencyText} />
         <Input
           label="Koszt wydatku"
@@ -217,7 +236,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
   );
 
   const stageTitle = (
-    <View style={styles.cardContent}>
+    <View style={[styles.cardContent, { width: sizeOfNavStage }]}>
       <Input
         label="Tytuł wydatku"
         keyboardType="default"
@@ -241,7 +260,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
   );
 
   const stageCategory = (
-    <View style={styles.cardContent}>
+    <View style={[styles.cardContent, { width: sizeOfNavStage }]}>
       <TextUI style={styles.categoriesLabel}>Kategoria zakupów</TextUI>
       <TextUI
         style={[
@@ -276,12 +295,20 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
 
   return (
     <View style={styles.rootContainer}>
-      {navStage === 1 && stagePrice}
-      {navStage === 2 && stageTitle}
-      {navStage === 3 && stageCategory}
+      <ScrollView
+        horizontal
+        pagingEnabled
+        scrollEnabled={false}
+        showsHorizontalScrollIndicator={false}
+        ref={navAddStageRef}
+      >
+        {stagePrice}
+        {stageTitle}
+        {stageCategory}
+      </ScrollView>
       <View style={styles.bottomButtons}>
         <View style={{ marginHorizontal: 12 }}>
-          <DatePickerDisplay
+          <FullDatePickerDisplay
             selectedDate={pickedDate}
             setSelectedDate={setPickedDate}
             fullDate

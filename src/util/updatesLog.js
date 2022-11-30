@@ -1,5 +1,21 @@
 const updatesLog = [
   {
+    title: "Aktualizacja ...",
+    added: [
+      "Nowa animacja między etapami w okienkach",
+      "Po przekroczeniu miesięcznego budżetu pojawia się odpowiedni tekst pod monitorem wydatków",
+    ],
+    changed: [
+      "Gradient koloru czerwonego poczas przekroczenia budżetu",
+      "Zmiana odcienia niebieskiego w przycisku",
+      "Kliknięcie poza okienko wyboru daty spowoduje jego zamknięcie",
+      "Wybór pełnej daty zmienia się teraz tylko po kliknięciu przycisku zatwierdzenia - wybór niepełnej daty ( bez dnia ) dalej działa na bieżąco",
+    ],
+    knownIssues: [
+      "Biały pasek nawigacyjny ( czasem czarny ) u dołu ekranu (jeżeli widoczny) podczas wyświetlania okna",
+    ],
+  },
+  {
     title: "Aktualizacja 29.11.2022",
     added: [
       "Opcja planowania budżetu miesięcznego w profilu",

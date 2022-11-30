@@ -2,7 +2,7 @@ export const DarkTheme = {
   colors: {
     primary: "#03a8f4",
     secondPrimary: "#0357f4",
-    thirdPrimary: "#03bcf4",
+    thirdPrimary: "#03d8f4",
     // bgPrimary: "#0f122c",
     // secondBgPrimary: "#191c3f",
     bgPrimary: "#0c0e25",
@@ -15,10 +15,19 @@ export const DarkTheme = {
     // card: "#191c3f",
     card: "#000000",
     text: "#FFFFFF",
+    blurText: "#7a7a7a",
     border: "#4690ff",
     header: "#FFFFFF",
     wrong: "#FF0000",
     wrongDarker: "#8b0000",
+
+    gradientPrimaryOne: "#00ccff",
+    gradientPrimaryTwo: "#03a8f4",
+    gradientPrimaryThree: "#0357f4",
+
+    gradientWrongOne: "#ff3232",
+    gradientWrongTwo: "#FF0000",
+    gradientWrongThree: "#e70000",
   },
 };
 
@@ -47,7 +56,7 @@ export const LightTheme = {
   colors: {
     primary: "#0099ff",
     secondPrimary: "#004faa",
-    thirdPrimary: "#00aeff",
+    thirdPrimary: "#00b7ff",
     // primary: "#004faa",
     // bgPrimary: "#e1eeff",
     bgPrimary: "#e2efff",
@@ -61,11 +70,21 @@ export const LightTheme = {
     // card: "#03A9F4",
     card: "#ffffff",
     text: "#000000",
+    blurText: "#8b8b8b",
     // border: "#fafafa",
     border: "#004faa",
     header: "#000000",
+
     wrong: "#FF0000",
     wrongDarker: "#8b0000",
+
+    gradientPrimaryOne: "#00ccff",
+    gradientPrimaryTwo: "#03a8f4",
+    gradientPrimaryThree: "#0357f4",
+
+    gradientWrongOne: "#ff3939",
+    gradientWrongTwo: "#FF0000",
+    gradientWrongThree: "#d60000",
   },
 };
 

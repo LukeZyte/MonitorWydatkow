@@ -22,6 +22,7 @@ const ModalWindow = ({
   onModalVisible,
   onSetModalVisible,
   title,
+  closeOnTap,
   style,
 }) => {
   const { colors } = useTheme();
@@ -38,7 +39,7 @@ const ModalWindow = ({
       <TouchableOpacity
         style={styles.rootContainer}
         activeOpacity={1}
-        // onPressOut={() => onSetModalVisible(false)}s
+        onPressOut={() => closeOnTap && onSetModalVisible(false)}
       />
       <View style={styles.innerContainer}>
         <Card

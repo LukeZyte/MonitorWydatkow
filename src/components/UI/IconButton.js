@@ -23,7 +23,9 @@ const IconButton = ({
       colors={
         // isDarkTheme
         // ? [colors.secondPrimary, colors.primary]
-        !myColors ? [colors.primary, colors.secondPrimary] : myColors
+        !myColors
+          ? [colors.gradientPrimaryTwo, colors.gradientPrimaryThree]
+          : myColors
       }
       style={[styles.outer, style]}
       // style={[styles.outer, { backgroundColor: colors.primary }, style]}
@@ -31,12 +33,12 @@ const IconButton = ({
       <Pressable
         onPress={onPress}
         android_ripple={
-          pressColor ? { color: pressColor } : { color: colors.bgPrimary }
+          pressColor ? { color: pressColor } : { color: colors.accent }
         }
         style={({ pressed }) => {
           pressed && isIOS && pressColor
             ? { opacity: 0.5, backgroundColor: pressColor }
-            : { opacity: 0.5, backgroundColor: colors.bgPrimary };
+            : { opacity: 0.5, backgroundColor: colors.accent };
           // pressColor && { backgroundColor: pressColor };
           // pressed && { backgroundColor: "orange" };
         }}

@@ -1,18 +1,13 @@
 import { StyleSheet, View, Platform } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { AppStyle } from "../../constants/style";
-import { getMonthName, getSimpleDate } from "../../constants/date";
+import { AppStyle } from "../../../constants/style";
+import { getMonthName } from "../../../constants/date";
 import { useState } from "react";
 import DatePickerModal from "./DatePickerModal";
-import TextUI from "../UI/TextUI";
-import IoniconTextButton from "../UI/IoniconTextButton";
+import TextUI from "../TextUI";
+import IoniconTextButton from "../IoniconTextButton";
 
-const DatePickerDisplay = ({
-  selectedDate,
-  setSelectedDate,
-  fullDate,
-  style,
-}) => {
+const DatePickerDisplay = ({ selectedDate, setSelectedDate, style }) => {
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
 
@@ -26,7 +21,6 @@ const DatePickerDisplay = ({
           setSelectedDate={setSelectedDate}
           datePickerVisible={datePickerVisible}
           setDatePickerVisible={setDatePickerVisible}
-          fullDate={fullDate}
         />
       )}
 
@@ -34,24 +28,21 @@ const DatePickerDisplay = ({
         style={[styles.display, { backgroundColor: colors.bgPrimary }, style]}
       >
         <IoniconTextButton
-          fitBorders={!fullDate}
+          fitBorders
           icon="calendar"
           size={24}
           color={colors.accent}
           onPress={() => setDatePickerVisible(true)}
-          // style={({ pressed }) => [pressed && isIOS && { opacity: 0.5 }]}
+          style={({ pressed }) => [pressed && isIOS && { opacity: 0.5 }]}
         >
-          {fullDate && getSimpleDate(selectedDate)}
-          {!fullDate && (
-            <View style={styles.dateContainer}>
-              <TextUI style={[styles.dateText, { color: colors.accent }]}>
-                {new Date(selectedDate).getFullYear()}
-              </TextUI>
-              <TextUI style={[styles.dateText]}>
-                {getMonthName(new Date(selectedDate).getMonth() + 1)}
-              </TextUI>
-            </View>
-          )}
+          <View style={styles.dateContainer}>
+            <TextUI style={[styles.dateText, { color: colors.accent }]}>
+              {new Date(selectedDate).getFullYear()}
+            </TextUI>
+            <TextUI style={[styles.dateText]}>
+              {getMonthName(new Date(selectedDate).getMonth() + 1)}
+            </TextUI>
+          </View>
         </IoniconTextButton>
       </View>
     </>
