@@ -1,4 +1,4 @@
-import { Alert, ScrollView, StyleSheet, View } from "react-native";
+import { Alert, Platform, ScrollView, StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import ExpensesDisplay from "../components/Expenses/ExpensesDisplay";
 import ExpensesList from "../components/Expenses/ExpensesList";
@@ -19,6 +19,8 @@ const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const { expenses } = useContext(ExpensesContext);
 
+  const isIOS = Platform.OS === "ios";
+
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const iconSize = AppStyle.fontSize.large;
 
@@ -27,34 +29,36 @@ const HomeScreen = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState(today);
 
   // AsyncStorage
-  const getSelectedDateFromStore = async () => {
-    try {
-      const result = await AsyncStorage.getItem("selectedDateKey");
-      if (result) {
-        setSelectedDate(new Date(JSON.parse(result)));
-      }
-    } catch (error) {
-      Alert.alert(error);
-    }
-  };
+  // const getSelectedDateFromStore = async () => {
+  //   try {
+  //     const result = await AsyncStorage.getItem("selectedDateKey");
+  //     if (result) {
+  //       setSelectedDate(new Date(JSON.parse(result)));
+  //     }
+  //   } catch (error) {
+  //     Alert.alert(error);
+  //   }
+  // };
 
-  const setSelectedDateStore = async (data) => {
-    try {
-      await AsyncStorage.setItem("selectedDateKey", JSON.stringify(data));
-    } catch (error) {
-      Alert.alert(error);
-    }
-  };
+  // const setSelectedDateStore = async (data) => {
+  //   try {
+  //     await AsyncStorage.setItem("selectedDateKey", JSON.stringify(data));
+  //   } catch (error) {
+  //     Alert.alert(error);
+  //   }
+  // };
 
   useEffect(() => {
-    setSelectedDateStore(selectedDate);
+    // setSelectedDateStore(selectedDate);
 
-    NavigationBar.setBackgroundColorAsync(colors.background);
+    if (!isIOS) {
+      NavigationBar.setBackgroundColorAsync(colors.background);
+    }
   }, [selectedDate]);
 
-  useLayoutEffect(() => {
-    getSelectedDateFromStore();
-  }, []);
+  // useLayoutEffect(() => {
+  //   getSelectedDateFromStore();
+  // }, []);
 
   return (
     <>

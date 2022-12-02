@@ -1,5 +1,15 @@
 const updatesLog = [
   {
+    title: "Aktualizacja 2.12.2022",
+    changed: [
+      "Nowe koło wydatków widoczne dla każdego miesiąca, lecz nie wypełniające się",
+      "Mniej gruba czcionka sumy wydatków",
+      "Suma wydatków nie rośnie wraz z paskiem, tylko od początku pokazuje prawidłową wartość",
+      "Kwota i tytuł wydatku teraz się automatycznie zaznaczają pokazując klawiaturę",
+    ],
+    fixed: ["Drobne, wstępne poprawki pod build na iOS"],
+  },
+  {
     title: "Aktualizacja 30.11.2022",
     added: [
       "Nowa animacja między etapami w okienkach",

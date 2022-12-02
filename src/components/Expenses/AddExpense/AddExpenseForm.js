@@ -10,7 +10,13 @@ import IconButton from "../../UI/IconButton";
 import Input from "../../UI/Input";
 import { AppStyle } from "../../../constants/style";
 import { useTheme } from "@react-navigation/native";
-import { useContext, useRef, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { ExpensesContext } from "../../../../store/expensesContext";
 import { CategoriesContext } from "../../../../store/categoriesContext";
 import TextUI from "../../UI/TextUI";
@@ -27,6 +33,8 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
   const screenWidth = Dimensions.get("screen").width;
   const screenHeight = Dimensions.get("screen").height;
 
+  const priceInputRef = useRef();
+  const titleInputRef = useRef();
   const navAddStageRef = useRef();
 
   const [navStage, setNavStage] = useState(1);
@@ -120,6 +128,10 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         setEnteredPrice({ value: null, isValid: false });
         return;
       }
+
+      priceInputRef.current.blur();
+      titleInputRef.current.focus();
+
       navAddStageRef.current?.scrollTo({
         x: sizeOfNavStage,
         animated: true,
@@ -133,6 +145,9 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
         setEnteredTitle({ value: "", isValid: false });
         return;
       }
+
+      titleInputRef.current.blur();
+
       navAddStageRef.current?.scrollTo({
         x: sizeOfNavStage * 2,
         animated: true,
@@ -178,11 +193,21 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
     }
   };
 
+  useLayoutEffect(() => {
+    // Yes, setTimeout is needed in order to make the keyboard popup XDDD I have no idea why, probably a bug
+    setTimeout(() => priceInputRef.current.focus(), 150);
+  }, []);
+
   const stagePrice = (
     <View style={[styles.cardContent, { width: sizeOfNavStage }]}>
       <View style={[styles.priceContainer]}>
         <View style={styles.priceCurrencyText} />
         <Input
+          ref={priceInputRef}
+          // autoFocus={true}
+          returnKeyType="next"
+          blurOnSubmit={false}
+          onSubmitEditing={nextHandler}
           label="Koszt wydatku"
           keyboardType="number-pad"
           maxLength={8}
@@ -238,6 +263,9 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
   const stageTitle = (
     <View style={[styles.cardContent, { width: sizeOfNavStage }]}>
       <Input
+        ref={titleInputRef}
+        returnKeyType="next"
+        onSubmitEditing={nextHandler}
         label="Tytuł wydatku"
         keyboardType="default"
         style={[

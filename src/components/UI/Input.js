@@ -19,6 +19,8 @@ const Input = React.forwardRef(
       blurOnSubmit,
       keyboardType,
       autoFocus,
+      returnKeyType,
+      onSubmitEditing,
     },
     ref
   ) => {
@@ -29,6 +31,8 @@ const Input = React.forwardRef(
       <View style={styles.container}>
         {label && <TextUI style={[styles.label, styleLabel]}>{label}</TextUI>}
         <TextInput
+          onSubmitEditing={onSubmitEditing}
+          returnKeyType={returnKeyType}
           ref={ref}
           autoFocus={autoFocus}
           keyboardType={keyboardType}
