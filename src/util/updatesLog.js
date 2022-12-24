@@ -1,5 +1,15 @@
 const updatesLog = [
   {
+    title: "Aktualizacja 24.12.2022",
+    added: ["Działający build na iOS!"],
+    changed: ["Niektóre kolory uległy zmianie"],
+    fixed: ["Wiele błędów na wersję iOS zostało naprawionych"],
+    knownIssues: [
+      "Przeskok w animacji przy przechodzeniu dalej podczas dodawania nowego wydatku na systemach iOS",
+      "Biały pasek nawigacyjny ( czasem czarny ) u dołu ekranu (jeżeli widoczny) podczas wyświetlania okna na systemach Android",
+    ],
+  },
+  {
     title: "Aktualizacja 2.12.2022",
     changed: [
       "Nowe koło wydatków widoczne dla każdego miesiąca, lecz nie wypełniające się",
@@ -8,6 +18,9 @@ const updatesLog = [
       "Kwota i tytuł wydatku teraz się automatycznie zaznaczają pokazując klawiaturę",
     ],
     fixed: ["Drobne, wstępne poprawki pod build na iOS"],
+    knownIssues: [
+      "Biały pasek nawigacyjny ( czasem czarny ) u dołu ekranu (jeżeli widoczny) podczas wyświetlania okna na systemach Android",
+    ],
   },
   {
     title: "Aktualizacja 30.11.2022",

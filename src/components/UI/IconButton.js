@@ -21,27 +21,25 @@ const IconButton = ({
   return (
     <LinearGradient
       colors={
-        // isDarkTheme
-        // ? [colors.secondPrimary, colors.primary]
         !myColors
           ? [colors.gradientPrimaryTwo, colors.gradientPrimaryThree]
           : myColors
       }
       style={[styles.outer, style]}
-      // style={[styles.outer, { backgroundColor: colors.primary }, style]}
     >
       <Pressable
         onPress={onPress}
         android_ripple={
-          pressColor ? { color: pressColor } : { color: colors.accent }
+          pressColor ? { color: pressColor } : { color: colors.secondPrimary }
         }
-        style={({ pressed }) => {
-          pressed && isIOS && pressColor
-            ? { opacity: 0.5, backgroundColor: pressColor }
-            : { opacity: 0.5, backgroundColor: colors.accent };
+        style={
+          ({ pressed }) => [
+            pressed && isIOS && { backgroundColor: colors.secondPrimary },
+            pressColor && pressed && { backgroundColor: pressColor },
+          ]
           // pressColor && { backgroundColor: pressColor };
           // pressed && { backgroundColor: "orange" };
-        }}
+        }
       >
         {children}
       </Pressable>

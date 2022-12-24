@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  Platform,
+  KeyboardAvoidingView,
 } from "react-native";
 import Card from "./Card";
 import TextUI from "./TextUI";
@@ -26,12 +28,13 @@ const ModalWindow = ({
   style,
 }) => {
   const { colors } = useTheme();
+  const isIOS = Platform.OS === "ios";
 
   const screenWidth = Dimensions.get("screen").width;
   const screenHeight = Dimensions.get("screen").height;
 
   useLayoutEffect(() => {
-    NavigationBar.setBackgroundColorAsync(colors.background);
+    !isIOS && NavigationBar.setBackgroundColorAsync(colors.background);
   }, []);
 
   return (
@@ -41,7 +44,7 @@ const ModalWindow = ({
         activeOpacity={1}
         onPressOut={() => closeOnTap && onSetModalVisible(false)}
       />
-      <View style={styles.innerContainer}>
+      <KeyboardAvoidingView behavior="height" style={styles.innerContainer}>
         <Card
           style={[styles.modalContent, style, { borderColor: colors.border }]}
         >
@@ -57,7 +60,7 @@ const ModalWindow = ({
             {children}
           </View>
         </Card>
-      </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };

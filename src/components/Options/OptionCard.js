@@ -31,7 +31,7 @@ const OptionCard = ({
         onPress={onPress}
         android_ripple={{ color: colors.accent }}
         style={({ pressed }) => [
-          pressed && isIOS && { opacity: 0.5, backgroundColor: colors.accent },
+          pressed && isIOS && { backgroundColor: colors.accent },
           styles.container,
         ]}
       >

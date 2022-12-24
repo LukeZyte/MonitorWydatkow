@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import { Alert, Platform, Pressable, StyleSheet, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AppStyle } from "../../constants/style";
 
@@ -14,9 +14,12 @@ const ArrowButton = ({ direction, onPress }) => {
       <Pressable
         onPress={onPress}
         android_ripple={{ color: colors.primary }}
-        style={({ pressed }) => {
-          pressed && { backgroundColor: colors.primary };
-        }}
+        style={({ pressed }) =>
+          pressed &&
+          isIOS && {
+            backgroundColor: colors.primary,
+          }
+        }
       >
         <MaterialIcons
           name={`keyboard-arrow-${direction}`}

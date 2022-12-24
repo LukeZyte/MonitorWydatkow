@@ -1,5 +1,5 @@
 import { createContext, useLayoutEffect, useState } from "react";
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DarkTheme, LightTheme } from "../src/constants/style";
 import * as NavigationBar from "expo-navigation-bar";
@@ -13,6 +13,8 @@ export const ThemeContext = createContext({
 });
 
 const ThemeContextProvider = ({ children }) => {
+  const isIOS = Platform.OS === "ios";
+
   const [currentTheme, setCurrentTheme] = useState(DarkTheme);
 
   const getThemeFromStore = async () => {
@@ -46,14 +48,16 @@ const ThemeContextProvider = ({ children }) => {
       setCurrentTheme(LightTheme);
       setThemeStore(LightTheme);
 
-      NavigationBar.setBackgroundColorAsync(LightTheme.colors.background);
+      !isIOS &&
+        NavigationBar.setBackgroundColorAsync(LightTheme.colors.background);
 
       console.log("Ustawiam LIGHT");
     } else {
       setCurrentTheme(DarkTheme);
       setThemeStore(DarkTheme);
 
-      NavigationBar.setBackgroundColorAsync(DarkTheme.colors.background);
+      !isIOS &&
+        NavigationBar.setBackgroundColorAsync(DarkTheme.colors.background);
       console.log("Ustawiam DARK");
     }
   };

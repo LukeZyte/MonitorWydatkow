@@ -16,10 +16,7 @@ const BottomTabElement = ({ title, bgColor, active, color, iconName }) => {
         alignItems: "center",
       }}
     >
-      <FontAwesome5
-        name={iconName}
-        size={24}
-        color={color}
+      <View
         style={[
           {
             padding: 12,
@@ -29,7 +26,9 @@ const BottomTabElement = ({ title, bgColor, active, color, iconName }) => {
             backgroundColor: colors.secondBgPrimary,
           },
         ]}
-      />
+      >
+        <FontAwesome5 name={iconName} size={24} color={color} />
+      </View>
       <TextUI
         style={{
           fontSize: AppStyle.fontSize.normal,

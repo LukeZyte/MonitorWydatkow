@@ -22,9 +22,12 @@ const IoniconTextButton = ({
     <View style={[styles.outer, style]}>
       <Pressable
         onPress={onPress}
-        android_ripple={{ color: colors.accent }}
+        android_ripple={{ color: colors.secondBgPrimarySelected }}
         style={({ pressed }) =>
-          pressed && isIOS && { backgroundColor: colors.accent, opacity: 0.5 }
+          pressed &&
+          isIOS && {
+            backgroundColor: colors.secondBgPrimarySelected,
+          }
         }
       >
         <View

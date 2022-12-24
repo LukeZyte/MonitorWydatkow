@@ -14,12 +14,14 @@ import { StatusBar } from "expo-status-bar";
 import { AppStyle } from "./src/constants/style";
 import LogoBarImage from "./src/util/LogoBarImage";
 import BottomTabElement from "./src/components/UI/BottomTabElement";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MyApp = () => {
   const { currentTheme, isDarkTheme } = useContext(ThemeContext);
+  const insets = useSafeAreaInsets();
 
   const ExpensesScreen = () => {
     return (
@@ -42,7 +44,9 @@ const MyApp = () => {
             ? currentTheme.colors.primary
             : currentTheme.colors.primary,
           tabBarStyle: {
-            height: 60,
+            backgroundColor: currentTheme.colors.background,
+
+            height: 60 + insets.bottom,
             // backgroundColor: "gray",
             // paddingVertical: 10,
             // paddingVertical: 4,
@@ -125,6 +129,7 @@ const MyApp = () => {
             height: 60,
             paddingVertical: 10,
           },
+          headerBackTitleVisible: false,
         }}
       >
         <Stack.Screen

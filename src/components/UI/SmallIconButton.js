@@ -15,11 +15,9 @@ const SmallIconButton = ({ children, onPress, style, pressColor }) => {
         android_ripple={
           ({ color: colors.bgPrimary }, pressColor && { color: pressColor })
         }
-        style={({ pressed }) => {
-          pressed &&
-            isIOS && { opacity: 0.5, backgroundColor: colors.bgPrimary },
-            pressColor && { backgroundColor: pressColor };
-        }}
+        style={({ pressed }) =>
+          pressed && isIOS && { backgroundColor: colors.bgPrimary }
+        }
       >
         <View style={styles.inner}>{children}</View>
       </Pressable>

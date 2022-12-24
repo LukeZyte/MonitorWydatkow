@@ -43,7 +43,6 @@ const Input = React.forwardRef(
               color: colors.text,
               borderColor: colors.background,
               borderRadius: AppStyle.border.radius,
-              // borderColor: colors.accent,
             },
             focus && styles.focusInput,
             focus && {

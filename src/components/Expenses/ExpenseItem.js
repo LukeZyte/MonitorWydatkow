@@ -185,7 +185,7 @@ const ExpenseItem = ({
           android_ripple={{ color: colors.primary }}
           style={({ pressed }) =>
             pressed &&
-            isIOS && { opacity: 0.5, backgroundColor: colors.primary }
+            isIOS && { backgroundColor: colors.secondBgPrimarySelected }
           }
         >
           <View style={[styles.container]}>
