@@ -209,7 +209,7 @@ const AddExpenseForm = ({ onSetModalVisible }) => {
           blurOnSubmit={false}
           onSubmitEditing={nextHandler}
           label="Koszt wydatku"
-          keyboardType="number-pad"
+          keyboardType="numeric"
           maxLength={8}
           style={[
             styles.priceInput,

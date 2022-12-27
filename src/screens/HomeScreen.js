@@ -54,7 +54,7 @@ const HomeScreen = ({ navigation }) => {
     if (!isIOS) {
       NavigationBar.setBackgroundColorAsync(colors.background);
     }
-  }, [selectedDate]);
+  }, []);
 
   // useLayoutEffect(() => {
   //   getSelectedDateFromStore();

@@ -1,9 +1,21 @@
 const updatesLog = [
   {
+    title: "Aktualizacja 27.12.2022",
+    added: ['Panel "Statystyki"'],
+    changed: [
+      "Tytuły nieaktywnego pola na pasku nawigacyjnym są koloru szarego",
+    ],
+    knownIssues: [
+      "Długie nazwy wydatków psują wygląd okno podczas ich usuwania",
+      "Przeskok w animacji przy przechodzeniu dalej podczas dodawania nowego wydatku na systemach iOS",
+      "Biały pasek nawigacyjny ( czasem czarny ) u dołu ekranu (jeżeli widoczny) podczas wyświetlania okna na systemach Android",
+    ],
+  },
+  {
     title: "Aktualizacja 24.12.2022",
     added: ["Działający build na iOS!"],
-    changed: ["Niektóre kolory uległy zmianie"],
-    fixed: ["Wiele błędów na wersję iOS zostało naprawionych"],
+    changed: ["Nieznacznie paleta kolorów"],
+    fixed: ["Wiele błędów na wersję iOS"],
     knownIssues: [
       "Przeskok w animacji przy przechodzeniu dalej podczas dodawania nowego wydatku na systemach iOS",
       "Biały pasek nawigacyjny ( czasem czarny ) u dołu ekranu (jeżeli widoczny) podczas wyświetlania okna na systemach Android",

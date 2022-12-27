@@ -30,11 +30,15 @@ const BottomTabElement = ({ title, bgColor, active, color, iconName }) => {
         <FontAwesome5 name={iconName} size={24} color={color} />
       </View>
       <TextUI
-        style={{
-          fontSize: AppStyle.fontSize.normal,
-          fontWeight: AppStyle.fontWeight.bold,
-          marginTop: -12,
-        }}
+        style={[
+          {
+            fontSize: AppStyle.fontSize.normal,
+            fontWeight: AppStyle.fontWeight.bold,
+            marginTop: -12,
+            color: colors.blurText,
+          },
+          active && { color: colors.text },
+        ]}
       >
         {title}
       </TextUI>

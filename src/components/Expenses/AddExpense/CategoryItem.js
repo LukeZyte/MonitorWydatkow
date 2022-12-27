@@ -6,6 +6,7 @@ import { CategoriesContext } from "../../../../store/categoriesContext";
 import { AppStyle } from "../../../constants/style";
 
 const CategoryItem = ({
+  small,
   name,
   color,
   selectCategoryHandler,
@@ -13,7 +14,7 @@ const CategoryItem = ({
 }) => {
   const { categories } = useContext(CategoriesContext);
   const { colors } = useTheme();
-  const iconSize = 24;
+  const iconSize = small ? 18 : 24;
   let icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
 
   switch (name) {
@@ -64,10 +65,14 @@ const CategoryItem = ({
           {
             backgroundColor: color,
             borderColor: colors.bgPrimary,
+            padding: 12,
           },
           choosenCategory && {
             borderColor: colors.primary,
             borderRadius: AppStyle.border.radius,
+          },
+          small && {
+            padding: 8,
           },
         ]}
       >
@@ -82,8 +87,8 @@ export default CategoryItem;
 const styles = StyleSheet.create({
   innerContainer: {
     flexDirection: "row",
-    paddingVertical: 12,
-    paddingHorizontal: 12,
+    //paddingVertical: 12,
+    //paddingHorizontal: 12,
     marginHorizontal: 2,
     borderRadius: AppStyle.border.round,
     borderWidth: 2,

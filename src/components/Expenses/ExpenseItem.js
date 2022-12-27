@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { ExpensesContext } from "../../../store/expensesContext";
 import { getSimpleDate } from "../../constants/date";
 import DeleteExpenseModal from "./DeleteExpenseModal";
+import CategoryItem from "./AddExpense/CategoryItem";
 
 const ExpenseItem = ({
   id,
@@ -20,40 +21,40 @@ const ExpenseItem = ({
   const { colors } = useTheme();
   const isIOS = Platform.OS === "ios";
 
-  const iconSize = 16;
-  let icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
+  // const iconSize = 16;
+  // let icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
 
-  switch (category) {
-    case "Spożywcze":
-      icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
-      break;
-    case "Używki":
-      icon = <Ionicons name="beer" size={iconSize} color="white" />;
-      break;
-    case "Osobiste":
-      icon = <Ionicons name="folder-open" size={iconSize} color="white" />;
-      break;
-    case "Transport":
-      icon = <Ionicons name="car" size={iconSize} color="white" />;
-      break;
-    case "Odzież":
-      icon = <Ionicons name="shirt" size={iconSize} color="white" />;
-      break;
-    case "Usługi":
-      icon = <Ionicons name="cut" size={iconSize} color="white" />;
-      break;
-    case "Rachunki":
-      icon = <Ionicons name="home" size={iconSize} color="white" />;
-      break;
-    case "Suplementy":
-      //leaf
-      //flash
-      icon = <Ionicons name="barbell" size={iconSize} color="white" />;
-      break;
-    case "Inne":
-      icon = <Ionicons name="shapes" size={iconSize} color="white" />;
-      break;
-  }
+  // switch (category) {
+  //   case "Spożywcze":
+  //     icon = <Ionicons name="fast-food" size={iconSize} color="white" />;
+  //     break;
+  //   case "Używki":
+  //     icon = <Ionicons name="beer" size={iconSize} color="white" />;
+  //     break;
+  //   case "Osobiste":
+  //     icon = <Ionicons name="folder-open" size={iconSize} color="white" />;
+  //     break;
+  //   case "Transport":
+  //     icon = <Ionicons name="car" size={iconSize} color="white" />;
+  //     break;
+  //   case "Odzież":
+  //     icon = <Ionicons name="shirt" size={iconSize} color="white" />;
+  //     break;
+  //   case "Usługi":
+  //     icon = <Ionicons name="cut" size={iconSize} color="white" />;
+  //     break;
+  //   case "Rachunki":
+  //     icon = <Ionicons name="home" size={iconSize} color="white" />;
+  //     break;
+  //   case "Suplementy":
+  //     //leaf
+  //     //flash
+  //     icon = <Ionicons name="barbell" size={iconSize} color="white" />;
+  //     break;
+  //   case "Inne":
+  //     icon = <Ionicons name="shapes" size={iconSize} color="white" />;
+  //     break;
+  // }
 
   let categoryColor = AppStyle.categoriesColor.other;
   switch (category) {
@@ -189,16 +190,25 @@ const ExpenseItem = ({
           }
         >
           <View style={[styles.container]}>
-            <View
+            {/* <View
               style={[
                 styles.icon,
                 {
                   backgroundColor: categoryColor,
                 },
               ]}
-            >
-              {icon}
+            > */}
+            {/* {icon} */}
+            <View style={{ marginHorizontal: 4 }}>
+              <CategoryItem
+                small
+                name={category}
+                color={categoryColor}
+                selectCategoryHandler={() => {}}
+                selectedCategory={() => {}}
+              />
             </View>
+            {/* </View> */}
             <View style={styles.titleDate}>
               <TextUI>{title}</TextUI>
               <TextUI style={[styles.date, { color: colors.accent }]}>

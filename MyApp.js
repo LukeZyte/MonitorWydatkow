@@ -15,6 +15,7 @@ import { AppStyle } from "./src/constants/style";
 import LogoBarImage from "./src/util/LogoBarImage";
 import BottomTabElement from "./src/components/UI/BottomTabElement";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import StatisticsScreen from "./src/screens/StatisticsScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,7 +51,8 @@ const MyApp = () => {
             // backgroundColor: "gray",
             // paddingVertical: 10,
             // paddingVertical: 4,
-            borderTopWidth: 0,
+            borderTopWidth: 4,
+            borderTopColor: currentTheme.colors.background,
             elevation: 0,
           },
           tabBarShowLabel: false,
@@ -62,6 +64,23 @@ const MyApp = () => {
         }}
         labeled={false}
       >
+        <Tab.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{
+            tabBarLabel: "Profil",
+            tabBarIcon: ({ color }) => (
+              <BottomTabElement
+                active={color === currentTheme.colors.primary}
+                color={color}
+                iconName="user-alt"
+                // bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
+                title="Profil"
+              />
+            ),
+            headerTitle: "Profil",
+          }}
+        />
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
@@ -82,21 +101,21 @@ const MyApp = () => {
           }}
         />
         <Tab.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
+          name="StatisticsScreen"
+          component={StatisticsScreen}
           options={{
-            tabBarLabel: "Profil",
+            tabBarLabel: "Statystyki",
             tabBarIcon: ({ color }) => (
               <BottomTabElement
                 active={color === currentTheme.colors.primary}
                 color={color}
-                iconName="user-alt"
+                iconName="chart-bar"
                 // bgColor={isDarkTheme ? "#0e2149" : "#d0eeff"}
-                title="Profil"
+                title="Statystyki"
               />
             ),
 
-            headerTitle: "Profil",
+            headerTitle: "Statystyki",
           }}
         />
       </Tab.Navigator>
