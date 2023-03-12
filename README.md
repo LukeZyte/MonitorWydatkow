@@ -2,7 +2,7 @@
 (in development) The React Native application that helps you track your expenses. Available in light and dark theme! The statistics screen is not finished yet.
 
 ## Used libraries
-Expo, React Navigation, Async-storage, 
+Expo, React Navigation, Async-storage, Circular-progress-indicator
 
 ## Screenshots
 ### Light theme
